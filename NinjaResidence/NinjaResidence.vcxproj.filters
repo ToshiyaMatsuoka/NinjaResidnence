@@ -127,9 +127,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Object.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -154,23 +151,11 @@
     <ClInclude Include="DescriptionBoard.h">
       <Filter>ソース ファイル\Object</Filter>
     </ClInclude>
-    <ClInclude Include="BaseTarget.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="Target.h">
       <Filter>ソース ファイル\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Switch.h">
       <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Rope.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Shuriken.h">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SkillBase.h">
-      <Filter>ソース ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="SkillSelect.h">
       <Filter>ソース ファイル\Object</Filter>
@@ -237,6 +222,21 @@
     </ClInclude>
     <ClInclude Include="SoundOperater.h">
       <Filter>ソース ファイル\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Shuriken.h">
+      <Filter>ソース ファイル\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillBase.h">
+      <Filter>ソース ファイル\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTarget.h">
+      <Filter>ソース ファイル\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>ソース ファイル\Target</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
