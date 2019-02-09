@@ -134,7 +134,7 @@ void Object::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DW
 
 }
 
-void Object::RevolveZEX(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, float RevolvingShaftX, float RevolvingShaftY, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+void Object::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, float RevolvingShaftX, float RevolvingShaftY, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 
 	float CharVertexX[4];
 	float CharVertexY[4];

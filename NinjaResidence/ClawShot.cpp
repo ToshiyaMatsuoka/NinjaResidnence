@@ -177,7 +177,7 @@ void ClawShot::Render()
 	}
 	if (m_isChoseDeg) {
 		CUSTOMVERTEX DirectionArrowVertex[4];
-		RevolveZEX(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_DirectionArrow.x - (m_DirectionArrow.scale_x * m_Direction), m_DirectionArrow.y, 0xFFFFFFFF, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
+		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_DirectionArrow.x - (m_DirectionArrow.scale_x * m_Direction), m_DirectionArrow.y, 0xFFFFFFFF, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
 		TextureRender("BLOCK_INTEGRATION_A_TEX", DirectionArrowVertex);
 		return;
 	}
@@ -195,7 +195,7 @@ void ClawShot::Render()
 		m_RopeCentral.y = RopeBatteryPosY-1.f;
 		m_RopeCentral.scale_x = BehindLength * 0.5f;
 		m_RopeCentral.scale_y = 3.5f;
-		RevolveZEX(RopeVertex, DegToRad(m_DirectionDeg), m_RopeCentral, RopeBatteryPosX, RopeBatteryPosY, 0xFFFFFFFF, BLOCK_INTEGRATION_WIDTH * 6.0f, 0,13.f/512.f);
+		RevolveZ(RopeVertex, DegToRad(m_DirectionDeg), m_RopeCentral, RopeBatteryPosX, RopeBatteryPosY, 0xFFFFFFFF, BLOCK_INTEGRATION_WIDTH * 6.0f, 0,13.f/512.f);
 		RevolveTexture(RopeVertex, 1);
 		///////////////////////////////////////////////
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_B_TEX", RopeVertex);
