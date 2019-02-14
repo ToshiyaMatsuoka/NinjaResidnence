@@ -21,6 +21,8 @@ public:
 	void Render();
 	void LoadResouce();
 
+	void CursorUpdate();
+
 private:
 	void InitPosStageImage();
 	void InitPosStageSelectNumber();
@@ -40,15 +42,15 @@ private:
 	const float MOVEMENT_Y_TO_BACK = 120.f;
 
 
-	enum m_StageNumber
+	enum StageNumber
 	{
-		Stage0,
+		Stage_Tutorial,
 		Stage1,
 		Stage2,
 		Stage3,
 		Stage4,
 		Stage5,
-		StageTitle,
+		Back_Title,
 	};
 	DWORD m_CursorAlfa = 0xFFFFFFFF;
 	CENTRAL_STATE m_SelectCursol = { 450.f,210.f,140,100 };

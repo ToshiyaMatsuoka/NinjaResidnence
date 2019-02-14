@@ -79,12 +79,12 @@ void StageSelectScene::InitStageSelectNumberkey()
 }
 
 
-SCENE_NUM  StageSelectScene::Update()
+SCENE_NUM StageSelectScene::Update()
 {
 	m_pXinputDevice->DeviceUpdate();
 
 	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_RETURN) || KeyPush == m_pDirectX->GetKeyStatus(DIK_NUMPADENTER)|| PadPush == m_pXinputDevice->GetButton(ButtonA)) {
-		if (m_StageNum == StageTitle)
+		if (m_StageNum == Back_Title)
 		{
 			SetNextScene(TITLE_SCENE);
 		}
@@ -95,116 +95,92 @@ SCENE_NUM  StageSelectScene::Update()
 		}
 	}
 	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_BACKSPACE) || PadPush == m_pXinputDevice->GetButton(ButtonB)) {
-		m_StageNum = StageTitle;
-		m_SelectCursol.y = 70.f;
-		m_SelectCursol.x = 330.f;
-
+		m_StageNum = Back_Title;
 	}
 	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_SPACE)) {
 		m_StageNum = 8;
-	}
-	
+	}	
 
-	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_RIGHT)|| KeyPush == m_pDirectX->GetKeyStatus(DIK_D) || PadPush == m_pXinputDevice->GetButton(ButtonRIGHT)|| m_pXinputDevice->GetAnalogL(ANALOGRIGHT))
+	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_RIGHT)|| KeyPush == m_pDirectX->GetKeyStatus(DIK_D) || PadPush == m_pXinputDevice->GetButton(ButtonRIGHT)|| PadPush == m_pXinputDevice->GetAnalogLState(ANALOGRIGHT))
 	{
-		if (m_StageNum == Stage0)
+		if (m_StageNum == Stage_Tutorial)
 		{
 			m_StageNum = Stage1;
-			m_SelectCursol.x += KUNAI_MOVEMENT_X;
 		}
 		if (m_StageNum == Stage2)
 		{
 			m_StageNum = Stage3;
-			m_SelectCursol.x += KUNAI_MOVEMENT_X;
 		}
 		if (m_StageNum == Stage4)
 		{
 			m_StageNum = Stage5;
-			m_SelectCursol.x += KUNAI_MOVEMENT_X;
 		}
 	}
-	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_LEFT)|| KeyPush == m_pDirectX->GetKeyStatus(DIK_A) || PadPush == m_pXinputDevice->GetButton(ButtonLEFT)|| m_pXinputDevice->GetAnalogL(ANALOGLEFT))
+	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_LEFT)|| KeyPush == m_pDirectX->GetKeyStatus(DIK_A) || PadPush == m_pXinputDevice->GetButton(ButtonLEFT)|| PadPush == m_pXinputDevice->GetAnalogLState(ANALOGLEFT))
 	{
 		if (m_StageNum == Stage1)
 		{
-			m_StageNum = Stage0;
-			m_SelectCursol.x -= KUNAI_MOVEMENT_X;
+			m_StageNum = Stage_Tutorial;
 		}
 		if (m_StageNum == Stage3)
 		{
 			m_StageNum = Stage2;
-			m_SelectCursol.x -= KUNAI_MOVEMENT_X;
 		}
 		if (m_StageNum == Stage5)
 		{
 			m_StageNum = Stage4;
-			m_SelectCursol.x -= KUNAI_MOVEMENT_X;
 		}
 	}
 
-	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_UP) || KeyPush == m_pDirectX->GetKeyStatus(DIK_W) || PadPush == m_pXinputDevice->GetButton(ButtonUP) || m_pXinputDevice->GetAnalogL(ANALOGUP)) {
-		if (m_StageNum == Stage0)
+	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_UP) || KeyPush == m_pDirectX->GetKeyStatus(DIK_W) || PadPush == m_pXinputDevice->GetButton(ButtonUP) || PadPush == m_pXinputDevice->GetAnalogLState(ANALOGUP)) {
+		if (m_StageNum == Stage_Tutorial)
 		{
-			m_StageNum = StageTitle;
-			m_SelectCursol.y -= MOVEMENT_X_TO_BACK;
-			m_SelectCursol.x -= MOVEMENT_Y_TO_BACK;
+			m_StageNum = Back_Title;
 		}
 		if (m_StageNum == Stage1)
 		{
-			m_StageNum = StageTitle;
-			m_SelectCursol.y -= MOVEMENT_X_TO_BACK;
-			//
-			m_SelectCursol.x -= 770;
+			m_StageNum = Back_Title;
 		}
 		if (m_StageNum == Stage2)
 		{
-			m_StageNum = Stage0;
-			m_SelectCursol.y -= KUNAI_MOVEMENT_Y;
+			m_StageNum = Stage_Tutorial;
 		}
 		if (m_StageNum == Stage3)
 		{
 			m_StageNum = Stage1;
-			m_SelectCursol.y -= KUNAI_MOVEMENT_Y;
 		}
 		if (m_StageNum == Stage4)
 		{
 			m_StageNum = Stage2;
-			m_SelectCursol.y -= KUNAI_MOVEMENT_Y;
 		}
 		if (m_StageNum == Stage5)
 		{
 			m_StageNum = Stage3;
-			m_SelectCursol.y -= KUNAI_MOVEMENT_Y;
 		}
 	}
-	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_DOWN) || KeyPush == m_pDirectX->GetKeyStatus(DIK_S) || PadPush == m_pXinputDevice->GetButton(ButtonDOWN) || m_pXinputDevice->GetAnalogL(ANALOGDOWN)) {
+	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_DOWN) || KeyPush == m_pDirectX->GetKeyStatus(DIK_S) || PadPush == m_pXinputDevice->GetButton(ButtonDOWN) || PadPush == m_pXinputDevice->GetAnalogLState(ANALOGDOWN)) {
 		if (m_StageNum == Stage3)
 		{
 			m_StageNum = Stage5;
-			m_SelectCursol.y += KUNAI_MOVEMENT_Y;
 		}
 		if (m_StageNum == Stage2)
 		{
 			m_StageNum = Stage4;
-			m_SelectCursol.y += KUNAI_MOVEMENT_Y;
 		}
-		if (m_StageNum == Stage0)
+		if (m_StageNum == Stage_Tutorial)
 		{
 			m_StageNum = Stage2;
-			m_SelectCursol.y += KUNAI_MOVEMENT_Y;
 		}
 		if (m_StageNum == Stage1)
 		{
 			m_StageNum = Stage3;
-			m_SelectCursol.y += KUNAI_MOVEMENT_Y;
 		}
-		if (m_StageNum == StageTitle)
+		if (m_StageNum == Back_Title)
 		{
-			m_StageNum = Stage0;
-			m_SelectCursol.y += MOVEMENT_X_TO_BACK;
-			m_SelectCursol.x += MOVEMENT_Y_TO_BACK;
+			m_StageNum = Stage_Tutorial;
 		}
 	}
+	CursorUpdate();
 	return GetNextScene();
 }
 
@@ -245,8 +221,8 @@ void StageSelectScene::Render()
 	m_pDirectX->DrawTexture("KUNAI_TEX", StageImage);
 #ifdef _DEBUG
 	RECT testName = { 0, 100, 1250, 720 };
-	char TestName[ArrayLong];
-	sprintf_s(TestName, ArrayLong, "Cursol X:%.2f Y:%.2f", m_SelectCursol.x, m_SelectCursol.y);
+	char TestName[ARRAY_LONG];
+	sprintf_s(TestName, ARRAY_LONG, "Cursol X:%.2f Y:%.2f", m_SelectCursol.x, m_SelectCursol.y);
 	m_pDirectX->DrawWord(testName, TestName, "DEBUG_FONT", DT_RIGHT, 0xffffffff);
 
 #endif
@@ -267,6 +243,44 @@ void StageSelectScene::LoadResouce()
 	m_pDirectX->LoadTexture("texture/StageImageD.jpg", "STAGEIMAGED_TEX");
 
 	m_pDirectX->SetFont(50, 20, "DEBUG_FONT");
-
 }
 
+
+void StageSelectScene::CursorUpdate() {
+	switch (m_StageNum)
+	{
+	case Stage_Tutorial:
+		m_SelectCursol.x = 450;
+		m_SelectCursol.y = 210;
+		break;
+	case Stage1:
+		m_SelectCursol.x = 1100;
+		m_SelectCursol.y = 210;
+		break;
+	case Stage2:
+		m_SelectCursol.x = 450;
+		m_SelectCursol.y = 410;
+		break;
+	case Stage3:
+		m_SelectCursol.x = 1100;
+		m_SelectCursol.y = 410;
+		break;
+	case Stage4:
+		m_SelectCursol.x = 450;
+		m_SelectCursol.y = 610;
+		break;
+	case Stage5:
+		m_SelectCursol.x = 1100;
+		m_SelectCursol.y = 610;
+		break;
+	case Back_Title:
+		m_SelectCursol.y = 70.f;
+		m_SelectCursol.x = 330.f;
+		break;
+	case 8:
+		m_SelectCursol.x = 450;
+		m_SelectCursol.y = 210;
+	default:
+		break;
+	}
+}
