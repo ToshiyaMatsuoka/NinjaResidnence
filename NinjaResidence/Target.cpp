@@ -39,6 +39,7 @@ void Target::Update()
 
 void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 {
+	DWORD Color = 0xffffffff;
 	if (m_GimmickInfo.GimmickType == BT_WATER)
 	{
 		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
@@ -58,6 +59,7 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	}
 	if (m_isActive) {
 		m_MotionBias = 1;
+		Color = 0xFFCCCCCC;
 	}
 	else m_MotionBias = 0;
 	if (m_TargetInfo.PairNumber > 30) {
@@ -78,16 +80,6 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 		m_TargetVertex[2].y = (CELL_SIZE * (m_TargetPosY + 0.5f)) + MapScrollY + CELL_SIZE;
 		m_TargetVertex[3].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + 5;
 		m_TargetVertex[3].y = (CELL_SIZE * (m_TargetPosY + 0.5f)) + MapScrollY + CELL_SIZE;
-
-		//m_TargetVertex[0].tu = BLOCK_INTEGRATION_WIDTH * m_MotionBias;
-		//m_TargetVertex[1].tu = BLOCK_INTEGRATION_WIDTH * (m_MotionBias + 1);
-		//m_TargetVertex[2].tu = BLOCK_INTEGRATION_WIDTH * (m_MotionBias + 1);
-		//m_TargetVertex[3].tu = BLOCK_INTEGRATION_WIDTH * m_MotionBias;
-
-		//m_TargetVertex[0].tv = BLOCK_INTEGRATION_HEIGHT * 2;
-		//m_TargetVertex[1].tv = BLOCK_INTEGRATION_HEIGHT * 2;
-		//m_TargetVertex[2].tv = BLOCK_INTEGRATION_HEIGHT * 3;
-		//m_TargetVertex[3].tv = BLOCK_INTEGRATION_HEIGHT * 3;
 		float deg = 0;
 		switch (m_TargetInfo.PairNumber % 10) {
 			//上向き
@@ -98,7 +90,6 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 			for (int i = 0; i < 4; ++i) {
 				m_TargetVertex[i].y -= CELL_SIZE * 0.5f;
 			}
-
 			break;
 			//右向き
 		case 7:
@@ -115,7 +106,7 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 			break;
 		}
 
-		RevolveZ(m_TargetVertex, DegToRad(deg), 0xffffffff, BLOCK_INTEGRATION_WIDTH * m_MotionBias, BLOCK_INTEGRATION_HEIGHT * 2, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+		RevolveZ(m_TargetVertex, DegToRad(deg), Color, BLOCK_INTEGRATION_WIDTH * m_MotionBias, BLOCK_INTEGRATION_HEIGHT * 2, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_TargetVertex);
 	}
 }
