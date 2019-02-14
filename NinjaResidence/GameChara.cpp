@@ -64,6 +64,8 @@ void GameChara::AccelarationControl() {
 }
 bool GameChara::PermitJumping() {
 	//壁ジャンプ判定の為
+	UpdateMapPos();
+
 	m_MapLeftDirectionPosition -= 1;
 	m_MapRightDirectionPosition += 1;
 	m_HeldOntoWallLeft = !LeftCollisionCheck(NONE) && (LeftCollisionCheck(START_ZONE) || !LeftCollisionCheck(START_ZONE));
@@ -106,7 +108,6 @@ void GameChara::Jump()
 		InitJumpParam();
 		return;
 	}
-	UpdateMapPos();
 	if (!m_isUsingArt) {
 		m_ChangeAnimation = JUMPING;
 	}
@@ -120,6 +121,8 @@ void GameChara::Jump()
 		JumpingLateralMotion();
 		m_RiseFlameTime++;
 		AccelarationControl();
+		UpdateMapPos();
+
 		return;
 	}
 	AnimeCount = 0;
@@ -427,6 +430,12 @@ void GameChara::Reverce(Object* MapChip, int PairNumber)
 
 void GameChara::UpdateMapPos()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		m_DisplayCoordinate[i].y = m_WorldCoordinate[i].y + m_MapScrollY;
+		m_DisplayCoordinate[i].x = m_WorldCoordinate[i].x + m_MapScrollX;
+	}
+
 	m_MapLeftDirectionPosition = static_cast<int>(m_WorldCoordinate[3].x / CELL_SIZE);
 	m_MapRightDirectionPosition = static_cast<int>((m_WorldCoordinate[2].x) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_WorldCoordinate[3].y + 10.f) / CELL_SIZE);
@@ -676,6 +685,7 @@ bool GameChara::DownCollisionAnything(void) {
 
 	return true;
 }
+
 bool GameChara::DownCollisionCheck(int block) {
 	if ((m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) == block) ||
 		(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) == block) ||
@@ -684,6 +694,7 @@ bool GameChara::DownCollisionCheck(int block) {
 	}
 	return false;
 }
+
 bool GameChara::TopCollisionCheck(int block) {
 	if ((m_pMapChip->GetMapChipData(m_MapPositionY - 4, m_MapLeftDirectionPosition) == block) ||
 		(m_pMapChip->GetMapChipData(m_MapPositionY - 4, m_MapLeftDirectionPosition + 1) == block) ||
@@ -702,6 +713,7 @@ bool GameChara::LeftCollisionCheck(int block) {
 	}
 	return false;
 }
+
 bool GameChara::RightCollisionCheck(int block) {
 	if (m_MapRightDirectionPosition >= m_row) {
 		m_MapRightDirectionPosition -= 1;
@@ -751,11 +763,16 @@ bool GameChara::LookDownWater() {
 	bool buf = false;
 	for (int i = 0; i < m_colunm - m_MapPositionY - 1; ++i) {
 		if (!buf) {
-			buf = (BT_WATER == (m_pMapChip->GetMapChipData(m_MapPositionY + i, m_MapLeftDirectionPosition) / 100));
+			int MapdateBuf = m_pMapChip->GetMapChipData(m_MapPositionY + i, m_MapLeftDirectionPosition);
+			if (MapdateBuf > 0 && MapdateBuf < 100&& MapdateBuf!= SPEAR&& MapdateBuf!= STAGE_DROP_ZONE) {
+				return false;
+			}
+			buf = (BT_WATER == (MapdateBuf / 100));
 		}
 	}
 	return buf;
 }
+
 float GameChara::WaterCollsionCheck()
 {
 	float PosY = 0;
@@ -764,6 +781,7 @@ float GameChara::WaterCollsionCheck()
 	}
 	else return m_WorldCoordinate[2].y;
 }
+
 bool GameChara::FailureGame()
 {
 
@@ -986,6 +1004,7 @@ bool GameChara::LeftCollision() {
 	}
 	return false;
 }
+
 bool GameChara::RightCollision() {
 	//右方向のブロックを確かめる
 	if (!RightDirectionCollision())
