@@ -44,18 +44,32 @@ namespace PlayerAnimation {
 class GameChara :public Object
 {
 public:
-	CUSTOMVERTEX GetDisplayCharaCoordinate() { return m_DisplayCoordinate[4]; }
-	void PrevSaveMapPos();
 	void KeyOperation(KeyDirection vec);
-	void PositionSave(Object* MapChip, int BlockNumber);
 	bool Update();
-	bool CollisionIventBlock();
 	void Render();
 	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip);
 	~GameChara();
-
+	/**
+	* @breaf どんでん返し処理
+	*/
+	void Reverce(Object* MapChip, int BlockNumber);
+	/**
+	* @brief 前フレームの位置保存
+	*/
+	void PrevSaveMapPos();
+	/**
+	* @brief マップ上の左側のX座標取得
+	*/
 	int GetMapLeftDirectionPosition() { return m_MapLeftDirectionPosition; }
+	/**
+	* @brief マップ上のY座標取得
+	*/
 	int GetMapPositionY() { return m_MapPositionY; }
+	/**
+	* @brief ゲームの終了イベントブロックとの接触判定
+	* @return 接触していればtrue
+	*/
+	bool CollisionIventBlock();
 
 	void NoOperation();
 	/**
@@ -73,23 +87,22 @@ public:
 	* @brief キャラのディスプレイ上中心Y座標の取得
 	* @author Toshiya Matsuoka
 	*/
-	float GetPositionY() {
-		return m_DisplayCoordinate[0].y + (CELL_SIZE * 2);
-	}
+	float GetPositionY() { return m_DisplayCoordinate[0].y + (CELL_SIZE * 2);}
 
 	/**
 	* @brief キャラの向いている方向の取得
 	* @sa PlayerAnimation::DIRECTION
 	* @author Toshiya Matsuoka
 	*/
-	PlayerAnimation::DIRECTION GetFacing() {
-		return m_Facing;
-	}
+	PlayerAnimation::DIRECTION GetFacing() {return m_Facing;}
 	/**
 	* @brief 火遁アニメーション動作
 	* @author Toshiya Matsuoka
 	*/
 	void FireArtAnime();
+	/**
+	* @brief ゲーム失敗フラグの取得
+	*/
 	bool GetGameFailure() {
 		return m_GameFailure;
 	}
@@ -106,7 +119,8 @@ private:
 	int m_MapLeftDirectionPosition = 0;
 	//キャラの右側のX座標
 	int m_MapRightDirectionPosition = 0;
-	int m_MapPositionY = 0;//キャラの上側のx座標
+	//キャラの下側のY座標
+	int m_MapPositionY = 0;
 	//! 毎フレームかける重力の値
 	const float GRAVITY = 15.f;
 	void Dash();
@@ -114,7 +128,7 @@ private:
 	float MOVE_SPEED = 15.f;
 	const int VERTICAL_SCROLLING_LEVEL = 20;
 	const int ScrollSpeed = 15;
-
+	bool m_isDash = false;
 	//m_DisplayCoordinateのY座標がこの値を下回ると上にスクロールする
 	const int DisplayCharMoveScopeUp = 100;
 	//m_DisplayCoordinateのY座標がこの値を超えると上にスクロールする
@@ -125,12 +139,15 @@ private:
 	const int DisplayCharMoveScopeRight = 980;
 	//両端からのX座標の稼働範囲
 	const int DisplayCharMoveScopeX = 300;
+	/**
+	* @brief マップ座標の更新
+	*/
 	void UpdateMapPos();
 	/**
 	* @brief 画面スクロール
 	*/
 	void MapScrool();
-
+	//! 慣性移動の許可
 	bool m_isInertiaMoving = false;
 	//void MoveOperation(KeyDirection vec, CUSTOMVERTEX* pWorldCharaCoordinate, CUSTOMVERTEX* pDisplayCharaCoordinate, float MoveQuantity);
 	void MapReversePointSearch(int BlockNumber, MapDataState MapState);
@@ -175,7 +192,9 @@ private:
 	float m_AccelerationX = MOVE_SPEED * 1.5f;
 
 	bool m_GameFailure = false;
-
+	/**
+	* @breaf 移動処理
+	*/
 	void MoveOperation(KeyDirection vec);
 
 	/**
@@ -281,12 +300,19 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	void SideCollision();
-
+	/**
+	* @breaf 慣性移動
+	*/
 	void MoveInertia();
 
-
+	/**
+	* @breaf 左方の当たり判定
+	*/
 	bool LeftDirectionCollision();
 
+	/**
+	* @breaf 右方の当たり判定
+	*/
 	bool RightDirectionCollision();
 
 	/**

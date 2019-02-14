@@ -6,9 +6,9 @@
 
 #pragma once
 //継承関係で面倒なため仮置き、いい置き方あれば教えてほしい
-const float CELL_SIZE = 40.f;
-const float BLOCK_INTEGRATION_WIDTH = 80.2f / 512.0f;
-const float BLOCK_INTEGRATION_HEIGHT = 81.0f / 1024.0f;
+#define CELL_SIZE  40.f
+#define BLOCK_INTEGRATION_WIDTH 80.2f / 512.0f
+#define BLOCK_INTEGRATION_HEIGHT 81.0f / 1024.0f
 
 class MapChip;
 

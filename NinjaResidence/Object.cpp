@@ -191,21 +191,3 @@ void Object::RevolveTexture(CUSTOMVERTEX* Vertex, int Deg) {
 }
 
 
-void Object::WriteLog(std::string Text)
-{
-	const char* fileName = "test.txt";
-	std::ofstream ofs(fileName, std::ios::out);
-
-	if (!ofs)
-	{
-		std::cout << "ファイルが開けませんでした。" << std::endl;
-		std::cin.get();
-		return;
-	}
-
-	ofs << Text << std::endl;
-	std::cout << fileName << "に書き込みました。" << std::endl;
-
-	std::cin.get();
-}
-

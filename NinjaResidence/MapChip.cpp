@@ -57,7 +57,6 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 	std::stringstream MapSizeStream(str);
 	MapSizeStream >> m_row >> m_colunm;
 
-
 	MapData.resize(m_colunm);
 
 	for (int j = 0; j<m_colunm; j++)
@@ -107,15 +106,13 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 
 			}
 		}
-		y++;
-
-
-		if (y > static_cast<int>(MapData.size())) break;
+	y++;
+	if (y > static_cast<int>(MapData.size())) break;
 	}
 
 	if (MapState == REVERSE)
 	{
-		CheckVector();
+		CreateGimmick();
 		m_ReverseBuffer.resize(m_ReverseCount);
 	}
 }
@@ -142,20 +139,7 @@ void MapChip::MapDataVectorZeroSet(int MapDataVectorSetY, int MapDataVectorSetX,
 	}
 }
 
-
-void MapChip::MapDataVectorSet(int MapDataVectorSetY,int MapDataVectorSetX,int GimmickY,int GimmickX)
-{
-	for (int i = 0;i < GimmickX;i++)
-	{
-		for (int j = 1;j < GimmickY;j++)
-		{
-			MapData[MapDataVectorSetY + j][MapDataVectorSetX + i] = 900;
-		}
-	}
-}
-
-
-void MapChip::CheckVector()
+void MapChip::CreateGimmick()
 {
 	BaseTarget* pBuf = NULL;
 
@@ -183,7 +167,6 @@ void MapChip::CheckVector()
 		}
 	}
 }
-
 
 void MapChip::Activate(int X, int Y)
 {
@@ -270,7 +253,7 @@ void MapChip::Render()
 					break;
 				case DESCRIPTION_BOARD:
 				case DESCRIPTION_BOARD2:
-					SetVertexUV(CELL, 0, BLOCK_INTEGRATION_HEIGHT, 0.24f, BLOCK_INTEGRATION_HEIGHT*0.98);
+					SetVertexUV(CELL, 0.f, BLOCK_INTEGRATION_HEIGHT, 0.24f, BLOCK_INTEGRATION_HEIGHT*0.98f);
 					CELL[1].x += CELL_SIZE * 3.f;
 					CELL[2].x += CELL_SIZE * 3.f;
 					CELL[3].y += CELL_SIZE * 2.f;
@@ -312,7 +295,6 @@ void MapChip::Render()
 	}
 	
 #ifdef _DEBUG
-
 	RECT test = { 0,500,1250,700 };
 	char TestText[ARRAY_LONG];
 	sprintf_s(TestText, ARRAY_LONG, "MapScroll::X:%d,Y:%d", m_MapScrollX, m_MapScrollY);
@@ -330,7 +312,6 @@ bool MapChip::Update() {
 	}
 	return true;
 }
-
 
 void MapChip::CellInit() {
 	for (int i = 0; i < 4; i++) {

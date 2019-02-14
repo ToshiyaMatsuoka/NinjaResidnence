@@ -45,10 +45,11 @@ protected:
 
 	int m_ropeX;
 	int m_ropeY;
+	//! ロープとの当たり判定
 	bool CollisionRope();
-
+	//! 的との当たり判定
 	bool CollisionTarget();
-
+	//! 座標の初期化
 	void InitPosition() {};
 	SkillType m_SkillType;
 };

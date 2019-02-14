@@ -119,11 +119,11 @@
     <ClCompile Include="DirectX.cpp">
       <Filter>ソース ファイル\Device</Filter>
     </ClCompile>
-    <ClCompile Include="GAMEMANAGER.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SoundOperater.cpp">
       <Filter>ソース ファイル\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +150,6 @@
     </ClInclude>
     <ClInclude Include="DescriptionBoard.h">
       <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Switch.h">
       <Filter>ソース ファイル\Gimmick</Filter>
@@ -186,9 +183,6 @@
     </ClInclude>
     <ClInclude Include="DirectX.h">
       <Filter>ソース ファイル\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="GAMEMANAGER.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Torch.h">
       <Filter>ソース ファイル\Target</Filter>
@@ -237,6 +231,12 @@
     </ClInclude>
     <ClInclude Include="Rope.h">
       <Filter>ソース ファイル\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>ソース ファイル\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

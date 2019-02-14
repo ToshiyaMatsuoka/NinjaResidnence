@@ -1,9 +1,9 @@
 ﻿/**
-* @file GAMEMANAGER.cpp
+* @file GameManager.cpp
 * @brief Mainループ処理,Window関連
 * @author Toshiya Matsuoka
 */
-#include "GAMEMANAGER.h"
+#include "GameManager.h"
 #include <ctype.h>
 #include <cstdio>
 #include <cstdlib>
@@ -17,15 +17,15 @@
 #pragma comment(lib,"SoundLib.lib")
 
 //static変数の実体化
-DirectX* GAMEMANAGER::pDirectX = NULL;
-SceneManager* GAMEMANAGER::pSceneManager = NULL;
-SoundOperater* GAMEMANAGER::pSoundOperater = NULL;
-HWND GAMEMANAGER::hWnd = NULL;
-bool GAMEMANAGER::isWindowMode = true;
-bool GAMEMANAGER::isDeviceLost;
-RECT GAMEMANAGER::WinRect;
+DirectX* GameManager::pDirectX = NULL;
+SceneManager* GameManager::pSceneManager = NULL;
+SoundOperater* GameManager::pSoundOperater = NULL;
+HWND GameManager::hWnd = NULL;
+bool GameManager::isWindowMode = true;
+bool GameManager::isDeviceLost;
+RECT GameManager::WinRect;
 
-GAMEMANAGER::GAMEMANAGER(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
+GameManager::GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
 	hWnd = NULL;
 	isWindowMode = true;	
@@ -68,7 +68,7 @@ GAMEMANAGER::GAMEMANAGER(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
 
 }
 
-GAMEMANAGER::~GAMEMANAGER()
+GameManager::~GameManager()
 {
 	delete pSceneManager;
 	pSceneManager = NULL;
@@ -80,7 +80,7 @@ GAMEMANAGER::~GAMEMANAGER()
 
 
 // 画面モードの変更
-void GAMEMANAGER::ChangeDisplayMode(void)
+void GameManager::ChangeDisplayMode(void)
 {
 	HRESULT hr = NULL;
 	isWindowMode = !isWindowMode;
@@ -120,7 +120,7 @@ void GAMEMANAGER::ChangeDisplayMode(void)
 }
 
 //メッセージ処理　ウィンドウプロシージャWndProcの設定
-LRESULT CALLBACK GAMEMANAGER::WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+LRESULT CALLBACK GameManager::WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 {
 	switch (msg)
 	{
@@ -146,7 +146,7 @@ LRESULT CALLBACK GAMEMANAGER::WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 	return DefWindowProc(hWnd, msg, wp, lp);
 }
 
-int GAMEMANAGER::MessageLoop()
+int GameManager::MessageLoop()
 {
 
 	MSG msg;
@@ -207,7 +207,7 @@ int GAMEMANAGER::MessageLoop()
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	GAMEMANAGER* pGameManager = new GAMEMANAGER(hInstance,hPrevInstance,lpCmdLine,nCmdShow);
+	GameManager* pGameManager = new GameManager(hInstance,hPrevInstance,lpCmdLine,nCmdShow);
 	pGameManager->MessageLoop();
 	delete pGameManager;
 	pGameManager = NULL;

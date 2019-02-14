@@ -315,8 +315,8 @@ void GameScene::Render()
 	}
 #ifdef _DEBUG
 	RECT testName = { 0, 100, 1250, 720 };
-	char TestName[ArrayLong];
-	sprintf_s(TestName, ArrayLong, "STAGE_%d", m_StageNum);
+	char TestName[ARRAY_LONG];
+	sprintf_s(TestName, ARRAY_LONG, "STAGE_%d", m_StageNum);
 	m_pDirectX->DrawWord(testName, TestName, "DEBUG_FONT", DT_RIGHT, 0xffffffff);
 #endif
 	if (m_pDescriptionBoard->DescriptionNumberdecision == m_pDescriptionBoard->Number1)
@@ -471,8 +471,8 @@ void GameScene::SkillStart() {
 		}
 		break;
 	}
-
 }
+
 void GameScene::SkillEND() {
 	switch (CurrentSkill) {
 	case SHURIKEN:
@@ -488,6 +488,7 @@ void GameScene::SkillEND() {
 	}
 
 }
+
 void GameScene::SkillErase() {
 	switch (CurrentSkill) {
 	case SHURIKEN:

@@ -69,7 +69,7 @@ void MapReverse::GoMapReverse(Object** pBusyMapChip, Object** pIdleMapChip)
 		*pBusyMapChip = *pIdleMapChip;
 		*pIdleMapChip = Mapbuf;
 
-		m_pGameChara->PositionSave(*pBusyMapChip, m_ReversePair);
+		m_pGameChara->Reverce(*pBusyMapChip, m_ReversePair);
 	}
 	CollLeft = CollRight = CollCenter = false;
 }

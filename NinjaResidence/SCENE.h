@@ -6,7 +6,7 @@
 #pragma once
 
 #include "enum_Scene.h"
-#include "GAMEMANAGER.h"
+#include "GameManager.h"
 #include "XinputDevice.h"
 #include "SoundOperater.h"
 
@@ -22,6 +22,12 @@ struct CENTRAL_STATE
 
 class Scene {
 public:
+	Scene(DirectX* pDirectX, SoundOperater* pSoundOperater);
+	virtual ~Scene();
+	virtual SCENE_NUM Update() = 0;
+	virtual void LoadResouce() = 0;
+	virtual void Render() = 0;
+
 	SCENE_NUM GetNextScene()
 	{
 		return m_NextScene;
@@ -30,16 +36,11 @@ public:
 	{
 		m_NextScene = NextScene;
 	}
-	Scene(DirectX* pDirectX, SoundOperater* pSoundOperater);
-	virtual ~Scene();
-	virtual SCENE_NUM Update() = 0;
-	virtual void LoadResouce() = 0;
-	virtual void Render() = 0;
 	void EndGame() {
 		m_GameState = WM_QUIT;
 	}
 
-
+	//! ロード画面の描画
 	void LoadAnimation();
 	/**
 	*@brief CUSTOMVERTEXにパラメータを入れる
@@ -64,17 +65,19 @@ public:
 	* @param scaleTv 切り取り画像の下端
 	*/
 	void CreateSquareVertex(CUSTOMVERTEX* Vertex, float x, float y, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
-	void GoToOptionScene();
-	void RunOptionScene(int m_BGMvolume, int m_SEvolume);
+
 	int GetStageNum() {
 		return m_StageNum;
 	}
+
 	int GetGameState() {
 		return m_GameState;
 	}
+
 	bool GetSoundSetting() {
 		return m_SoundSetting;
 	}
+
 	void InactiveSoundSetting() {
 		m_SoundSetting = false;
 	}
@@ -87,9 +90,8 @@ protected:
 
 	static int m_StageNum;
 	int m_GameState = WM_NULL;
-	static const int ArrayLong = 64;
+	static const int ARRAY_LONG = 64;
 
-	//! 後で名称変更
 	static bool m_SoundSetting;
 
 	float DegToRad(float deg) {
@@ -99,8 +101,6 @@ protected:
 	void RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
 	//次のシーン
 	SCENE_NUM m_NextScene = SCENE_NONE;
-	//! テキストファイルに指定の文字列を上書きする
-	void WriteLog(std::string Text);
 private:
 
 };

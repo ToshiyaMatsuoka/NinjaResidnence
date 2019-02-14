@@ -1,5 +1,5 @@
 ﻿/**
-* @file GAMEMANAGER.h
+* @file GameManager.h
 * @brief Mainループ処理,Window関連
 * @author Toshiya Matsuoka
 */
@@ -23,11 +23,11 @@ void WriteLog(std::string Text);
 
 class SceneManager;
 
-class GAMEMANAGER
+class GameManager
 {
 public:
-	GAMEMANAGER(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow);
-	~GAMEMANAGER();
+	GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow);
+	~GameManager();
 	int MessageLoop();
 	static void ChangeDisplayMode(void);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);

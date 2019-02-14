@@ -39,10 +39,6 @@ void FallRock::Update()
 		m_QuantityOfMovement += 5.f;
 		m_pMapChip->MapDataVectorHitSet((m_GimmickPosY + static_cast<int>(m_QuantityOfMovement)) / static_cast<int>(CELL_SIZE), m_GimmickInfo.PositionX, 2, 2);
 	}
-	if (CheckNumber / 100 == 3)
-	{
-		m_pMapChip->Activate((m_GimmickPosX / static_cast<int>(CELL_SIZE)), (m_GimmickPosY + static_cast<int>(CELL_SIZE) * 2 + static_cast<int>(m_QuantityOfMovement)) / static_cast<int>(CELL_SIZE));
-	}
 }
 void FallRock::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 {

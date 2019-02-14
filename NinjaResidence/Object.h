@@ -118,8 +118,16 @@ public:
 	* @details 関連するCUSTOMVERTEX作成関数の逆動作をする
 	*/
 	void TranslateCentral_State(CENTRAL_STATE* Central, CUSTOMVERTEX* Vertex);
-	void TranslateCentral_State(CUSTOMVERTEX * Vertex, CENTRAL_STATE * Central);
+	void TranslateCentral_State(CUSTOMVERTEX* Vertex, CENTRAL_STATE* Central);
 
+	/**
+	* @brief CUSTOMVERTEXにUVパラメータを入れる
+	* @param Vertex 値を入れる配列
+	* @param tu 切り取り画像の左端
+	* @param tv 切り取り画像の上端
+	* @param scaleTu 切り取り画像の右端
+	* @param scaleTv 切り取り画像の下端
+	*/
 	void SetVertexUV(CUSTOMVERTEX* Vertex, float Tu, float Tv, float scaleTu, float scaleTv);
 
 	/**
@@ -140,9 +148,11 @@ public:
 
 	virtual void Reverse(Object* MapChip) {};
 	virtual bool GetActive() { return false; };
+	//! 度数から弧度への変換
 	float DegToRad(float deg) {
 		return deg * (D3DX_PI / 180);
 	}
+	//! 弧度から度数への変換
 	float RadToDeg(float rad) {
 		return rad * ( 180/ D3DX_PI);
 	}
@@ -198,9 +208,6 @@ protected:
 	* @param Deg 90度右に何回転させるか
 	*/
 	void RevolveTexture(CUSTOMVERTEX * Vertex, int Deg);
-
-	//! テキストファイルに指定の文字列を上書きする
-	void WriteLog(std::string Text);
 
 	static std::vector<BlockInfo> m_ReversePoint;
 	static std::vector<MapScrollBuffer> m_ReverseBuffer;

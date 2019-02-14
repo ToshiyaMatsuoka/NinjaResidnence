@@ -44,14 +44,6 @@ void Scene::CreateSquareVertex(CUSTOMVERTEX* Vertex, float x,float y, DWORD  col
 	Vertex[2] = { x, y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
 	Vertex[3] = { 0,  y, 1.f, 1.f, color, tu, tv + scaleTv };
 }
-void Scene::GoToOptionScene() {
-
-}
-
-void Scene::RunOptionScene(int m_BGMvolume,int m_SEvolume) {
-
-	
-}
 
 void Scene::LoadAnimation() {
 	CUSTOMVERTEX LoadBg[4];
@@ -102,23 +94,4 @@ void Scene::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWO
 	Vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
 	Vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
 
-}
-
-
-void Scene::WriteLog(std::string Text)
-{
-	const char* fileName = "test.txt";
-	std::ofstream ofs(fileName, std::ios::out);
-
-	if (!ofs)
-	{
-		std::cout << "ファイルが開けませんでした。" << std::endl;
-		std::cin.get();
-		return ;
-	}
-
-	ofs << Text << std::endl;
-	std::cout << fileName << "に書き込みました。" << std::endl;
-
-	std::cin.get();
 }

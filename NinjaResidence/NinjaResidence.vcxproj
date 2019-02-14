@@ -26,7 +26,7 @@
     <ClCompile Include="DirectX.cpp" />
     <ClCompile Include="FallRock.cpp" />
     <ClCompile Include="FireArt.cpp" />
-    <ClCompile Include="GAMEMANAGER.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GAMESCENE.cpp" />
     <ClCompile Include="GameChara.cpp" />
     <ClCompile Include="HighShuriken.cpp" />
@@ -62,7 +62,7 @@
     <ClInclude Include="enum_Scene.h" />
     <ClInclude Include="FallRock.h" />
     <ClInclude Include="FireArt.h" />
-    <ClInclude Include="GAMEMANAGER.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GAMESCENE.h" />
     <ClInclude Include="GameChara.h" />
     <ClInclude Include="HighShuriken.h" />

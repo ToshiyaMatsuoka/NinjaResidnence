@@ -4,7 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #include "DirectX.h"
-#include "GAMEMANAGER.h"
+#include "GameManager.h"
 #include <algorithm>
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
