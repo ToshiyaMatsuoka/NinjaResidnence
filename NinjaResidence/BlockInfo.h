@@ -5,7 +5,6 @@
 */
 
 #pragma once
-//継承関係で面倒なため仮置き、いい置き方あれば教えてほしい
 #define CELL_SIZE  40.f
 #define BLOCK_INTEGRATION_WIDTH 80.2f / 512.0f
 #define BLOCK_INTEGRATION_HEIGHT 81.0f / 1024.0f
@@ -22,6 +21,32 @@ enum MapDataState
 	REVERSE,//裏
 	STATE_FALSE,
 };
+
+namespace MapBlock
+{
+	/**
+	* @enum BLOCKTYPE
+	* ブロック種別
+	*/
+	enum BLOCKTYPE//CSVのブロックの番号
+	{
+		NONE,
+		WOOD_BLOCK,
+		ROCK_BLOCK,
+		WOOD_TRACT,
+		ROCK_TRACT,
+		SPEAR,
+		STAGE_DROP_ZONE,
+		DESCRIPTION_BOARD = 7,
+		DESCRIPTION_BOARD2 = 8,
+		START_ZONE = 9,
+		GOAL_ZONE = 10,
+		WOOD_REVERSE_ZONE = 11,
+		ROCK_REVERSE_ZONE = 12,
+
+	};
+}
+
 
 /**
 * @struct BlockInfo

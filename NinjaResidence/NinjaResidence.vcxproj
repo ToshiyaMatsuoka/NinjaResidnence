@@ -59,14 +59,12 @@
     <ClInclude Include="ClawShot.h" />
     <ClInclude Include="DescriptionBoard.h" />
     <ClInclude Include="DirectX.h" />
-    <ClInclude Include="enum_Scene.h" />
     <ClInclude Include="FallRock.h" />
     <ClInclude Include="FireArt.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GAMESCENE.h" />
     <ClInclude Include="GameChara.h" />
     <ClInclude Include="HighShuriken.h" />
-    <ClInclude Include="MapBlock.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="PartitionBoard.h" />

@@ -196,12 +196,6 @@
     <ClInclude Include="TITLESCENE.h">
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="enum_Scene.h">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MapBlock.h">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="BlockInfo.h">
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>

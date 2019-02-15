@@ -5,7 +5,6 @@
 */
 #pragma once
 
-#include "enum_Scene.h"
 #include "GameManager.h"
 #include "XinputDevice.h"
 #include "SoundOperater.h"
@@ -13,6 +12,24 @@
 #define CENTRAL_Y (DISPLAY_HEIGHT / 2)
 #define CENTRAL_X (DISPLAY_WIDTH / 2)
 
+/**
+* @enum SCENE_NUM
+* シーンの列挙
+*/
+enum SCENE_NUM
+{
+	SCENE_NONE,
+
+	TITLE_SCENE,
+
+	STAGESELECT_SCENE,
+
+	GAME_SCENE,
+
+	RESULT_SCENE,
+
+	MAX_SCENE,
+};
 
 
 struct CENTRAL_STATE
@@ -32,10 +49,12 @@ public:
 	{
 		return m_NextScene;
 	}
+
 	void SetNextScene(SCENE_NUM NextScene)
 	{
 		m_NextScene = NextScene;
 	}
+
 	void EndGame() {
 		m_GameState = WM_QUIT;
 	}
