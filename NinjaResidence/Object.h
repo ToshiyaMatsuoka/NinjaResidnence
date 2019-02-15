@@ -8,7 +8,6 @@
 
 #include "SCENE.h"
 #include "BlockInfo.h"
-#include "MapBlock.h"
 
 
 enum KeyDirection

@@ -129,12 +129,11 @@ void GameChara::Jump()
 		return;
 	}
 	AnimeCount = 0;
-
+	AddGravity();
 	InitJumpParam();
 }
 
 void GameChara::JumpingLateralMotion() {
-	//TODO:X軸方向への移動量が大きく増減する場合がある
 	if (!m_isInTheAir) {
 		m_HeldOntoWallLeft = m_HeldOntoWallRight = false;
 		return;
@@ -577,11 +576,12 @@ bool GameChara::Update()
 	if (!m_CollisionHead) {
 		Jump();
 		MapScrool();
-		TopCollision();
 		SideCollision();
+		TopCollision();
 		SetGround();
 	}
-	else if (m_isJump) {
+	else /*if (m_isJump)*/ {
+		AddGravity();
 		AddGravity();
 		m_isInertiaMoving = true;
 		InitJumpParam();
@@ -729,6 +729,9 @@ bool GameChara::RightCollisionCheck(int block) {
 }
 
 bool GameChara::LeftDirectionCollision() {
+	while (m_MapLeftDirectionPosition < 0) {
+		m_MapLeftDirectionPosition += 1;
+	}
 	int HeadBlock=(m_pMapChip->GetMapChipData(m_MapPositionY - 4, m_MapLeftDirectionPosition));
 	int BodyBlock=(m_pMapChip->GetMapChipData(m_MapPositionY - 3, m_MapLeftDirectionPosition));
 	int LegBlock=(m_pMapChip->GetMapChipData(m_MapPositionY - 2, m_MapLeftDirectionPosition));
@@ -764,6 +767,7 @@ bool GameChara::LookDownWater() {
 	bool buf = false;
 	for (int i = 0; i < m_colunm - m_MapPositionY - 1; ++i) {
 		if (!buf) {
+			// 下にブロックがあるかの確認
 			int MapdateBuf = m_pMapChip->GetMapChipData(m_MapPositionY + i, m_MapLeftDirectionPosition);
 			if (MapdateBuf > 0 && MapdateBuf < 100&& MapdateBuf!= SPEAR&& MapdateBuf!= STAGE_DROP_ZONE) {
 				return false;
@@ -809,6 +813,13 @@ void GameChara::Render()
 	DebugColl[1].x = DebugColl[2].x = m_MapRightDirectionPosition * CELL_SIZE + m_MapScrollX;
 	DebugColl[0].color = DebugColl[1].color = DebugColl[2].color = DebugColl[3].color = 0xFFEFEFEF;
 	TextureRender("TEST_TEX", DebugColl);
+	DebugColl[3].y = DebugColl[2].y = (m_MapPositionY - 3) * CELL_SIZE + m_MapScrollY;
+	DebugColl[0].y = DebugColl[1].y = DebugColl[3].y - CELL_SIZE;
+	DebugColl[3].x = DebugColl[0].x = m_MapLeftDirectionPosition * CELL_SIZE + m_MapScrollX;
+	DebugColl[1].x = DebugColl[2].x = m_MapRightDirectionPosition * CELL_SIZE + m_MapScrollX;
+	DebugColl[0].color = DebugColl[1].color = DebugColl[2].color = DebugColl[3].color = 0xFFE0E0E0;
+	TextureRender("TEST_TEX", DebugColl);
+
 #endif
 	CUSTOMVERTEX Chara[4];
 	CENTRAL_STATE CharCentral = { 0 };
