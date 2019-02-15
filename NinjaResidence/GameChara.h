@@ -49,24 +49,29 @@ public:
 	void Render();
 	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip);
 	~GameChara();
+
 	/**
 	* @breaf どんでん返し処理
 	* @author Toshiya Matsuoka
 	*/
 	void Reverce(Object* MapChip, int BlockNumber);
+
 	/**
 	* @brief 前フレームの位置保存
 	* @author Toshiya Matsuoka
 	*/
 	void PrevSaveMapPos();
+
 	/**
 	* @brief マップ上の左側のX座標取得
 	*/
 	int GetMapLeftDirectionPosition() { return m_MapLeftDirectionPosition; }
+
 	/**
 	* @brief マップ上のY座標取得
 	*/
 	int GetMapPositionY() { return m_MapPositionY; }
+
 	/**
 	* @brief ゲームの終了イベントブロックとの接触判定
 	* @return 接触していればtrue
@@ -74,7 +79,24 @@ public:
 	*/
 	bool CollisionIventBlock();
 
+	/**
+	* @brief 下へのスクロール操作
+	* @author Toshiya Matsuoka
+	*/
+	void DownScrollOparation();
+
+	/**
+	* @brief 上へのスクロール操作
+	* @author Toshiya Matsuoka
+	*/
+	void UpScrollOparation();
+
+	/**
+	* @brief 無操作時動作
+	* @author Toshiya Matsuoka
+	*/
 	void NoOperation();
+
 	/**
 	* @brief Debug用キャラ上昇処理
 	* @author Toshiya Matsuoka
