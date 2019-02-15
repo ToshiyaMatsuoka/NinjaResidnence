@@ -348,6 +348,15 @@ void GameChara::KeyOperation(KeyDirection vec)
 				for (int i = 0; i < 4; ++i) {
 					m_DisplayCoordinate[i].y = m_WorldCoordinate[i].y + m_MapScrollY;
 				}
+				if (m_DisplayCoordinate[3].y > static_cast<float>(DisplayCharMoveScopeDown) - VERTICAL_SCROLLING_LEVEL)
+				{
+					m_DisplayCoordinate[0].y = (static_cast<float>(DisplayCharMoveScopeDown));
+					m_DisplayCoordinate[1].y = (static_cast<float>(DisplayCharMoveScopeDown));
+					m_DisplayCoordinate[2].y = (static_cast<float>(DisplayCharMoveScopeDown) + m_Central.scale_y);
+					m_DisplayCoordinate[3].y = (static_cast<float>(DisplayCharMoveScopeDown) + m_Central.scale_y);
+					m_MapScrollY -= 5;
+				}
+
 			}
 		}
 		break;
