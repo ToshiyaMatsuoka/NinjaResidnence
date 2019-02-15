@@ -164,12 +164,38 @@ public:
 	* @sa enum PADSTATE
 	*/
 	PADSTATE GetAnalogRState(Analog AnalogState);
+
+	/**
+	* @brief  XinputDeviceでゲームパッドの右トリガー入力状態取得
+	* @return 押下状態
+	* @sa enum PADSTATE
+	*/
+	PADSTATE GetTriggerRState();
+
+	/**
+	* @brief  XinputDeviceでゲームパッドの左トリガー入力状態取得
+	* @return 押下状態
+	* @sa enum PADSTATE
+	*/
+	PADSTATE GetTriggerLState();
+
 	/**
 	* @brief  XinputDeviceでゲームパッドの左アナログスティック入力状態振り分け
 	* @param AnalogState ANALOG_X　or　ANALOG_Y
 	* @sa enum Analog
 	*/
 	void AnalogLStateDivide(Analog AnalogState);
+
+	/**
+	* @brief  XinputDeviceでゲームパッドの右トリガー入力状態振り分け
+	*/
+	void TriggerRStateDivide();
+
+	/**
+	* @brief  XinputDeviceでゲームパッドの左トリガー入力状態振り分け
+	*/
+	void TriggerLStateDivide();
+
 	/**
 	* @brief  XinputDeviceでゲームパッドの右アナログスティック入力状態振り分け
 	* @param AnalogState ANALOG_X　or　ANALOG_Y
@@ -199,6 +225,12 @@ private:
 
 	PADSTATE m_AnalogLOldState[ANALOGMAX] = { PadOff };
 	PADSTATE m_AnalogLState[ANALOGMAX] = { PadOff };
+	
+	PADSTATE m_TriggerROldState = PadOff;
+	PADSTATE m_TriggerRState = PadOff;
+
+	PADSTATE m_TriggerLOldState = PadOff;
+	PADSTATE m_TriggerLState = PadOff;
 	//! デバイスの状態確認用
 	DWORD XINPUT_INFO = -1;
 	

@@ -45,6 +45,8 @@ void XinputDevice::BottonCheck() {
 	AnalogLStateDivide(ANALOGRIGHT);
 	AnalogRStateDivide(ANALOGRIGHT);
 
+	TriggerRStateDivide();
+	TriggerLStateDivide();
 }
 
 void XinputDevice::DeviceUpdate(int GamePadNumber) {
@@ -52,6 +54,7 @@ void XinputDevice::DeviceUpdate(int GamePadNumber) {
 	GetControl(GamePadNumber);
 	BottonCheck();
 }
+
 void XinputDevice::CheckButtonState(WORD ButtomID, ButtonIndex ButtomIndex)
 {
 	if (m_Xinput.Gamepad.wButtons & ButtomID)
@@ -201,6 +204,16 @@ PADSTATE XinputDevice::GetAnalogRState(Analog AnalogState)
 	return m_AnalogRState[AnalogState];
 }
 
+PADSTATE XinputDevice::GetTriggerRState()
+{
+	return m_TriggerRState;
+}
+
+PADSTATE XinputDevice::GetTriggerLState()
+{
+	return m_TriggerLState;
+}
+
 void XinputDevice::AnalogRStateDivide(Analog AnalogState) {
 	if (GetAnalogR(AnalogState))
 	{
@@ -254,3 +267,57 @@ void XinputDevice::AnalogLStateDivide(Analog AnalogState) {
 		m_AnalogLOldState[AnalogState] = PadOff;
 	}
 }
+
+void XinputDevice::TriggerRStateDivide() {
+	if (GetAnalogTrigger(RIGHT_TRIGGER))
+	{
+		if (m_TriggerROldState == PadOn)
+		{
+			m_TriggerRState = PadOn;
+		}
+		else
+		{
+			m_TriggerRState = PadPush;
+		}
+		m_TriggerROldState = PadOn;
+	}
+	else
+	{
+		if (m_TriggerROldState == PadOn)
+		{
+			m_TriggerRState = PadRelease;
+		}
+		else
+		{
+			m_TriggerRState = PadOff;
+		}
+		m_TriggerROldState = PadOff;
+	}
+}
+void XinputDevice::TriggerLStateDivide() {
+	if (GetAnalogTrigger(LEFT_TRIGGER))
+	{
+		if (m_TriggerLOldState == PadOn)
+		{
+			m_TriggerLState = PadOn;
+		}
+		else
+		{
+			m_TriggerLState = PadPush;
+		}
+		m_TriggerLOldState = PadOn;
+	}
+	else
+	{
+		if (m_TriggerLOldState == PadOn)
+		{
+			m_TriggerLState = PadRelease;
+		}
+		else
+		{
+			m_TriggerLState = PadOff;
+		}
+		m_TriggerLOldState = PadOff;
+	}
+}
+
