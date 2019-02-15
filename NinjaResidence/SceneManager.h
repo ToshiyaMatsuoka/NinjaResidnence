@@ -7,11 +7,10 @@
 
 #include "SCENE.h"
 #include "SoundOperater.h"
-#include "enum_Scene.h"
 
+enum SCENE_NUM;
 class Scene;
 class VOLUMESELECTSCENE;
-
 
 class SceneManager
 {
@@ -26,9 +25,9 @@ public:
 private:
 	void LoadAnimation();
 
-	SCENE_NUM m_CurrentScene;	//今のシーン
+	SCENE_NUM m_CurrentScene;
 	void KeyOperation();
-	//! メモリリーク検知器では検出されないと思われる。
+
 	static Scene*	m_pScene;
 	SCENE_NUM m_NextScene;
 	DirectX* m_pDirectX = NULL;
@@ -37,8 +36,9 @@ private:
 
 	HANDLE m_threadHandle = NULL;
 	DWORD m_threadResult = NULL;
-
+	//! ロードのマルチスレッド処理
 	void LoadAction();
+
 	bool isRunOnce = false;
 	bool isThreadActive = false;
 	int LoadTime = 0;

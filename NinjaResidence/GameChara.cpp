@@ -58,10 +58,12 @@ void GameChara::InitJumpParam() {
 	//m_AccelerationX = InitialAcceleration;
 	m_RiseFlameTime = 0;
 }
+
 void GameChara::AccelarationControl() {
 	m_AccelerationY -= 2.f;
 
 }
+
 bool GameChara::PermitJumping() {
 	//壁ジャンプ判定の為
 	UpdateMapPos();
@@ -86,6 +88,7 @@ bool GameChara::PermitJumping() {
 	}
 	return false;
 }
+
 void GameChara::Jump()
 {
 	if (!m_isJump) {
@@ -355,8 +358,6 @@ void GameChara::KeyOperation(KeyDirection vec)
 			m_WorldCoordinate[i].y -= MOVE_SPEED+ GRAVITY;
 		}
 #endif
-		//TopCollision();
-		//SideCollision();
 	}
 }
 

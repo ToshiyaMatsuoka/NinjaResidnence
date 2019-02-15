@@ -19,6 +19,7 @@ public:
 	void Initialize();
 	SCENE_NUM Update();
 	void Render();
+
 	void LoadResouce();
 
 	void CursorUpdate();
@@ -41,7 +42,6 @@ private:
 	const float MOVEMENT_X_TO_BACK = 140.f;
 	const float MOVEMENT_Y_TO_BACK = 120.f;
 
-
 	enum StageNumber
 	{
 		Stage_Tutorial,
@@ -52,12 +52,14 @@ private:
 		Stage5,
 		Back_Title,
 	};
+
 	DWORD m_CursorAlfa = 0xFFFFFFFF;
 	CENTRAL_STATE m_SelectCursol = { 450.f,210.f,140,100 };
 	CENTRAL_STATE m_StageSelectBack = { 120.f,70.f,80.f,50.f };
 	CENTRAL_STATE m_StageImage[6];
 	CENTRAL_STATE m_StageSelectNumber[6];
 	CENTRAL_STATE m_StageFrame = { DISPLAY_WIDTH / 2,DISPLAY_HEIGHT / 2,270.f,270.f };
+
 	std::string m_CursolImagekey;
 	std::string m_BackImagekey;
 	std::string m_StageImagekey[6];

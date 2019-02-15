@@ -52,7 +52,6 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	{
 		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
 	}
-
 	if (MapDataReverse != m_TargetInfo.MapDataState)
 	{
 		return;

@@ -51,10 +51,12 @@ public:
 	~GameChara();
 	/**
 	* @breaf どんでん返し処理
+	* @author Toshiya Matsuoka
 	*/
 	void Reverce(Object* MapChip, int BlockNumber);
 	/**
 	* @brief 前フレームの位置保存
+	* @author Toshiya Matsuoka
 	*/
 	void PrevSaveMapPos();
 	/**
@@ -68,6 +70,7 @@ public:
 	/**
 	* @brief ゲームの終了イベントブロックとの接触判定
 	* @return 接触していればtrue
+	* @author Toshiya Matsuoka
 	*/
 	bool CollisionIventBlock();
 
@@ -102,6 +105,7 @@ public:
 	void FireArtAnime();
 	/**
 	* @brief ゲーム失敗フラグの取得
+	* @author Toshiya Matsuoka
 	*/
 	bool GetGameFailure() {
 		return m_GameFailure;
@@ -302,16 +306,19 @@ private:
 	void SideCollision();
 	/**
 	* @breaf 慣性移動
+	* @author Toshiya Matsuoka
 	*/
 	void MoveInertia();
 
 	/**
 	* @breaf 左方の当たり判定
+	* @author Toshiya Matsuoka
 	*/
 	bool LeftDirectionCollision();
 
 	/**
 	* @breaf 右方の当たり判定
+	* @author Toshiya Matsuoka
 	*/
 	bool RightDirectionCollision();
 

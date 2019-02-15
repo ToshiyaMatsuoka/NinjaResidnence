@@ -21,7 +21,6 @@ GameScene::GameScene(DirectX* pDirectX, SoundOperater* pSoundOperater) :Scene(pD
 	m_pGameChara = new GameChara(pDirectX, pSoundOperater, m_pBusyMapChip);
 	m_pMapReverse = new MapReverse(pDirectX, pSoundOperater, m_pGameChara);
 
-
 	m_pShuriken = new Shuriken(pDirectX, pSoundOperater, m_pBusyMapChip, m_pGameChara);
 	m_pHighShuriken = new HighShuriken(pDirectX, pSoundOperater, m_pBusyMapChip, m_pGameChara, m_pXinputDevice);
 	m_pFireArt = new FireArt(pDirectX, pSoundOperater, m_pBusyMapChip, m_pGameChara);
@@ -247,6 +246,7 @@ void GameScene::KeyOperation() {
 		m_pGameChara->KeyOperation(DEBUG);
 	}
 }
+
 void GameScene::NotPushedAnyButton() {
 	if (m_pDirectX->GetKeyStatus(DIK_W)) {
 		return;
@@ -349,12 +349,13 @@ void GameScene::LoadResouce()
 	m_pDirectX->SetFont(25, 10, "DEBUG_FONT");
 
 	m_pSoundOperater->AddFile("Sound/nc62985.wav", "DECISION",SE);
-
 }
+
 void GameScene::TextureRender(std::string TextureKey, CUSTOMVERTEX* TextureSize)
 {
 	m_pDirectX->DrawTexture(TextureKey, TextureSize);
 }
+
 void GameScene::StageTurning()
 {
 	switch (m_StageNum) {
@@ -421,6 +422,7 @@ void GameScene::SkillsUpdate() {
 		break;
 	}
 }
+
 void GameScene::SkillsRender() {
 	m_SkillSelect->Render();
 	switch (CurrentSkill) {
@@ -542,7 +544,6 @@ void GameScene::GameFailureAnime()
 		StandbyTime = 0;
 	}
 }
-
 
 void GameScene::ClearAnime()
 {
