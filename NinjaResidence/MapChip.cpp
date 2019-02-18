@@ -198,6 +198,9 @@ void MapChip::Render()
 {
 	int TopCellPos = (m_MapScrollY * -1)/ static_cast<int>(CELL_SIZE);
 	int LeftCellPos = (m_MapScrollX * -1) / static_cast<int>(CELL_SIZE);
+	if (LeftCellPos<0) {
+		LeftCellPos = 0;
+	}
 	int BottomCellPos = ((m_MapScrollY * -1) + DISPLAY_HEIGHT) / static_cast<int>(CELL_SIZE) + 1;
 	int RightCellPos = ((m_MapScrollX * -1) + DISPLAY_WIDTH) / static_cast<int>(CELL_SIZE) + 1;
 	if (BottomCellPos > m_colunm) {

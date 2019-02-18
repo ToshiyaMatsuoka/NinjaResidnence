@@ -160,7 +160,7 @@ public:
 	virtual int SearchBlockY(MapBlock::BLOCKTYPE Block) {return 3;}
 
 	virtual bool GetGimmickActive() { return false; };
-	virtual CUSTOMVERTEX* GetTargetPosition(int targetType) { return m_WorldCoordinate; };
+	virtual CUSTOMVERTEX* GetTargetPosition(int targetType) { return NULL; };
 	bool ContactSpecifyObject(CENTRAL_STATE* object);
 	int GetMapScrollX() { return m_MapScrollX; };
 	int GetMapScrollY() { return m_MapScrollY; };
@@ -172,6 +172,18 @@ public:
 		return m_colunm;
 	}
 	int GetMapChipData(int height, int width) {
+		if (height >= m_colunm) {
+			height = m_colunm - 1;
+		}
+		if (height < 0) {
+			height = 0;
+		}
+		if (width >= m_row) {
+			width = m_row - 1;
+		}
+		if (width < 0) {
+			width = 0;
+		}
 		int Buf = -1;
 		Buf = MapData[height][width];
 		return Buf;
@@ -211,10 +223,6 @@ protected:
 	static std::vector<BlockInfo> m_ReversePoint;
 	static std::vector<MapScrollBuffer> m_ReverseBuffer;
 	static int m_ReverseCount;
-	//! ディスプレイ上のキャラの矩形
-	CUSTOMVERTEX m_DisplayCoordinate[4];
-	//! 全体的なキャラの矩形
-	CUSTOMVERTEX m_WorldCoordinate[4];
 private:
 
 };
