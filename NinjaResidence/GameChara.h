@@ -112,7 +112,7 @@ public:
 	* @brief キャラのディスプレイ上中心Y座標の取得
 	* @author Toshiya Matsuoka
 	*/
-	float GetPositionY() { return m_DisplayCoordinate[0].y + (CELL_SIZE * 2);}
+	float GetPositionY() { return m_Central.y - (m_Central.scale_y/2.f) + static_cast<float>(m_MapScrollY);}
 
 	/**
 	* @brief キャラの向いている方向の取得
@@ -135,12 +135,13 @@ public:
 
 
 private:
+
 	//前フレームのm_MapLeftDirectionPositionの値
-	int m_PrevMapLeftDirectionPosition = 0;
+	int m_PrevLeftDirectionPosition = 0;
 	//前フレームのm_MapRightDirectionPositionの値
-	int m_PrevMapRightDirectionPosition = 0;
+	int m_PrevRightDirectionPosition = 0;
 	//前フレームのm_MapPositionYの値
-	int m_PrevMapCharaPositionY = 0;
+	int m_PrevPositionY = 0;
 	//キャラの左側のX座標
 	int m_MapLeftDirectionPosition = 0;
 	//キャラの右側のX座標
@@ -149,6 +150,7 @@ private:
 	int m_MapPositionY = 0;
 	//! 毎フレームかける重力の値
 	const float GRAVITY = 15.f;
+	//! ダッシュ動作
 	void Dash();
 	//! 移動量
 	float MOVE_SPEED = 15.f;
@@ -181,10 +183,16 @@ private:
 	float m_CollisionTu = 80 / 512.f;
 	//! 当たり判定描画用
 	float m_CollisionTv = 160 / 512.f;
+
 	MapReverse* m_pMapReverse = NULL;
 	Object* m_pMapChip = NULL;
+
 	float GravityAcceleration = 0;
 
+	//! ディスプレイ上のキャラの矩形
+	CUSTOMVERTEX m_DisplayCoordinate[4];
+	//! 全体的なキャラの矩形
+	CUSTOMVERTEX m_WorldCoordinate[4];
 
 	//仮統合ファイルの切り取り情報
 	const float CHARA_TEXTURE_WIDTH = 4096.f;
