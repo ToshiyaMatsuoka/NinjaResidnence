@@ -9,8 +9,8 @@ using namespace PlayerAnimation;
 ClawShot::ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
 {
 	m_Central = { 500,0,25,25 };
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 
 	m_SkillType = CLAWSHOT;
 }
@@ -132,10 +132,10 @@ bool ClawShot::Update()
 		m_DirectionBias = ZERO;
 	}
 	else m_DirectionBias = ONE;
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_row - 1) {
+	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX - 1) {
 		InitPosition();
 	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_colunm - 1) {
+	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_SizeY - 1) {
 		InitPosition();
 	}
 	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
@@ -209,8 +209,8 @@ void ClawShot::Render()
 
 void ClawShot::Reverse(Object* MapChip) {
 	m_pMapChip = MapChip;
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 
 	InitPosition();
 }

@@ -15,8 +15,8 @@ HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Obj
 	m_Central = { 500,0,20,20 };
 	m_pMapChip = MapChip;
 	m_pGameChara = GameChara;
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 	m_pXinputDevice = pXinputDevice;
 	m_SkillType = HIGH_SHURIKEN_ART;
 }
@@ -153,10 +153,10 @@ bool HighShuriken::Update()
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
 
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_row - 1) {
+	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX - 1) {
 		InitPosition();
 	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_colunm - 1) {
+	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_SizeY - 1) {
 		InitPosition();
 	}
 	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
@@ -221,8 +221,8 @@ void HighShuriken::Render()
 
 void HighShuriken::Reverse(Object* MapChip) {
 	m_pMapChip = MapChip;
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 	InitPosition();
 }
 

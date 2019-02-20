@@ -136,12 +136,9 @@ public:
 
 private:
 
-	//前フレームのm_MapLeftDirectionPositionの値
-	int m_PrevLeftDirectionPosition = 0;
-	//前フレームのm_MapRightDirectionPositionの値
-	int m_PrevRightDirectionPosition = 0;
-	//前フレームのm_MapPositionYの値
-	int m_PrevPositionY = 0;
+	float m_PrevLeftPosition = 0;
+	float m_PrevRightPosition = 0;
+	float m_PrevPositionY = 0;
 	//キャラの左側のX座標
 	int m_MapLeftDirectionPosition = 0;
 	//キャラの右側のX座標
@@ -158,15 +155,15 @@ private:
 	const int ScrollSpeed = 15;
 	bool m_isDash = false;
 	//m_DisplayCoordinateのY座標がこの値を下回ると上にスクロールする
-	const int DisplayCharMoveScopeUp = 100;
+	const int ScrollUpRange = 150;
 	//m_DisplayCoordinateのY座標がこの値を超えると上にスクロールする
-	const int DisplayCharMoveScopeDown = 630;
+	const int ScrollDownRange = 630;
 	//m_DisplayCoordinateのX座標がこの値を下回ると左にスクロールする
-	const int DisplayCharMoveScopeLeft = 300;
+	const int ScrollLeftRange = 300;
 	//m_DisplayCoordinateのX座標がこの値を超えると右にスクロールする
-	const int DisplayCharMoveScopeRight = 980;
+	const int ScrollRightRange = 980;
 	//両端からのX座標の稼働範囲
-	const int DisplayCharMoveScopeX = 300;
+	const int ScrollXScope = 300;
 	/**
 	* @brief マップ座標の更新
 	*/

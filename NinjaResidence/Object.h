@@ -166,20 +166,20 @@ public:
 	int GetMapScrollY() { return m_MapScrollY; };
 
 	int GetRow() {
-		return m_row;
+		return m_SizeX;
 	}
 	int GetColunm() {
-		return m_colunm;
+		return m_SizeY;
 	}
 	int GetMapChipData(int height, int width) {
-		if (height >= m_colunm) {
-			height = m_colunm - 1;
+		if (height >= m_SizeY) {
+			height = m_SizeY - 1;
 		}
 		if (height < 0) {
 			height = 0;
 		}
-		if (width >= m_row) {
-			width = m_row - 1;
+		if (width >= m_SizeX) {
+			width = m_SizeX - 1;
 		}
 		if (width < 0) {
 			width = 0;
@@ -204,9 +204,9 @@ protected:
 	std::vector< std::vector<int> > MapData;
 	
 	//!行
-	int m_row = 0;
+	int m_SizeX = 0;
 	//!列
-	int m_colunm = 0;
+	int m_SizeY = 0;
 
 	static const int ARRAY_LONG = 64;
 	//! Z軸回転

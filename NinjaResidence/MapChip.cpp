@@ -25,7 +25,7 @@ MapChip::MapChip(DirectX* pDirectX, SoundOperater* pSoundOperater) :Object(pDire
 MapChip::~MapChip()
 {
 	m_ReverseCount = 0;
-	for (int i = 0; i < m_colunm; i++)
+	for (int i = 0; i < m_SizeY; i++)
 	{
 		MapData[i].clear();
 		vector<int>().swap(MapData[i]);
@@ -55,13 +55,13 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 	getline(ifs, str);
 	replace(str.begin(), str.end(), ',', ' ');
 	std::stringstream MapSizeStream(str);
-	MapSizeStream >> m_row >> m_colunm;
+	MapSizeStream >> m_SizeX >> m_SizeY;
 
-	MapData.resize(m_colunm);
+	MapData.resize(m_SizeY);
 
-	for (int j = 0; j<m_colunm; j++)
+	for (int j = 0; j<m_SizeY; j++)
 	{
-		MapData[j].resize(m_row);
+		MapData[j].resize(m_SizeX);
 	}
 
 	while (getline(ifs, str))
@@ -203,11 +203,11 @@ void MapChip::Render()
 	}
 	int BottomCellPos = ((m_MapScrollY * -1) + DISPLAY_HEIGHT) / static_cast<int>(CELL_SIZE) + 1;
 	int RightCellPos = ((m_MapScrollX * -1) + DISPLAY_WIDTH) / static_cast<int>(CELL_SIZE) + 1;
-	if (BottomCellPos > m_colunm) {
-		BottomCellPos = m_colunm;
+	if (BottomCellPos > m_SizeY) {
+		BottomCellPos = m_SizeY;
 	}
-	if (RightCellPos > m_row) {
-		RightCellPos = m_row;
+	if (RightCellPos > m_SizeX) {
+		RightCellPos = m_SizeX;
 	}
 
 	for (int j = TopCellPos; j < BottomCellPos;j++)
@@ -330,9 +330,9 @@ void MapChip::CellInit() {
 }
 
 int MapChip::SearchBlockX(BLOCKTYPE Block) {
-	for (int j = 0; j < m_colunm; j++)
+	for (int j = 0; j < m_SizeY; j++)
 	{
-		for (int i = 0; i < m_row; i++)
+		for (int i = 0; i < m_SizeX; i++)
 		{
 			if (MapData[j][i] == Block)
 			{
@@ -344,9 +344,9 @@ int MapChip::SearchBlockX(BLOCKTYPE Block) {
 }
 
 int MapChip::SearchBlockY(BLOCKTYPE Block) {
-	for (int j = 0; j < m_colunm; j++)
+	for (int j = 0; j < m_SizeY; j++)
 	{
-		for (int i = 0; i < m_row; i++)
+		for (int i = 0; i < m_SizeX; i++)
 		{
 			if (MapData[j][i] == Block)
 			{

@@ -11,8 +11,8 @@ using namespace PlayerAnimation;
 FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip,GameChara)
 {
 	m_Central = { 500,0,80,80 };
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 	m_SkillType = FIRE_ART;
 }
 
@@ -100,8 +100,8 @@ bool FireArt::Update()
 		if (MapPosX < 0) {
 			MapPosX = m_MapPositionX;
 		}
-		if (MapPosX > m_row-1) {
-			MapPosX = m_row - 1;
+		if (MapPosX > m_SizeX-1) {
+			MapPosX = m_SizeX - 1;
 		}
 
 		if (m_pMapChip->GetMapChipData(m_MapPositionY, MapPosX) > 100)
@@ -139,6 +139,6 @@ void FireArt::Render()
 
 void FireArt::Reverse(Object* MapChip) {
 	m_pMapChip = MapChip;
-	m_row = m_pMapChip->GetRow();
-	m_colunm = m_pMapChip->GetColunm();
+	m_SizeX = m_pMapChip->GetRow();
+	m_SizeY = m_pMapChip->GetColunm();
 }
