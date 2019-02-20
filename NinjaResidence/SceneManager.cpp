@@ -4,10 +4,10 @@
 * @author Kojiro Kawahara
 */
 #include "SceneManager.h"
-#include "TITLESCENE.h"
-#include "STAGESELECTSCENE.h"
-#include "GAMESCENE.h"
-#include "VOLUMESELECTSCENE.h"
+#include "./Scene/TitleScene.h"
+#include "./Scene/StageSelectScene.h"
+#include "./Scene/GameScene.h"
+#include "./Scene/VolumeSelectScene.h"
 
 Scene*	SceneManager::m_pScene = NULL;
 
@@ -16,7 +16,7 @@ SceneManager::SceneManager(DirectX* pDirectX, SoundOperater* pSoundOperater)
 {
 	m_pDirectX = pDirectX;
 	m_pSoundOperater = pSoundOperater;
-	m_pVolumeSettingScene = new VOLUMESELECTSCENE(m_pDirectX, m_pSoundOperater);
+	m_pVolumeSettingScene = new VolumeSelectScene(m_pDirectX, m_pSoundOperater);
 
 	//ゲームシーンへショートカットする
 	//m_NextScene = GAME_SCENE;

@@ -5,12 +5,9 @@
 */
 #pragma once
 
-#include "SCENE.h"
-#include "SoundOperater.h"
+#include "./Scene/Scene.h"
 
-enum SCENE_NUM;
-class Scene;
-class VOLUMESELECTSCENE;
+class VolumeSelectScene;
 
 class SceneManager
 {
@@ -32,7 +29,7 @@ private:
 	SCENE_NUM m_NextScene;
 	DirectX* m_pDirectX = NULL;
 	SoundOperater* m_pSoundOperater = NULL;
-	VOLUMESELECTSCENE* m_pVolumeSettingScene = NULL;
+	VolumeSelectScene* m_pVolumeSettingScene = NULL;
 
 	HANDLE m_threadHandle = NULL;
 	DWORD m_threadResult = NULL;

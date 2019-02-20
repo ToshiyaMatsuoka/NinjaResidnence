@@ -1,10 +1,10 @@
 ﻿/**
-* @file SCENE.cpp
-* @brief SCENEクラス
+* @file Scene.cpp
+* @brief Sceneクラス
 * @author Kojiro Kawahara
 */
-#include "SCENE.h"
-#include "BlockInfo.h"
+#include "Scene.h"
+#include "../BlockInfo.h"
 
 int Scene::m_StageNum = 8;
 bool Scene::m_SoundSetting = false;
@@ -14,13 +14,13 @@ Scene :: Scene(DirectX* pDirectX, SoundOperater* pSoundOperater):m_pDirectX(pDir
 	m_pXinputDevice = new XinputDevice;
 	m_pSoundOperater = pSoundOperater;
 	
-	m_pDirectX->LoadTexture("Resource/texture/object_a.png", "BLOCK_INTEGRATION_A_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Load_BG.jpg", "LOAD_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/object_a.png", "BLOCK_INTEGRATION_A_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Load_BG.jpg", "LOAD_BG_TEX");
 
-	m_pDirectX->LoadTexture("Texture/GyoushoNumber.png", "NUMBER_TEX");
-	m_pDirectX->LoadTexture("Texture/SoundVolumeMenu.png", "SV_MENU_TEX");
-	m_pDirectX->LoadTexture("Texture/SoundSelectCursor.png", "SV_CURSOR_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Setting_BG.jpg", "VOLUME_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/GyoushoNumber.png", "NUMBER_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/SoundVolumeMenu.png", "SV_MENU_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/SoundSelectCursor.png", "SV_CURSOR_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Setting_BG.jpg", "VOLUME_BG_TEX");
 
 	m_pDirectX->SetFont(75, 75, "LOAD_FONT");
 }

@@ -1,22 +1,21 @@
 ﻿/**
-* @file GAMESCENE.h
-* @brief GAMESCENEクラス
+* @file GameScene.h
+* @brief GameSceneクラス
 * @author Kojiro Kawahara
 */
 #pragma once
 
-#include "MapChip.h"
-#include "SCENE.h"
-#include "GameChara.h"
-#include "MapReverse.h"
-#include "SkillSelect.h"
-#include "DescriptionBoard.h"
-#include "PauseScene.h"
-#include "Target.h"
-#include "Rope.h"
-#include "Switch.h"
-#include "Torch.h"
-
+#include "../Object/MapChip.h"
+#include "./Scene.h"
+#include "../Object/GameChara.h"
+#include "../Object/MapReverse.h"
+#include "../Object/SkillSelect.h"
+#include "../Object/DescriptionBoard.h"
+#include "./PauseScene.h"
+#include "../Target/Target.h"
+#include "../Target/Rope.h"
+#include "../Target/Switch.h"
+#include "../Target/Torch.h"
 #define _CRTDBG_MAP_ALLOC
 #define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 

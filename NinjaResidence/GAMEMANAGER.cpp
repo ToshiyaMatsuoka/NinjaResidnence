@@ -4,6 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #include "GameManager.h"
+#include "SceneManager.h"
 #include <ctype.h>
 #include <cstdio>
 #include <cstdlib>
@@ -62,7 +63,7 @@ GameManager::GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
 	pDirectX->InitPresentParameters(hWnd);
-	pDirectX->BuildDXDevice(hWnd, isWindowMode, "texture/ninja.png");
+	pDirectX->BuildDXDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
 	pSoundOperater->Initialize();
 
 
@@ -92,7 +93,7 @@ void GameManager::ChangeDisplayMode(void)
 	hr = pDirectX->ResetDevice(isWindowMode, &WinRect,hWnd);
 
 	pDirectX->ReleaseDx();
-	pDirectX->BuildDXDevice(hWnd, isWindowMode, "texture/ninja.png");
+	pDirectX->BuildDXDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
 	pSoundOperater->Initialize();
 	pSceneManager->LoadResouce();
 
@@ -190,7 +191,7 @@ int GameManager::MessageLoop()
 				hr = pDirectX->ResetDevice(isWindowMode, &WinRect, hWnd);
 				pDirectX->ReleaseDx();
 
-				pDirectX->RecoverDevice(hWnd, isWindowMode, "texture/ninja.png");
+				pDirectX->RecoverDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
 				pSoundOperater->Initialize();
 				pSceneManager->LoadResouce();
 

@@ -1,0 +1,49 @@
+﻿/**
+* @file HighShuriken.h
+* @brief 高等手裏剣クラス
+* @author Toshiya Matsuoka
+*/
+
+#pragma once
+#include "SkillBase.h"
+#include "../MapChip.h"
+
+class SkillBase;
+class XinputDevice;
+
+class HighShuriken :public SkillBase
+{
+public:
+	/*
+	* @brief キー入力時の内部処理関数
+	*/
+	void KeyOperation(KeyDirection vec);
+
+
+
+	bool Update();
+	void Render();
+	void Reverse(Object* MapChip);
+
+	float InputRightStickDeg();
+
+
+	HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara, XinputDevice* pXinputDevice);
+	~HighShuriken();
+	bool GetActive() { return m_isActive; };
+private:
+	CENTRAL_STATE m_DirectionArrow = { 500,0,100,20 };
+	CUSTOMVERTEX m_DisplayCoordinate[4];
+	CUSTOMVERTEX m_WorldCoordinate[4];
+	XinputDevice* m_pXinputDevice = NULL;
+	const float MoveSpeed = 10.f;
+	void InitPosition();
+	/*
+	* @brief 投擲起動処理
+	* @return 投げられたらtrue
+	* @details 投擲前に角度指定フェイズを挟む
+	*/
+	bool PermitActive();
+	bool isOperation = false;
+};
+

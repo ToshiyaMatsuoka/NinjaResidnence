@@ -1,9 +1,9 @@
 ﻿/**
-* @file STAGESELECTSCENE.cpp
+* @file StageSelectScene.cpp
 * @brief ステージセレクトシーン
 * @author Toshiya Matsuoka
 */
-#include "STAGESELECTSCENE.h"
+#include "StageSelectScene.h"
 
 StageSelectScene::StageSelectScene(DirectX* pDirectX, SoundOperater* pSoundOperater) :Scene(pDirectX,pSoundOperater)
 {
@@ -230,17 +230,17 @@ void StageSelectScene::Render()
 
 void StageSelectScene::LoadResouce()
 {
-	m_pDirectX->LoadTexture("Resource/texture/SelectBG.png", "SELECT_BG_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageImage.png", "STAGEIMAGE_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumberT.png", "STAGESELECTNUMBERT_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumber1.png", "STAGESELECTNUMBER1_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumber2.png", "STAGESELECTNUMBER2_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumber3.png", "STAGESELECTNUMBER3_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumber4.png", "STAGESELECTNUMBER4_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageSelectNumber5.png", "STAGESELECTNUMBER5_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Kunai.png", "KUNAI_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StagexSelectBack.png", "STAGESELECTBACK_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageImageD.jpg", "STAGEIMAGED_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/SelectBG.png", "SELECT_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageImage.png", "STAGEIMAGE_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumberT.png", "STAGESELECTNUMBERT_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumber1.png", "STAGESELECTNUMBER1_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumber2.png", "STAGESELECTNUMBER2_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumber3.png", "STAGESELECTNUMBER3_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumber4.png", "STAGESELECTNUMBER4_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageSelectNumber5.png", "STAGESELECTNUMBER5_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Kunai.png", "KUNAI_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StagexSelectBack.png", "STAGESELECTBACK_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageImageD.jpg", "STAGEIMAGED_TEX");
 
 	m_pDirectX->SetFont(50, 20, "DEBUG_FONT");
 }

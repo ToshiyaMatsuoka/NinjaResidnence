@@ -1,236 +1,220 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Object">
-      <UniqueIdentifier>{13f90229-5673-4496-9a9e-fdd9565f88f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\Skill">
-      <UniqueIdentifier>{d8d150a7-a84c-468e-8a4d-ba5fbb323f3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene">
-      <UniqueIdentifier>{d7906db9-256b-4e89-8f6d-9eb77ae023f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Gimmick">
-      <UniqueIdentifier>{5dc11de3-68d2-412e-aaad-8eece62c7da8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Target">
-      <UniqueIdentifier>{960ab4e0-1844-484c-9361-91d3476f2f31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Device">
+    <Filter Include="Device">
       <UniqueIdentifier>{83ad8f97-1762-457c-93b4-6d57ba9777d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gimmick">
+      <UniqueIdentifier>{5dc11de3-68d2-412e-aaad-8eece62c7da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{13f90229-5673-4496-9a9e-fdd9565f88f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Skill">
+      <UniqueIdentifier>{d8d150a7-a84c-468e-8a4d-ba5fbb323f3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{d7906db9-256b-4e89-8f6d-9eb77ae023f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Target">
+      <UniqueIdentifier>{960ab4e0-1844-484c-9361-91d3476f2f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Device\DirectX.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
-    <ClCompile Include="GameChara.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Device\SoundOperater.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Device\XinputDevice.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
-    <ClCompile Include="SkillSelect.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Gimmick\BaseGimmick.cpp">
+      <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="SkillBase.cpp">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClCompile Include="Gimmick\FallRock.cpp">
+      <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="Shuriken.cpp">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClCompile Include="Gimmick\PartitionBoard.cpp">
+      <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="HighShuriken.cpp">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClCompile Include="Gimmick\Water.cpp">
+      <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="FireArt.cpp">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClCompile Include="Object\DescriptionBoard.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="ClawShot.cpp">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClCompile Include="Object\GameChara.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="MapChip.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Object\MapChip.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="MapReverse.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Object\MapReverse.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="GAMESCENE.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Object\Object.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="PauseScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Object\SkillSelect.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="STAGESELECTSCENE.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Object\TitleCursol.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="VOLUMESELECTSCENE.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Object\Skill\ClawShot.cpp">
+      <Filter>Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="TITLESCENE.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Object\Skill\FireArt.cpp">
+      <Filter>Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="TitleCursol.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Object\Skill\HighShuriken.cpp">
+      <Filter>Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="FallRock.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClCompile Include="Object\Skill\Shuriken.cpp">
+      <Filter>Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="BaseGimmick.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClCompile Include="Object\Skill\SkillBase.cpp">
+      <Filter>Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="Switch.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClCompile Include="Scene\PauseScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Water.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClCompile Include="Target\BaseTarget.cpp">
+      <Filter>Target</Filter>
     </ClCompile>
-    <ClCompile Include="PartitionBoard.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClCompile Include="Target\Rope.cpp">
+      <Filter>Target</Filter>
     </ClCompile>
-    <ClCompile Include="BaseTarget.cpp">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClCompile Include="Target\Switch.cpp">
+      <Filter>Target</Filter>
     </ClCompile>
-    <ClCompile Include="Rope.cpp">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClCompile Include="Target\Target.cpp">
+      <Filter>Target</Filter>
     </ClCompile>
-    <ClCompile Include="Target.cpp">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClCompile Include="Target\Torch.cpp">
+      <Filter>Target</Filter>
     </ClCompile>
-    <ClCompile Include="Torch.cpp">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DescriptionBoard.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SCENE.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="Scene\StageSelectScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="XinputDevice.cpp">
-      <Filter>ソース ファイル\Device</Filter>
+    <ClCompile Include="Scene\VolumeSelectScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX.cpp">
-      <Filter>ソース ファイル\Device</Filter>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SoundOperater.cpp">
-      <Filter>ソース ファイル\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetandGimmickType.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseGimmick.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="ClawShot.h">
-      <Filter>ソース ファイル\Object\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="FireArt.h">
-      <Filter>ソース ファイル\Object\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="HighShuriken.h">
-      <Filter>ソース ファイル\Object\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="FallRock.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="DescriptionBoard.h">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Switch.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="SkillSelect.h">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>ソース ファイル\Object</Filter>
     </ClInclude>
-    <ClInclude Include="MapChip.h">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClInclude Include="Device\DirectX.h">
+      <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="GameChara.h">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClInclude Include="Device\SoundOperater.h">
+      <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="STAGESELECTSCENE.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Device\XinputDevice.h">
+      <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="VOLUMESELECTSCENE.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Gimmick\BaseGimmick.h">
+      <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="GAMESCENE.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Gimmick\FallRock.h">
+      <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="SCENE.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Gimmick\PartitionBoard.h">
+      <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="XinputDevice.h">
-      <Filter>ソース ファイル\Device</Filter>
+    <ClInclude Include="Gimmick\Water.h">
+      <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX.h">
-      <Filter>ソース ファイル\Device</Filter>
+    <ClInclude Include="Object\DescriptionBoard.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Torch.h">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClInclude Include="Object\GameChara.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Water.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClInclude Include="Object\MapChip.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="TitleCursol.h">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClInclude Include="Object\MapReverse.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="TITLESCENE.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Object\Object.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="BlockInfo.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Object\SkillSelect.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="MapReverse.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Object\TitleCursol.h">
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="PartitionBoard.h">
-      <Filter>ソース ファイル\Gimmick</Filter>
+    <ClInclude Include="Object\Skill\ClawShot.h">
+      <Filter>Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="PauseScene.h">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClInclude Include="Object\Skill\FireArt.h">
+      <Filter>Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="SoundOperater.h">
-      <Filter>ソース ファイル\Device</Filter>
+    <ClInclude Include="Object\Skill\HighShuriken.h">
+      <Filter>Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="Shuriken.h">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClInclude Include="Object\Skill\Shuriken.h">
+      <Filter>Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="SkillBase.h">
-      <Filter>ソース ファイル\Object\Skill</Filter>
+    <ClInclude Include="Object\Skill\SkillBase.h">
+      <Filter>Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="BaseTarget.h">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClInclude Include="Scene\PauseScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>ソース ファイル\Object</Filter>
+    <ClInclude Include="Target\BaseTarget.h">
+      <Filter>Target</Filter>
     </ClInclude>
-    <ClInclude Include="Rope.h">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClInclude Include="Target\Rope.h">
+      <Filter>Target</Filter>
     </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>ソース ファイル\Target</Filter>
+    <ClInclude Include="Target\Switch.h">
+      <Filter>Target</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Target\Target.h">
+      <Filter>Target</Filter>
     </ClInclude>
+    <ClInclude Include="Target\Torch.h">
+      <Filter>Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StageSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\VolumeSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="TargetandGimmickType.h" />
+    <ClInclude Include="BlockInfo.h" />
   </ItemGroup>
 </Project>

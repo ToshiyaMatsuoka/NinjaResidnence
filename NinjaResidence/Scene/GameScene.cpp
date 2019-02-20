@@ -1,13 +1,13 @@
 ﻿/**
-* @file GAMESCENE.cpp
-* @brief GAMESCENEクラス
+* @file GameScene.cpp
+* @brief GameSceneクラス
 * @author Kojiro Kawahara
 */
-#include "GAMESCENE.h"
-#include "Shuriken.h"
-#include "HighShuriken.h"
-#include "FireArt.h"
-#include "ClawShot.h"
+#include "GameScene.h"
+#include "../Object/Skill/Shuriken.h"
+#include "../Object/Skill/HighShuriken.h"
+#include "../Object/Skill/FireArt.h"
+#include "../Object/Skill/ClawShot.h"
 
 GameScene::GameScene(DirectX* pDirectX, SoundOperater* pSoundOperater) :Scene(pDirectX,pSoundOperater)
 {
@@ -332,20 +332,20 @@ void GameScene::Render()
 void GameScene::LoadResouce()
 {
 	m_pDirectX->LoadTexture(NULL, "TEST_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/BG_A.jpg", "GAME_SURFACE_BG_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/BG_B.jpg", "GAME_REVERSE_BG_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Pause_BG.jpg", "PAUSE_BG_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/object_a.png", "BLOCK_INTEGRATION_A_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Block_IntegrationB.png", "BLOCK_INTEGRATION_B_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/ninja.png", "CHARA_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Arrow.png", "ARROW_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Kanban.png", "KANBAN_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/Kanban2.png", "KANBAN_TEX2");
-	m_pDirectX->LoadTexture("Resource/texture/Pause.png", "PAUSETITLE_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/PauseMenu.png", "PAUSEMENU_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageClear.png", "CLEAR_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/StageFailure.png", "FAILURE_TEX");
-	m_pDirectX->LoadTexture("Resource/texture/effect.png", "EFFECT_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/BG_A.jpg", "GAME_SURFACE_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/BG_B.jpg", "GAME_REVERSE_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Pause_BG.jpg", "PAUSE_BG_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/object_a.png", "BLOCK_INTEGRATION_A_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Block_IntegrationB.png", "BLOCK_INTEGRATION_B_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/ninja.png", "CHARA_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Arrow.png", "ARROW_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Kanban.png", "KANBAN_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/Kanban2.png", "KANBAN_TEX2");
+	m_pDirectX->LoadTexture("Resource/Texture/Pause.png", "PAUSETITLE_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/PauseMenu.png", "PAUSEMENU_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageClear.png", "CLEAR_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/StageFailure.png", "FAILURE_TEX");
+	m_pDirectX->LoadTexture("Resource/Texture/effect.png", "EFFECT_TEX");
 	m_pDirectX->SetFont(25, 10, "DEBUG_FONT");
 
 	m_pSoundOperater->AddFile("Resource/Sound/nc62985.wav", "DECISION",SE);
