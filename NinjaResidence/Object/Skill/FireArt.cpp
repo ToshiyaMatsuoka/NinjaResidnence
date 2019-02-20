@@ -10,7 +10,7 @@ using namespace PlayerAnimation;
 
 FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip,GameChara)
 {
-	m_Central = { 500,0,80,80 };
+	m_Central = { 500,0,CELL_SIZE*2.f,CELL_SIZE*2.f };
 	m_SizeX = m_pMapChip->GetRow();
 	m_SizeY = m_pMapChip->GetColunm();
 	m_SkillType = FIRE_ART;
@@ -125,13 +125,13 @@ void FireArt::Render()
 	}
 	if (m_isActive) {
 		CUSTOMVERTEX Vertex[4];
-		CreateSquareVertex(Vertex, m_Central, 0xFFFFFFFF, m_DirectionBias * m_CharTu, m_CharTv * 8, m_CharTu * m_Direction, m_CharTv);
+		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, m_DirectionBias * m_CharTu, m_CharTv * 8, m_CharTu * m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
 		m_Central.x += 85 * m_Direction;
-		CreateSquareVertex(Vertex, m_Central, 0xFFFFFFFF,(m_DirectionBias + 1)* m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
+		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR,(m_DirectionBias + 1)* m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
 		m_Central.x += 85 * m_Direction;
-		CreateSquareVertex(Vertex, m_Central, 0xFFFFFFFF, (m_DirectionBias +2 ) * m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
+		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, (m_DirectionBias +2 ) * m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
 
 	}

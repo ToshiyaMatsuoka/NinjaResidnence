@@ -12,7 +12,7 @@ using namespace PlayerAnimation;
 
 HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara, XinputDevice* pXinputDevice) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
 {
-	m_Central = { 500,0,20,20 };
+	m_Central = { 500,0,CELL_SIZE*0.5f,CELL_SIZE*0.5f };
 	m_pMapChip = MapChip;
 	m_pGameChara = GameChara;
 	m_SizeX = m_pMapChip->GetRow();
@@ -204,7 +204,7 @@ void HighShuriken::Render()
 	}
 	if (m_isChoseDeg) {
 		CUSTOMVERTEX DirectionArrowVertex[4];
-		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_DirectionArrow.x - (m_DirectionArrow.scale_x * m_Direction), m_DirectionArrow.y, 0xFFFFFFFF, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
+		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_Central.x , m_Central.y, DEFFALT_COLOR, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
 		TextureRender("BLOCK_INTEGRATION_A_TEX", DirectionArrowVertex);
 		rad = 0;
 		return;
@@ -213,7 +213,7 @@ void HighShuriken::Render()
 		CUSTOMVERTEX ShurikenVertex[4];
 		static float rad = 0.f;
 		rad += 10.f;
-		RevolveZ(ShurikenVertex, static_cast<float>(rad), m_Central, 0xFFFFFFFF, 0.f, BLOCK_INTEGRATION_HEIGHT * 2.965f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+		RevolveZ(ShurikenVertex, static_cast<float>(rad), m_Central, DEFFALT_COLOR, 0.f, BLOCK_INTEGRATION_HEIGHT * 2.965f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", ShurikenVertex);
 	}
 

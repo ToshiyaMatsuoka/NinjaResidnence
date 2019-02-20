@@ -71,14 +71,7 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	m_TargetPosY = static_cast<float>(m_TargetInfo.PositionY);
 	if (MapDataReverse == m_TargetInfo.MapDataState)
 	{
-		m_TargetVertex[0].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + 5;
-		m_TargetVertex[0].y = (CELL_SIZE * (m_TargetPosY - 0.5f)) + MapScrollY;
-		m_TargetVertex[1].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + CELL_SIZE + 5;
-		m_TargetVertex[1].y = (CELL_SIZE * (m_TargetPosY - 0.5f)) + MapScrollY;
-		m_TargetVertex[2].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + CELL_SIZE + 5;
-		m_TargetVertex[2].y = (CELL_SIZE * (m_TargetPosY + 0.5f)) + MapScrollY + CELL_SIZE;
-		m_TargetVertex[3].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + 5;
-		m_TargetVertex[3].y = (CELL_SIZE * (m_TargetPosY + 0.5f)) + MapScrollY + CELL_SIZE;
+		VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY, (CELL_SIZE * m_TargetPosX) + MapScrollX , CELL_SIZE, CELL_SIZE);
 		float deg = 0;
 		switch (m_TargetInfo.PairNumber % 10) {
 			//上向き

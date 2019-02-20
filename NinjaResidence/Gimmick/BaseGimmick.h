@@ -39,3 +39,32 @@ protected:
 	bool m_isFirstTime = false;
 	bool m_isActive = false;
 };
+
+namespace VertexSetUp {
+
+	inline void SetVertex(CUSTOMVERTEX* Vertex,float top,float left,float Yscale,float Xscale) {
+		Vertex[0].x = left;
+		Vertex[0].y = top;
+		Vertex[1].x = left + Xscale;
+		Vertex[1].y = top;
+		Vertex[2].x = left + Xscale;
+		Vertex[2].y = top + Yscale;
+		Vertex[3].x = left;
+		Vertex[3].y = top + Yscale;
+	}
+	inline void SetVertexUV(CUSTOMVERTEX* Vertex, float Tu, float Tv, float scaleTu = 1.f, float scaleTv = 1.f) {
+		Vertex[0].tu = Tu;
+		Vertex[0].tv = Tv;
+
+		Vertex[1].tu = Tu + scaleTu;
+		Vertex[1].tv = Tv;
+
+		Vertex[2].tu = Tu + scaleTu;
+		Vertex[2].tv = Tv + scaleTv;
+
+		Vertex[3].tu = Tu;
+		Vertex[3].tv = Tv + scaleTv;
+
+	}
+
+};

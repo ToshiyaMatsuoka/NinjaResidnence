@@ -49,24 +49,9 @@ void FallRock::Render(int MapScrollY, int MapScrollX, MapDataState MapDataRevers
 	{
 		return;
 	}
-	m_GimmickVertex[0].x = m_GimmickPosX + ScrollX;
-	m_GimmickVertex[0].y = m_GimmickPosY + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[1].x = m_GimmickPosX + (CELL_SIZE * 2.f) + ScrollX;
-	m_GimmickVertex[1].y = m_GimmickPosY + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[2].x = m_GimmickPosX + (CELL_SIZE * 2.f) + ScrollX;
-	m_GimmickVertex[2].y = m_GimmickPosY + (CELL_SIZE * 2.f) + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[3].x = m_GimmickPosX + ScrollX;
-	m_GimmickVertex[3].y = m_GimmickPosY + (CELL_SIZE * 2.f) + ScrollY + m_QuantityOfMovement;
+	VertexSetUp::SetVertex(m_GimmickVertex, m_GimmickPosY + ScrollY + m_QuantityOfMovement, m_GimmickPosX + ScrollX, CELL_SIZE * 2.f, CELL_SIZE * 2.f);
 
-	m_GimmickVertex[0].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-	m_GimmickVertex[1].tu = BLOCK_INTEGRATION_WIDTH * 6.f;
-	m_GimmickVertex[2].tu = BLOCK_INTEGRATION_WIDTH * 6.f;
-	m_GimmickVertex[3].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-
-	m_GimmickVertex[0].tv = BLOCK_INTEGRATION_HEIGHT * 3.f;
-	m_GimmickVertex[1].tv = BLOCK_INTEGRATION_HEIGHT * 3.f;
-	m_GimmickVertex[2].tv = BLOCK_INTEGRATION_HEIGHT * 5.f;
-	m_GimmickVertex[3].tv = BLOCK_INTEGRATION_HEIGHT * 5.f;
+	VertexSetUp::SetVertexUV(m_GimmickVertex, BLOCK_INTEGRATION_WIDTH * 4.f, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH * 2.f, BLOCK_INTEGRATION_HEIGHT * 2.f);
 
 	m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_GimmickVertex);
 }

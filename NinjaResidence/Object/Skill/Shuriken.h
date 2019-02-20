@@ -29,9 +29,6 @@ public:
 	~Shuriken();
 	bool GetActive() { return m_isActive; };
 private:
-	CENTRAL_STATE m_DirectionArrow = { 500,0,100,20 };
-	CUSTOMVERTEX m_DisplayCoordinate[4];
-	CUSTOMVERTEX m_WorldCoordinate[4];
 
 	const float MoveSpeed = 10.f;
 	void InitPosition();

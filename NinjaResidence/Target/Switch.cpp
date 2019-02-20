@@ -36,24 +36,9 @@ void Switch::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 		//TODO:的のオンオフ切り替え
 		if (MapDataReverse == m_TargetInfo.MapDataState)
 		{
-			m_TargetVertex[0].x = (CELL_SIZE * m_TargetPosX) + MapScrollX;
-			m_TargetVertex[0].y = (CELL_SIZE * m_TargetPosY) + MapScrollY;
-			m_TargetVertex[1].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + CELL_SIZE;
-			m_TargetVertex[1].y = (CELL_SIZE * m_TargetPosY) + MapScrollY;
-			m_TargetVertex[2].x = (CELL_SIZE * m_TargetPosX) + MapScrollX + CELL_SIZE;
-			m_TargetVertex[2].y = (CELL_SIZE * m_TargetPosY) + MapScrollY + CELL_SIZE;
-			m_TargetVertex[3].x = (CELL_SIZE * m_TargetPosX) + MapScrollX;
-			m_TargetVertex[3].y = (CELL_SIZE * m_TargetPosY) + MapScrollY + CELL_SIZE;
+			VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY, (CELL_SIZE * m_TargetPosX) + MapScrollX, CELL_SIZE, CELL_SIZE);
 
-			m_TargetVertex[0].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-			m_TargetVertex[1].tu = BLOCK_INTEGRATION_WIDTH * 5.f;
-			m_TargetVertex[2].tu = BLOCK_INTEGRATION_WIDTH * 5.f;
-			m_TargetVertex[3].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-
-			m_TargetVertex[0].tv = BLOCK_INTEGRATION_HEIGHT * 0.f;
-			m_TargetVertex[1].tv = BLOCK_INTEGRATION_HEIGHT * 0.f;
-			m_TargetVertex[2].tv = BLOCK_INTEGRATION_HEIGHT * 1.f;
-			m_TargetVertex[3].tv = BLOCK_INTEGRATION_HEIGHT * 1.f;
+			VertexSetUp::SetVertexUV(m_TargetVertex, BLOCK_INTEGRATION_WIDTH * 4.f, 0.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 
 			m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_TargetVertex);
 		}

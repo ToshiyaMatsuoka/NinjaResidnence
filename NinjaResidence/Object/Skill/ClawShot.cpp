@@ -8,7 +8,7 @@ using namespace PlayerAnimation;
 
 ClawShot::ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
 {
-	m_Central = { 500,0,25,25 };
+	m_Central = { 500,0,CELL_SIZE*0.625f,CELL_SIZE*0.625f };
 	m_SizeX = m_pMapChip->GetRow();
 	m_SizeY = m_pMapChip->GetColunm();
 
@@ -177,7 +177,7 @@ void ClawShot::Render()
 	}
 	if (m_isChoseDeg) {
 		CUSTOMVERTEX DirectionArrowVertex[4];
-		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_DirectionArrow.x - (m_DirectionArrow.scale_x * m_Direction), m_DirectionArrow.y, 0xFFFFFFFF, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
+		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_Central.x, m_Central.y, DEFFALT_COLOR, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
 		TextureRender("BLOCK_INTEGRATION_A_TEX", DirectionArrowVertex);
 		return;
 	}
@@ -195,13 +195,13 @@ void ClawShot::Render()
 		m_RopeCentral.y = RopeBatteryPosY-1.f;
 		m_RopeCentral.scale_x = BehindLength * 0.5f;
 		m_RopeCentral.scale_y = 3.5f;
-		RevolveZ(RopeVertex, DegToRad(m_DirectionDeg), m_RopeCentral, RopeBatteryPosX, RopeBatteryPosY, 0xFFFFFFFF, BLOCK_INTEGRATION_WIDTH * 6.0f, 0,13.f/512.f);
+		RevolveZ(RopeVertex, DegToRad(m_DirectionDeg), m_RopeCentral, RopeBatteryPosX, RopeBatteryPosY, DEFFALT_COLOR, BLOCK_INTEGRATION_WIDTH * 6.0f, 0,13.f/512.f);
 		RevolveTexture(RopeVertex, 1);
 		///////////////////////////////////////////////
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_B_TEX", RopeVertex);
 
 		CUSTOMVERTEX ClawVertex[4];
-		RevolveZ(ClawVertex, DegToRad(m_DirectionDeg), m_Central,0xFFFFFFFF, (m_DirectionBias + 3) * BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 5, BLOCK_INTEGRATION_WIDTH * m_Direction, BLOCK_INTEGRATION_HEIGHT);
+		RevolveZ(ClawVertex, DegToRad(m_DirectionDeg), m_Central, DEFFALT_COLOR, (m_DirectionBias + 3) * BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 5, BLOCK_INTEGRATION_WIDTH * m_Direction, BLOCK_INTEGRATION_HEIGHT);
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", ClawVertex);
 
 	}

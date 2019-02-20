@@ -35,9 +35,6 @@ private:
 	*/
 	bool PermitActive();
 
-	
-	CUSTOMVERTEX m_DisplayCoordinate[4];
-	CUSTOMVERTEX m_WorldCoordinate[4];
 	bool m_isActive = false;
 	bool m_isChoseDeg = false;
 

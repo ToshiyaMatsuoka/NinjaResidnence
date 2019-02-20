@@ -8,7 +8,7 @@ using namespace PlayerAnimation;
 
 Shuriken::Shuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater,MapChip,GameChara)
 {
-	m_Central = { 500,0,20,20 };
+	m_Central = { 500,0,CELL_SIZE*0.5f,CELL_SIZE*0.5f };
 	m_pMapChip = MapChip;
 	m_pGameChara = GameChara;
 	m_SizeX = m_pMapChip->GetRow();
@@ -115,6 +115,7 @@ bool Shuriken::Update()
 	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg)) + PrevMapScrollY;
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
+	//終了判定
 	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX-1) {
 		InitPosition();
 	}
@@ -132,11 +133,6 @@ bool Shuriken::Update()
 		m_pSoundOperater->Start("CLAWSHOT", false);
 		InitPosition();
 	}
-	//if (CollisionTarget()) {
-	//	m_pMapChip->Activate(m_targetX, m_targetY);
-	//	m_pSoundOperater->Start("CLAWSHOT", false);
-	//	InitPosition();
-	//}
 
 	if (CollisionRope()) {
 		m_pMapChip->Activate(m_ropeX, m_ropeY);
@@ -158,7 +154,7 @@ void Shuriken::Render()
 	}
 	if (m_isChoseDeg) {
 		CUSTOMVERTEX DirectionArrowVertex[4];
-		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_DirectionArrow.x - (m_DirectionArrow.scale_x * m_Direction), m_DirectionArrow.y, 0xFFFFFFFF, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
+		RevolveZ(DirectionArrowVertex, DegToRad(m_DirectionDeg), m_DirectionArrow, m_Central.x, m_Central.y, DEFFALT_COLOR, m_DirectionBias*(BLOCK_INTEGRATION_WIDTH*1.5f), BLOCK_INTEGRATION_HEIGHT * 9.65f, (BLOCK_INTEGRATION_WIDTH*1.5f)*m_Direction, BLOCK_INTEGRATION_HEIGHT*0.5f);
 		TextureRender("BLOCK_INTEGRATION_A_TEX", DirectionArrowVertex);
 		rad = 0;
 		return;
@@ -167,7 +163,7 @@ void Shuriken::Render()
 		CUSTOMVERTEX ShurikenVertex[4];
 		static float rad = 0.f;
 		rad += 10.f;
-		RevolveZ(ShurikenVertex, static_cast<float>(rad), m_Central, 0xFFFFFFFF, 0.f, BLOCK_INTEGRATION_HEIGHT * 2.965f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+		RevolveZ(ShurikenVertex, static_cast<float>(rad), m_Central, DEFFALT_COLOR, 0.f, BLOCK_INTEGRATION_HEIGHT * 2.965f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", ShurikenVertex);
 	}
 }

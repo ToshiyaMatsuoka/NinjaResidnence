@@ -40,6 +40,10 @@ protected:
 	float m_Direction = PlayerAnimation::FACING_NOTHING;
 	PlayerAnimation::DIRECTION_BIAS m_DirectionBias = PlayerAnimation::ZERO;
 
+	CENTRAL_STATE m_DirectionArrow = { 500,0,CELL_SIZE*2.5f,CELL_SIZE*0.5f };
+
+	const DWORD DEFFALT_COLOR = 0xFFFFFFFF;
+
 	int m_targetX;
 	int m_targetY;
 

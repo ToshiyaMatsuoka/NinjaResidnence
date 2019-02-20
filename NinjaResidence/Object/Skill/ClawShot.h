@@ -28,9 +28,6 @@ public:
 	~ClawShot();
 	bool GetActive() { return m_isActive; };
 private:
-	CENTRAL_STATE m_DirectionArrow = { 500,0,100,20 };
-	CUSTOMVERTEX m_DisplayCoordinate[4];
-	CUSTOMVERTEX m_WorldCoordinate[4];
 	float RopeBatteryPosX = 0;
 	float RopeBatteryPosY = 0;
 

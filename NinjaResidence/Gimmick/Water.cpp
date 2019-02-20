@@ -26,7 +26,7 @@ void Water::Activate()
 void Water::Update()
 {
 	if (!m_isActive) return;
-	if (m_QuantityOfMovement > -(80.f*4.f)) {
+	if (m_QuantityOfMovement > -(CELL_SIZE*8.f)) {
 		m_QuantityOfMovement -= 5.f;
 		if (SoundLib::Playing != m_pSoundOperater->GetStatus("DRAINAGE")) {
 			m_pSoundOperater->Start("DRAINAGE", false);
@@ -58,32 +58,15 @@ void Water::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 		m_WorldPosBottom = (CELL_SIZE * (m_GimmickPosY + 1));
 		m_isFirstTime = true;
 	}
+	m_TopPosition = m_WorldPosTop + ScrollY + m_QuantityOfMovement;
+	VertexSetUp::SetVertex(m_GimmickVertex, m_TopPosition, m_WorldPosLeft + ScrollX, CELL_SIZE, CELL_SIZE );
 
-	m_GimmickVertex[0].x = m_WorldPosLeft + ScrollX;
-	m_GimmickVertex[0].y = m_TopPosition = m_WorldPosTop + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[1].x = m_WorldPosRight + ScrollX;
-	m_GimmickVertex[1].y = m_WorldPosTop + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[2].x = m_WorldPosRight + ScrollX;
-	m_GimmickVertex[2].y = m_WorldPosBottom + ScrollY + m_QuantityOfMovement;
-	m_GimmickVertex[3].x = m_WorldPosLeft + ScrollX;
-	m_GimmickVertex[3].y = m_WorldPosBottom + ScrollY + m_QuantityOfMovement;
-
-	m_GimmickVertex[0].tu = BLOCK_INTEGRATION_WIDTH * 2.f;
-	m_GimmickVertex[1].tu = BLOCK_INTEGRATION_WIDTH * 3.f;
-	m_GimmickVertex[2].tu = BLOCK_INTEGRATION_WIDTH * 3.f;
-	m_GimmickVertex[3].tu = BLOCK_INTEGRATION_WIDTH * 2.f;
-
-	m_GimmickVertex[0].tv = BLOCK_INTEGRATION_HEIGHT;
-	m_GimmickVertex[1].tv = BLOCK_INTEGRATION_HEIGHT;
-	m_GimmickVertex[2].tv = BLOCK_INTEGRATION_HEIGHT * 2.f;
-	m_GimmickVertex[3].tv = BLOCK_INTEGRATION_HEIGHT * 2.f;
+	VertexSetUp::SetVertexUV(m_GimmickVertex, BLOCK_INTEGRATION_WIDTH* 2.f, BLOCK_INTEGRATION_HEIGHT, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 
 	m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_GimmickVertex);
+	//VertexSetUp::SetVertex(m_GimmickVertex, m_WorldPosTop + ScrollY + m_QuantityOfMovement, m_WorldPosLeft + ScrollX, CELL_SIZE, CELL_SIZE);
 
-	m_GimmickVertex[0].tu = BLOCK_INTEGRATION_WIDTH * 3.f;
-	m_GimmickVertex[1].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-	m_GimmickVertex[2].tu = BLOCK_INTEGRATION_WIDTH * 4.f;
-	m_GimmickVertex[3].tu = BLOCK_INTEGRATION_WIDTH * 3.f;
+	VertexSetUp::SetVertexUV(m_GimmickVertex, BLOCK_INTEGRATION_WIDTH* 3.f, BLOCK_INTEGRATION_HEIGHT, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 
 	m_GimmickVertex[0].y = m_GimmickVertex[2].y;
 	m_GimmickVertex[1].y = m_GimmickVertex[3].y;
