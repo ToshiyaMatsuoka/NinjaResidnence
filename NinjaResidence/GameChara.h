@@ -146,11 +146,11 @@ private:
 	//キャラの下側のY座標
 	int m_MapPositionY = 0;
 	//! 毎フレームかける重力の値
-	const float GRAVITY = 15.f;
+	const float GRAVITY = CELL_SIZE * 0.375f;
 	//! ダッシュ動作
 	void Dash();
 	//! 移動量
-	float MOVE_SPEED = 15.f;
+	float MOVE_SPEED = CELL_SIZE * 0.375f;
 	const int VERTICAL_SCROLLING_LEVEL = 20;
 	const int ScrollSpeed = 15;
 	bool m_isDash = false;
@@ -218,7 +218,7 @@ private:
 	bool m_isJumpRight = false;
 	bool m_isJumpLeft = false;
 	bool m_isUsingArt = false;
-	const float InitialAcceleration = 50.0f;
+	const float InitialAcceleration = CELL_SIZE * 1.25f;
 	float m_AccelerationY = InitialAcceleration;
 	float m_AccelerationX = MOVE_SPEED * 1.5f;
 
