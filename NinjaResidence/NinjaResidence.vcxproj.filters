@@ -119,9 +119,6 @@
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Object.h">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Device\DirectX.h">
       <Filter>Device</Filter>
     </ClInclude>
