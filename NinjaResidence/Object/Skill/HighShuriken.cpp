@@ -150,6 +150,7 @@ bool HighShuriken::Update()
 	PrevMapScrollY -= m_MapScrollY;
 	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg)) - PrevMapScrollX;
 	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg)) + PrevMapScrollY;
+	
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
 
@@ -170,12 +171,6 @@ bool HighShuriken::Update()
 		m_pSoundOperater->Start("CLAWSHOT", false);
 		InitPosition();
 	}
-	//if (CollisionTarget()) {
-	//	m_pMapChip->Activate(m_targetX, m_targetY);
-	//	m_pSoundOperater->Start("CLAWSHOT", false);
-
-	//	InitPosition();
-	//}
 
 	if (CollisionRope()) {
 		m_pMapChip->Activate(m_ropeX, m_ropeY);

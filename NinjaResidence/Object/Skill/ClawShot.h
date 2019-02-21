@@ -31,8 +31,7 @@ private:
 	float RopeBatteryPosX = 0;
 	float RopeBatteryPosY = 0;
 
-
-	const float MoveSpeed = 10.f;
+	//! 位置の初期化
 	void InitPosition();
 	/*
 	* @brief 投擲起動処理

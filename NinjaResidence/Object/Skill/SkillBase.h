@@ -34,6 +34,7 @@ protected:
 	int m_MapPositionY;
 	int PrevMapScrollX = 0;
 	int PrevMapScrollY = 0;
+	const float MoveSpeed = CELL_SIZE * 0.25f;
 
 	float m_DirectionDeg = 0;
 	//! キャラの向きの判別の為

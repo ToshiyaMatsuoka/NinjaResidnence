@@ -46,7 +46,6 @@ private:
 	float m_Direction = PlayerAnimation::FACING_NOTHING;
 	PlayerAnimation::DIRECTION m_Facing = PlayerAnimation::FACING_RIGHT;
 
-	const float MoveSpeed = 10.f;
 	void InitPosition();
 	float m_Animation = 0.f;
 	const float CHARA_TEXTURE_WIDTH = 4096.f;

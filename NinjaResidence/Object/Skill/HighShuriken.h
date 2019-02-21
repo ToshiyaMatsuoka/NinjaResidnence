@@ -33,7 +33,6 @@ public:
 	bool GetActive() { return m_isActive; };
 private:
 	XinputDevice* m_pXinputDevice = NULL;
-	const float MoveSpeed = 10.f;
 	void InitPosition();
 	/*
 	* @brief 投擲起動処理

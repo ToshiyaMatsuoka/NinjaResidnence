@@ -127,10 +127,10 @@ void FireArt::Render()
 		CUSTOMVERTEX Vertex[4];
 		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, m_DirectionBias * m_CharTu, m_CharTv * 8, m_CharTu * m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
-		m_Central.x += 85 * m_Direction;
+		m_Central.x += CELL_SIZE * 2.125f * m_Direction;
 		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR,(m_DirectionBias + 1)* m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
-		m_Central.x += 85 * m_Direction;
+		m_Central.x += CELL_SIZE * 2.125f * m_Direction;
 		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, (m_DirectionBias +2 ) * m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
 		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
 

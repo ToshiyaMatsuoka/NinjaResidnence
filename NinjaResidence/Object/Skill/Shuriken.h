@@ -30,7 +30,6 @@ public:
 	bool GetActive() { return m_isActive; };
 private:
 
-	const float MoveSpeed = 10.f;
 	void InitPosition();
 	/*
 	* @brief 投擲起動処理
