@@ -197,7 +197,15 @@ public:
 	void TriggerLStateDivide();
 
 	/**
-	* @brief  XinputDeviceでゲームパッドの右アナログスティック入力状態振り分け
+	* @brief 左右のバイブレーションモーターを動作させる
+	* @param LeftValue バイブレーション値 MAX＝65535　MIN＝0
+	* @param RightValue バイブレーション値 MAX＝65535　MIN＝0
+	* @details 右は高周波モーター、左は低周波モーター
+	*/
+	void RunVibration(unsigned int LeftValue = 0, unsigned int RightValue = 0);
+
+	/**
+	* @brief XinputDeviceでゲームパッドの右アナログスティック入力状態振り分け
 	* @param AnalogState ANALOG_X　or　ANALOG_Y
 	* @sa enum Analog
 	*/

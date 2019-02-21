@@ -321,3 +321,10 @@ void XinputDevice::TriggerLStateDivide() {
 	}
 }
 
+void XinputDevice::RunVibration(unsigned int LeftValue, unsigned int RightValue) {
+	XINPUT_VIBRATION vibration;
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	vibration.wLeftMotorSpeed = LeftValue;
+	vibration.wRightMotorSpeed = RightValue;
+	XInputSetState(0, &vibration);
+}

@@ -539,8 +539,11 @@ void GameScene::GameFailureAnime()
 	m_pSoundOperater->Start("FAILURE_SE", false);
 	static int StandbyTime = 0;
 	++StandbyTime;
+	m_pXinputDevice->RunVibration(0,50000);
 	if (StandbyTime > 120) {
 		SetNextScene(STAGESELECT_SCENE);
+		m_pXinputDevice->RunVibration();
+
 		StandbyTime = 0;
 	}
 }
