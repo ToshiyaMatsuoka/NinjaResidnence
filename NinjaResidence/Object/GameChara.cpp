@@ -49,12 +49,11 @@ void GameChara::InitJumpParam() {
 	m_isJumpRight = false;
 	m_isJumpLeft = false;
 	m_AccelerationY = InitialAcceleration;
-	//m_AccelerationX = InitialAcceleration;
 	m_RiseFlameTime = 0;
 }
 
 void GameChara::AccelarationControl() {
-	m_AccelerationY -= 2.f;
+	m_AccelerationY -= CELL_SIZE / 20.f;
 
 }
 
@@ -515,7 +514,7 @@ bool GameChara::Update()
 		SetGround();
 	}
 	else /*if (m_isJump)*/ {
-		AddGravity();
+		//AddGravity();
 		m_isInertiaMoving = true;
 		InitJumpParam();
 	}
@@ -558,12 +557,7 @@ bool GameChara::DownCollisionAnything(void) {
 	if (DownCollisionCheck(DESCRIPTION_BOARD)) {
 		return false;
 	}
-
-	//for (NULL; NULL;NULL) {
-	//	if (DownCollisionCheck(WOOD_BLOCK)) {
-	//		return true;
-	//	}
-	//}
+	//松明
 	bool TorchMin = ((D_Buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) >= 400) ||
 		(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) >= 400) ||
 		(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) >= 400));
@@ -573,6 +567,7 @@ bool GameChara::DownCollisionAnything(void) {
 	if (TorchMax && TorchMin&&D_Buf >100) {
 		return false;
 	}
+	//的
 	bool TargetMin = ((m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) >= 100) ||
 		(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) >= 100) ||
 		((D_Buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition)) >= 100));
@@ -582,29 +577,21 @@ bool GameChara::DownCollisionAnything(void) {
 	if (TargetMax && TargetMin&&D_Buf >100&& D_Buf <1100) {
 		return false;
 	}
+	//どんでん返しゾーン
 	bool ReverseCollLeft = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) < 1300) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) >= 1100);
 	bool ReverseCollCenter = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) < 1300) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) >= 1100);
 	bool ReverseCollRight = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) < 1300) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) >= 1100);
-
-	//bool BlockMax = ((D_Buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition)) < 100) ||
-	//	(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) < 100) ||
-	//	((m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition)) < 100);
-	//bool BlockMin = ((m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) > 0) ||
-	//	(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) > 0) ||
-	//	(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) > 0));
+	//基本ブロック
 	bool CollLeft = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) < 100)&& (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) > 0);
 	bool CollCenter = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition+1) < 100)&& (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition+1) > 0);
 	bool CollRight =(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) < 100)&& (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) > 0);
 	if ((CollLeft || CollRight || CollCenter)|| (ReverseCollLeft || ReverseCollRight || ReverseCollCenter)){
 		return true;
 	}
-
+	//水面
 	CollLeft = ((m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) < 800) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition) >= 700));
 	CollRight = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) < 800) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapLeftDirectionPosition + 1) >= 700);
 	CollCenter = (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) < 800) && (m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) >= 700);
-	//bool WaterMin = ( ||
-	//	||
-	//	(m_pMapChip->GetMapChipData(m_MapPositionY, m_MapRightDirectionPosition) >= 700));
 	if (CollLeft || CollRight || CollCenter) {
 		m_ChangeAnimation = WATER_ART;
 		if (m_isInTheAir) {
@@ -739,7 +726,6 @@ bool GameChara::FailureGame()
 void GameChara::Render()
 {
 	CreateSquareVertex(m_Central, m_WorldCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
-	//CreateSquareVertex(m_Central, m_DisplayCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
 	UpdateMapPos();
 #ifdef _DEBUG
 	CUSTOMVERTEX DebugColl[4];
@@ -887,9 +873,10 @@ bool GameChara::TopCollision() {
 			&& DESCRIPTION_BOARD != m_pMapChip->GetMapChipData(m_MapPositionY - 4, m_MapRightDirectionPosition);
 
 		if ((CollLeft || CollRight || CollCenter)) {
-			m_Central.y = ((m_MapPositionY) * CELL_SIZE)+1.f;
+			//m_Central.y = ((m_MapPositionY) * CELL_SIZE)+1.f;
 			m_CollisionHead = true;
-			//m_Central.y = m_PrevPositionY;
+			m_isJump = false;
+			m_Central.y = m_PrevPositionY;
 			return true;
 		}
 	}
