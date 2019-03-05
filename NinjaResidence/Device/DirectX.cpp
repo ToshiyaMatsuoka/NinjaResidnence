@@ -279,15 +279,15 @@ void DirectX::RenderingEnd() {
 *画像描画処理
 */
 
-void DirectX::LoadTexture(LPCSTR FilePath, string TextureKey) {
+void DirectX::LoadTexture(LPCSTR FilePath, string textureKey) {
 	D3DXCreateTextureFromFile(
 		m_pD3Device,
 		FilePath,
-		&m_pTexture[TextureKey]);
+		&m_pTexture[textureKey]);
 }
-void DirectX::DrawTexture(string TextureKey, const CUSTOMVERTEX* TextureSize) {
-	m_pD3Device->SetTexture(0, m_pTexture[TextureKey]);
-	m_pD3Device->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, TextureSize, sizeof(CUSTOMVERTEX));
+void DirectX::DrawTexture(string textureKey, const CUSTOMVERTEX* textureSize) {
+	m_pD3Device->SetTexture(0, m_pTexture[textureKey]);
+	m_pD3Device->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, textureSize, sizeof(CUSTOMVERTEX));
 }
 void DirectX::eraseTexture(string TexKey) {
 	if (!m_pTexture[TexKey]) {

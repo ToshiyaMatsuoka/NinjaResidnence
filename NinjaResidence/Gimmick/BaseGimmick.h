@@ -16,9 +16,9 @@ public:
 	BlockInfo m_GimmickInfo;
 	virtual void Activate() = 0;
 	virtual void Update() = 0;
-	virtual void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse) = 0;
-	BaseGimmick(BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
-	virtual float GetGimmickPosition(bool isAxisX, MapDataState MapDataReverse) { return 0; };
+	virtual void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState) = 0;
+	BaseGimmick(BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
+	virtual float GetGimmickPosition(bool isAxisX, MapDataState mapReverseState) { return 0; };
 	bool GetActive() { return m_isActive; };
 	virtual ~BaseGimmick();
 protected:
@@ -42,28 +42,28 @@ protected:
 
 namespace VertexSetUp {
 
-	inline void SetVertex(CUSTOMVERTEX* Vertex,float top,float left,float Yscale,float Xscale) {
-		Vertex[0].x = left;
-		Vertex[0].y = top;
-		Vertex[1].x = left + Xscale;
-		Vertex[1].y = top;
-		Vertex[2].x = left + Xscale;
-		Vertex[2].y = top + Yscale;
-		Vertex[3].x = left;
-		Vertex[3].y = top + Yscale;
+	inline void SetVertex(CUSTOMVERTEX* vertex,float top,float left,float yScale,float xScale) {
+		vertex[0].x = left;
+		vertex[0].y = top;
+		vertex[1].x = left + xScale;
+		vertex[1].y = top;
+		vertex[2].x = left + xScale;
+		vertex[2].y = top + yScale;
+		vertex[3].x = left;
+		vertex[3].y = top + yScale;
 	}
-	inline void SetVertexUV(CUSTOMVERTEX* Vertex, float Tu, float Tv, float scaleTu = 1.f, float scaleTv = 1.f) {
-		Vertex[0].tu = Tu;
-		Vertex[0].tv = Tv;
+	inline void SetVertexUV(CUSTOMVERTEX* vertex, float Tu, float Tv, float scaleTu = 1.f, float scaleTv = 1.f) {
+		vertex[0].tu = Tu;
+		vertex[0].tv = Tv;
 
-		Vertex[1].tu = Tu + scaleTu;
-		Vertex[1].tv = Tv;
+		vertex[1].tu = Tu + scaleTu;
+		vertex[1].tv = Tv;
 
-		Vertex[2].tu = Tu + scaleTu;
-		Vertex[2].tv = Tv + scaleTv;
+		vertex[2].tu = Tu + scaleTu;
+		vertex[2].tv = Tv + scaleTv;
 
-		Vertex[3].tu = Tu;
-		Vertex[3].tv = Tv + scaleTv;
+		vertex[3].tu = Tu;
+		vertex[3].tv = Tv + scaleTv;
 
 	}
 

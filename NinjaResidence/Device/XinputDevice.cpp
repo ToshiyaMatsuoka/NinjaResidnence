@@ -9,9 +9,9 @@
 
 
 
-void XinputDevice::GetControl(int GamePadNumber)
+void XinputDevice::GetControl(int gamePadNumber)
 {
-	XINPUT_INFO = XInputGetState(GamePadNumber, &m_Xinput);
+	XINPUT_INFO = XInputGetState(gamePadNumber, &m_Xinput);
 }
 
 PADSTATE XinputDevice::GetButton(ButtonIndex index)
@@ -49,44 +49,44 @@ void XinputDevice::BottonCheck() {
 	TriggerLStateDivide();
 }
 
-void XinputDevice::DeviceUpdate(int GamePadNumber) {
+void XinputDevice::DeviceUpdate(int gamePadNumber) {
 
-	GetControl(GamePadNumber);
+	GetControl(gamePadNumber);
 	BottonCheck();
 }
 
-void XinputDevice::CheckButtonState(WORD ButtomID, ButtonIndex ButtomIndex)
+void XinputDevice::CheckButtonState(WORD buttonID, ButtonIndex buttonIndex)
 {
-	if (m_Xinput.Gamepad.wButtons & ButtomID)
+	if (m_Xinput.Gamepad.wButtons & buttonID)
 	{
-		if (m_PadOldState[ButtomIndex] == PadOn)
+		if (m_PadOldState[buttonIndex] == PadOn)
 		{
-			m_PadState[ButtomIndex] = PadOn;
+			m_PadState[buttonIndex] = PadOn;
 		}
 		else
 		{
-			m_PadState[ButtomIndex] = PadPush;
+			m_PadState[buttonIndex] = PadPush;
 		}
 
-		m_PadOldState[ButtomIndex] = PadOn;
+		m_PadOldState[buttonIndex] = PadOn;
 	}
 	else
 	{
-		if (m_PadOldState[ButtomIndex] == PadOn)
+		if (m_PadOldState[buttonIndex] == PadOn)
 		{
-			m_PadState[ButtomIndex] = PadRelease;
+			m_PadState[buttonIndex] = PadRelease;
 		}
 		else
 		{
-			m_PadState[ButtomIndex] = PadOff;
+			m_PadState[buttonIndex] = PadOff;
 		}
-		m_PadOldState[ButtomIndex] = PadOff;
+		m_PadOldState[buttonIndex] = PadOff;
 	}
 }
 
-int XinputDevice::GetAnalogTrigger(AnalogTrigger Trigger)
+int XinputDevice::GetAnalogTrigger(AnalogTrigger trigger)
 {
-	switch (Trigger)
+	switch (trigger)
 	{
 	case LEFT_TRIGGER:
 		return m_Xinput.Gamepad.bLeftTrigger;
@@ -96,9 +96,9 @@ int XinputDevice::GetAnalogTrigger(AnalogTrigger Trigger)
 	return 0;
 }
 
-bool XinputDevice::GetAnalogL(Analog AnalogState)
+bool XinputDevice::GetAnalogL(Analog analogState)
 {
-	switch (AnalogState)
+	switch (analogState)
 	{
 	case ANALOGUP:
 		if (GetAnalogLValue(ANALOG_Y) > INCLINATION_THRESHOLD_VALUE)
@@ -130,9 +130,9 @@ bool XinputDevice::GetAnalogL(Analog AnalogState)
 	return false;
 }
 
-bool XinputDevice::GetAnalogR(Analog AnalogState)
+bool XinputDevice::GetAnalogR(Analog analogState)
 {
-	switch (AnalogState)
+	switch (analogState)
 	{
 	case ANALOGUP:
 		if (GetAnalogRValue(ANALOG_Y) > INCLINATION_THRESHOLD_VALUE)
@@ -164,9 +164,9 @@ bool XinputDevice::GetAnalogR(Analog AnalogState)
 	return false;
 }
 
-int XinputDevice::GetAnalogLValue(Analog AnalogState)
+int XinputDevice::GetAnalogLValue(Analog analogState)
 {
-	switch (AnalogState)
+	switch (analogState)
 	{
 	case ANALOG_Y:
 		return m_Xinput.Gamepad.sThumbLY;
@@ -179,9 +179,9 @@ int XinputDevice::GetAnalogLValue(Analog AnalogState)
 	}
 }
 
-int XinputDevice::GetAnalogRValue(Analog AnalogState)
+int XinputDevice::GetAnalogRValue(Analog analogState)
 {
-	switch (AnalogState)
+	switch (analogState)
 	{
 	case ANALOG_Y:
 		return m_Xinput.Gamepad.sThumbRY;
@@ -194,14 +194,14 @@ int XinputDevice::GetAnalogRValue(Analog AnalogState)
 	}
 }
 
-PADSTATE XinputDevice::GetAnalogLState(Analog AnalogState)
+PADSTATE XinputDevice::GetAnalogLState(Analog analogState)
 {
-	return m_AnalogLState[AnalogState];
+	return m_AnalogLState[analogState];
 }
 
-PADSTATE XinputDevice::GetAnalogRState(Analog AnalogState)
+PADSTATE XinputDevice::GetAnalogRState(Analog analogState)
 {
-	return m_AnalogRState[AnalogState];
+	return m_AnalogRState[analogState];
 }
 
 PADSTATE XinputDevice::GetTriggerRState()
@@ -214,57 +214,57 @@ PADSTATE XinputDevice::GetTriggerLState()
 	return m_TriggerLState;
 }
 
-void XinputDevice::AnalogRStateDivide(Analog AnalogState) {
-	if (GetAnalogR(AnalogState))
+void XinputDevice::AnalogRStateDivide(Analog analogState) {
+	if (GetAnalogR(analogState))
 	{
-		if (m_AnalogROldState[AnalogState] == PadOn)
+		if (m_AnalogROldState[analogState] == PadOn)
 		{
-			m_AnalogRState[AnalogState] = PadOn;
+			m_AnalogRState[analogState] = PadOn;
 		}
 		else
 		{
-			m_AnalogRState[AnalogState] = PadPush;
+			m_AnalogRState[analogState] = PadPush;
 		}
-		m_AnalogROldState[AnalogState] = PadOn;
+		m_AnalogROldState[analogState] = PadOn;
 	}
 	else
 	{
-		if (m_AnalogROldState[AnalogState] == PadOn)
+		if (m_AnalogROldState[analogState] == PadOn)
 		{
-			m_AnalogRState[AnalogState] = PadRelease;
+			m_AnalogRState[analogState] = PadRelease;
 		}
 		else
 		{
-			m_AnalogRState[AnalogState] = PadOff;
+			m_AnalogRState[analogState] = PadOff;
 		}
-		m_AnalogROldState[AnalogState] = PadOff;
+		m_AnalogROldState[analogState] = PadOff;
 	}
 }
 
-void XinputDevice::AnalogLStateDivide(Analog AnalogState) {
-	if (GetAnalogL(AnalogState))
+void XinputDevice::AnalogLStateDivide(Analog analogState) {
+	if (GetAnalogL(analogState))
 	{
-		if (m_AnalogLOldState[AnalogState] == PadOn)
+		if (m_AnalogLOldState[analogState] == PadOn)
 		{
-			m_AnalogLState[AnalogState] = PadOn;
+			m_AnalogLState[analogState] = PadOn;
 		}
 		else
 		{
-			m_AnalogLState[AnalogState] = PadPush;
+			m_AnalogLState[analogState] = PadPush;
 		}
-		m_AnalogLOldState[AnalogState] = PadOn;
+		m_AnalogLOldState[analogState] = PadOn;
 	}
 	else
 	{
-		if (m_AnalogLOldState[AnalogState] == PadOn)
+		if (m_AnalogLOldState[analogState] == PadOn)
 		{
-			m_AnalogLState[AnalogState] = PadRelease;
+			m_AnalogLState[analogState] = PadRelease;
 		}
 		else
 		{
-			m_AnalogLState[AnalogState] = PadOff;
+			m_AnalogLState[analogState] = PadOff;
 		}
-		m_AnalogLOldState[AnalogState] = PadOff;
+		m_AnalogLOldState[analogState] = PadOff;
 	}
 }
 
@@ -321,10 +321,10 @@ void XinputDevice::TriggerLStateDivide() {
 	}
 }
 
-void XinputDevice::RunVibration(unsigned int LeftValue, unsigned int RightValue) {
+void XinputDevice::RunVibration(unsigned int leftValue, unsigned int rightValue) {
 	XINPUT_VIBRATION vibration;
 	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = LeftValue;
-	vibration.wRightMotorSpeed = RightValue;
+	vibration.wLeftMotorSpeed = leftValue;
+	vibration.wRightMotorSpeed = rightValue;
 	XInputSetState(0, &vibration);
 }

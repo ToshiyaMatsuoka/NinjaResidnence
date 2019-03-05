@@ -7,7 +7,7 @@
 #include "../Object/MapChip.h"
 #include <string>
 
-PartitionBoard::PartitionBoard(BlockInfo Gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater) :BaseGimmick(Gimmick, pDirectX,pSoundOperater)
+PartitionBoard::PartitionBoard(BlockInfo gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater) :BaseGimmick(gimmick, pDirectX,pSoundOperater)
 {
 	m_pDirectX = pDirectX;
 	m_pMapChip = pMapChip;
@@ -45,9 +45,9 @@ void PartitionBoard::Update()
 }
 
 
-void PartitionBoard::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void PartitionBoard::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
-	if (MapDataReverse != m_GimmickInfo.MapDataState)
+	if (mapReverseState != m_GimmickInfo.MapDataState)
 	{
 		return;
 	}
@@ -62,7 +62,7 @@ void PartitionBoard::Render(int MapScrollY, int MapScrollX, MapDataState MapData
 		m_isFirstTime = true;
 	}
 	float BoradHeight = m_WorldPosBottom - m_WorldPosTop;
-	VertexSetUp::SetVertex(m_GimmickVertex, m_WorldPosTop + MapScrollY, m_WorldPosLeft + MapScrollX, BoradHeight, CELL_SIZE * 3.f);
+	VertexSetUp::SetVertex(m_GimmickVertex, m_WorldPosTop + mapScrollY, m_WorldPosLeft + mapScrollX, BoradHeight, CELL_SIZE * 3.f);
 
 	VertexSetUp::SetVertexUV(m_GimmickVertex, BLOCK_INTEGRATION_WIDTH* 3.f,0.f, BLOCK_INTEGRATION_WIDTH * 2.f, BLOCK_INTEGRATION_HEIGHT * 5.f);
 

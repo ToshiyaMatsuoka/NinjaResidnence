@@ -7,7 +7,7 @@
 #include "../Device/DirectX.h"
 #include "../TargetandGimmickType.h"
 
-Torch::Torch(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(Target, Gimmick, pDirectX,pSoundOperater)
+Torch::Torch(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(target, gimmick, pDirectX,pSoundOperater)
 {
 
 }
@@ -37,39 +37,39 @@ void Torch::Update()
 }
 
 
-void Torch::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void Torch::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
 	if (m_GimmickInfo.GimmickType == BT_PARTITIONBOARD)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_FALLROCK)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_WATER)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
-	if (MapDataReverse != m_TargetInfo.MapDataState)
+	if (mapReverseState != m_TargetInfo.MapDataState)
 	{
 		return;
 	}
 
-	float ScrollY = static_cast<float>(MapScrollY);
-	float ScrollX = static_cast<float>(MapScrollX);
+	float scrollY = static_cast<float>(mapScrollY);
+	float scrollX = static_cast<float>(mapScrollX);
 
 	m_TargetPosX = static_cast<float>(m_TargetInfo.PositionX);
 	m_TargetPosY = static_cast<float>(m_TargetInfo.PositionY);
 
-	VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY, (CELL_SIZE * m_TargetPosX) + MapScrollX, CELL_SIZE * 3.f , CELL_SIZE);
+	VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + mapScrollY, (CELL_SIZE * m_TargetPosX) + mapScrollX, CELL_SIZE * 3.f , CELL_SIZE);
 
 	VertexSetUp::SetVertexUV(m_TargetVertex, BLOCK_INTEGRATION_WIDTH * 3.f, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 2.f);
 
 	m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_TargetVertex);
 	if (m_isActive) {
 		float HarfCellSize = CELL_SIZE * 0.5;
-		VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY - HarfCellSize, (CELL_SIZE * m_TargetPosX) + MapScrollX, CELL_SIZE, CELL_SIZE);
+		VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + mapScrollY - HarfCellSize, (CELL_SIZE * m_TargetPosX) + mapScrollX, CELL_SIZE, CELL_SIZE);
 
 		VertexSetUp::SetVertexUV(m_TargetVertex,BLOCK_INTEGRATION_WIDTH * 4.f, BLOCK_INTEGRATION_HEIGHT * 5.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 

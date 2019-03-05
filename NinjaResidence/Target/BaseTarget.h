@@ -17,7 +17,7 @@
 class BaseTarget
 {
 public:
-	BaseTarget(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
+	BaseTarget(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
 	virtual ~BaseTarget();
 
 	BlockInfo* GetTargetInfo() { return &m_TargetInfo; }
@@ -29,8 +29,8 @@ public:
 	* @author Toshiya Matsuoka
 	*/
 	void ActivateGimmick();
-	virtual void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse) = 0;
-	virtual float GetGimmickPosition(bool isAxisX, MapDataState MapDataReverse) { return m_pBaseGimmick->GetGimmickPosition(isAxisX, MapDataReverse); };
+	virtual void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState) = 0;
+	virtual float GetGimmickPosition(bool isAxisX, MapDataState mapReverseState) { return m_pBaseGimmick->GetGimmickPosition(isAxisX, mapReverseState); };
 	virtual CUSTOMVERTEX* GetTargetPosition() { return m_TargetVertex; };
 	/**
 	* @brief ギミックのマップ上のY座標取得

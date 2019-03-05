@@ -8,7 +8,7 @@
 #include <string>
 
 
-FallRock::FallRock(BlockInfo Gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater) :BaseGimmick(Gimmick, pDirectX,pSoundOperater)
+FallRock::FallRock(BlockInfo gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater) :BaseGimmick(gimmick, pDirectX,pSoundOperater)
 {
 	m_pDirectX = pDirectX;
 	m_pMapChip = pMapChip;
@@ -40,16 +40,17 @@ void FallRock::Update()
 		m_pMapChip->MapDataVectorHitSet((m_GimmickPosY + static_cast<int>(m_QuantityOfMovement)) / static_cast<int>(CELL_SIZE), m_GimmickInfo.PositionX, 2, 2);
 	}
 }
-void FallRock::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void FallRock::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
-	float ScrollY = static_cast<float>(MapScrollY);
-	float ScrollX = static_cast<float>(MapScrollX);
+	float scrollY = static_cast<float>(mapScrollY);
+	float scrollX = static_cast<float>(mapScrollX);
 
-	if (MapDataReverse != m_GimmickInfo.MapDataState)
+	if (mapReverseState != m_GimmickInfo.MapDataState)
 	{
 		return;
 	}
-	VertexSetUp::SetVertex(m_GimmickVertex, m_GimmickPosY + ScrollY + m_QuantityOfMovement, m_GimmickPosX + ScrollX, CELL_SIZE * 2.f, CELL_SIZE * 2.f);
+
+	VertexSetUp::SetVertex(m_GimmickVertex, m_GimmickPosY + scrollY + m_QuantityOfMovement, m_GimmickPosX + scrollX, CELL_SIZE * 2.f, CELL_SIZE * 2.f);
 
 	VertexSetUp::SetVertexUV(m_GimmickVertex, BLOCK_INTEGRATION_WIDTH * 4.f, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH * 2.f, BLOCK_INTEGRATION_HEIGHT * 2.f);
 

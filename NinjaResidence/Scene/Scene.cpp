@@ -32,17 +32,17 @@ Scene::~Scene()
 }
 
 
-void Scene::CreateSquareVertex(CUSTOMVERTEX* Vertex, CENTRAL_STATE Central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { Central.x - Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { Central.x + Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { Central.x + Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { Central.x - Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu, tv + scaleTv };
+void Scene::CreateSquareVertex(CUSTOMVERTEX* vertex, CENTRAL_STATE central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+	vertex[0] = { central.x - central.scaleX, central.y - central.scaleY, 1.f, 1.f, color, tu, tv };
+	vertex[1] = { central.x + central.scaleX, central.y - central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { central.x + central.scaleX, central.y + central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { central.x - central.scaleX, central.y + central.scaleY, 1.f, 1.f, color, tu, tv + scaleTv };
 }
-void Scene::CreateSquareVertex(CUSTOMVERTEX* Vertex, float x,float y, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { 0,  0, 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { x, 0, 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { x, y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { 0,  y, 1.f, 1.f, color, tu, tv + scaleTv };
+void Scene::CreateSquareVertex(CUSTOMVERTEX* vertex, float x,float y, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+	vertex[0] = { 0,  0, 1.f, 1.f, color, tu, tv };
+	vertex[1] = { x, 0, 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { x, y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { 0,  y, 1.f, 1.f, color, tu, tv + scaleTv };
 }
 
 void Scene::LoadAnimation() {
@@ -59,39 +59,39 @@ void Scene::LoadAnimation() {
 }
 
 
-void Scene::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+void Scene::RevolveZ(CUSTOMVERTEX* vertex, float rad, CENTRAL_STATE central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 
 	float CharVertexX[4];
 	float CharVertexY[4];
 
-	CharVertexX[0] = Central.x - Central.scale_x;
-	CharVertexX[1] = Central.x + Central.scale_x;
-	CharVertexX[2] = Central.x + Central.scale_x;
-	CharVertexX[3] = Central.x - Central.scale_x;
+	CharVertexX[0] = central.x - central.scaleX;
+	CharVertexX[1] = central.x + central.scaleX;
+	CharVertexX[2] = central.x + central.scaleX;
+	CharVertexX[3] = central.x - central.scaleX;
 
-	CharVertexY[0] = Central.y - Central.scale_y;
-	CharVertexY[1] = Central.y - Central.scale_y;
-	CharVertexY[2] = Central.y + Central.scale_y;
-	CharVertexY[3] = Central.y + Central.scale_y;
+	CharVertexY[0] = central.y - central.scaleY;
+	CharVertexY[1] = central.y - central.scaleY;
+	CharVertexY[2] = central.y + central.scaleY;
+	CharVertexY[3] = central.y + central.scaleY;
 
 	for (int RoteCnt = 0; RoteCnt < 4; RoteCnt++) {
 
-		CharVertexX[RoteCnt] -= Central.x;
-		CharVertexY[RoteCnt] -= Central.y;
+		CharVertexX[RoteCnt] -= central.x;
+		CharVertexY[RoteCnt] -= central.y;
 
 		float KEEPER = CharVertexX[RoteCnt];
 
-		CharVertexX[RoteCnt] = (CharVertexX[RoteCnt] * cos(-Rad)) - (CharVertexY[RoteCnt] * sin(-Rad));
-		CharVertexY[RoteCnt] = (CharVertexY[RoteCnt] * cos(-Rad)) + (KEEPER * sin(-Rad));
+		CharVertexX[RoteCnt] = (CharVertexX[RoteCnt] * cos(-rad)) - (CharVertexY[RoteCnt] * sin(-rad));
+		CharVertexY[RoteCnt] = (CharVertexY[RoteCnt] * cos(-rad)) + (KEEPER * sin(-rad));
 
-		CharVertexX[RoteCnt] += Central.x;
-		CharVertexY[RoteCnt] += Central.y;
+		CharVertexX[RoteCnt] += central.x;
+		CharVertexY[RoteCnt] += central.y;
 
 	}
 
-	Vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
+	vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
+	vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
 
 }

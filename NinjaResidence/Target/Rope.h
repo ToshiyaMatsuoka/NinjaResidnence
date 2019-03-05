@@ -11,8 +11,8 @@ class Rope :public BaseTarget
 public:
 	void ActivateTarget();
 	void Update();
-	void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse);
-	Rope(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
+	void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState);
+	Rope(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
 	~Rope();
 private:
 	float m_Movement = 0;

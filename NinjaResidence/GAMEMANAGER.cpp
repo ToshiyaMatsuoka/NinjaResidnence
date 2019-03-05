@@ -43,13 +43,13 @@ GameManager::GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
 	Wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	Wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	Wndclass.lpszMenuName = NULL;
-	Wndclass.lpszClassName = ApiName;	//クラス名
+	Wndclass.lpszClassName = API_NAME;	//クラス名
 	//Windowの登録
 	RegisterClass(&Wndclass);
 	//Windowの生成
 	hWnd = CreateWindow(
-		ApiName,					//ウィンドウのクラス名
-		ApiName, 					//ウィンドウのタイトル
+		API_NAME,					//ウィンドウのクラス名
+		API_NAME, 					//ウィンドウのタイトル
 		WS_OVERLAPPEDWINDOW | WS_VISIBLE,	//ウィンドウスタイル
 		CW_USEDEFAULT,						// ウィンドウの横方向の位置x
 		CW_USEDEFAULT,						// ウィンドウの縦方向の位置y
@@ -214,7 +214,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	pGameManager = NULL;
 }
 
-void WriteLog(std::string Text)
+void WriteLog(std::string text)
 {
 	const char* fileName = "test.txt";
 	std::ofstream ofs(fileName, std::ios::out);
@@ -226,7 +226,7 @@ void WriteLog(std::string Text)
 		return;
 	}
 
-	ofs << Text << std::endl;
+	ofs << text << std::endl;
 	std::cout << fileName << "に書き込みました。" << std::endl;
 
 	std::cin.get();

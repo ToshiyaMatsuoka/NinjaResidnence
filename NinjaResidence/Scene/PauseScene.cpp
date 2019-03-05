@@ -47,15 +47,15 @@ SCENE_NUM PauseScene::Update() {
 }
 
 void PauseScene::Render() {
-	CUSTOMVERTEX PauseMenuVertex[4];
+	CUSTOMVERTEX pauseMenuVertex[4];
 	m_pDirectX->DrawTexture("PAUSE_BG_TEX", m_BackgroundVertex);
 
-	CreateSquareVertex(PauseMenuVertex, m_Menu);
-	m_pDirectX->DrawTexture("PAUSEMENU_TEX", PauseMenuVertex);
-	CreateSquareVertex(PauseMenuVertex, m_MenuTitle);
-	m_pDirectX->DrawTexture("PAUSETITLE_TEX", PauseMenuVertex);
-	CreateSquareVertex(PauseMenuVertex, m_Cursor, m_CursorColor);
-	m_pDirectX->DrawTexture("SV_CURSOR_TEX", PauseMenuVertex);
+	CreateSquareVertex(pauseMenuVertex, m_Menu);
+	m_pDirectX->DrawTexture("PAUSEMENU_TEX", pauseMenuVertex);
+	CreateSquareVertex(pauseMenuVertex, m_MenuTitle);
+	m_pDirectX->DrawTexture("PAUSETITLE_TEX", pauseMenuVertex);
+	CreateSquareVertex(pauseMenuVertex, m_Cursor, m_CursorColor);
+	m_pDirectX->DrawTexture("SV_CURSOR_TEX", pauseMenuVertex);
 
 }
 

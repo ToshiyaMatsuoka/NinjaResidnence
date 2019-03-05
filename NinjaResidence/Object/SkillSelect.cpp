@@ -6,7 +6,7 @@
 
 #include "SkillSelect.h"
 
-SkillSelect::SkillSelect(DirectX* pDirectX, SoundOperater* pSoundOperater, bool* m_EnableSkill) :Object(pDirectX, pSoundOperater), m_EnableSkill(m_EnableSkill)
+SkillSelect::SkillSelect(DirectX* pDirectX, SoundOperater* pSoundOperater, bool* enableSkill) :Object(pDirectX, pSoundOperater), m_EnableSkill(enableSkill)
 {
 
 }

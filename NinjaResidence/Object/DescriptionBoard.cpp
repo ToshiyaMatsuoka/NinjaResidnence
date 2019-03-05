@@ -7,9 +7,9 @@
 
 using namespace MapBlock;
 
-DescriptionBoard::DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater,GameChara * GameChara, Object * pBusyMapChip) :Object(pDirectX, pSoundOperater)
+DescriptionBoard::DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater,GameChara * gameChara, Object * pBusyMapChip) :Object(pDirectX, pSoundOperater)
 {
-	m_pGameChara = GameChara;
+	m_pGameChara = gameChara;
 	m_pMapChip = pBusyMapChip;
 	DescriptionNumberdecision = NONE;
 	DescriptionBoardSIZE[0] = { 300,110,1.0f, 1.0f,0xFFFFFFFF, 0.f, 0.f };

@@ -36,157 +36,157 @@ bool Object::Update()
 
 bool Object::ContactSpecifyObject(CENTRAL_STATE* object)
 {
-	if ((m_Central.x <= object->x + object->scale_x) && (m_Central.x >= object->x- object->scale_x)
-		&& (m_Central.y <= object->y + object->scale_y) && (m_Central.y >= object->y- object->scale_y)) {
+	if ((m_Central.x <= object->x + object->scaleX) && (m_Central.x >= object->x- object->scaleX)
+		&& (m_Central.y <= object->y + object->scaleY) && (m_Central.y >= object->y- object->scaleY)) {
 		return true;
 	}
 	return false;
 }
 
-void Object::TextureRender(std::string TextureKey, CUSTOMVERTEX* TextureSize)
+void Object::TextureRender(std::string textureKey, CUSTOMVERTEX* textureSize)
 {
-	m_pDirectX->DrawTexture(TextureKey, TextureSize);
+	m_pDirectX->DrawTexture(textureKey, textureSize);
 }
 
 
-void Object::CreateSquareVertex(CUSTOMVERTEX* Vertex, CENTRAL_STATE Central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { Central.x - Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { Central.x + Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { Central.x + Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { Central.x - Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu, tv + scaleTv };
+void Object::CreateSquareVertex(CUSTOMVERTEX* vertex, CENTRAL_STATE central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+	vertex[0] = { central.x - central.scaleX, central.y - central.scaleY, 1.f, 1.f, color, tu, tv };
+	vertex[1] = { central.x + central.scaleX, central.y - central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { central.x + central.scaleX, central.y + central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { central.x - central.scaleX, central.y + central.scaleY, 1.f, 1.f, color, tu, tv + scaleTv };
 }
-void Object::CreateSquareVertex(CUSTOMVERTEX* Vertex, float x, float y, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { 0,  0, 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { x, 0, 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { x, y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { 0,  y, 1.f, 1.f, color, tu, tv + scaleTv };
+void Object::CreateSquareVertex(CUSTOMVERTEX* vertex, float x, float y, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+	vertex[0] = { 0,  0, 1.f, 1.f, color, tu, tv };
+	vertex[1] = { x, 0, 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { x, y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { 0,  y, 1.f, 1.f, color, tu, tv + scaleTv };
 }
-void Object::CreateSquareVertex( CENTRAL_STATE Central,CUSTOMVERTEX* Vertex, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { Central.x , Central.y , 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { Central.x + Central.scale_x, Central.y , 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { Central.x + Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { Central.x , Central.y + Central.scale_y, 1.f, 1.f, color, tu, tv + scaleTv };
+void Object::CreateSquareVertex( CENTRAL_STATE central,CUSTOMVERTEX* vertex, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+	vertex[0] = { central.x , central.y , 1.f, 1.f, color, tu, tv };
+	vertex[1] = { central.x + central.scaleX, central.y , 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { central.x + central.scaleX, central.y + central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { central.x , central.y + central.scaleY, 1.f, 1.f, color, tu, tv + scaleTv };
 }
 
-void Object::TranslateCentral_State(CENTRAL_STATE* Central, CUSTOMVERTEX* Vertex) {
-	Central->x = Vertex[0].x;
-	Central->y = Vertex[0].y;
-	Central->scale_x = Vertex[1].x - Vertex[0].x;
-	Central->scale_y = Vertex[3].y - Vertex[0].y;
+void Object::TranslateCentral_State(CENTRAL_STATE* central, CUSTOMVERTEX* vertex) {
+	central->x = vertex[0].x;
+	central->y = vertex[0].y;
+	central->scaleX = vertex[1].x - vertex[0].x;
+	central->scaleY = vertex[3].y - vertex[0].y;
 }
-void Object::TranslateCentral_State(CUSTOMVERTEX* Vertex, CENTRAL_STATE* Central) {
-	if (!Vertex) {
+void Object::TranslateCentral_State(CUSTOMVERTEX* vertex, CENTRAL_STATE* central) {
+	if (!vertex) {
 		return;
 	}
-	Central->scale_x = (Vertex[1].x - Vertex[0].x)*0.5f;
-	Central->scale_y = (Vertex[3].y - Vertex[0].y)*0.5f;
-	Central->x = Vertex[0].x + Central->scale_x;
-	Central->y = Vertex[0].y + Central->scale_y;
+	central->scaleX = (vertex[1].x - vertex[0].x)*0.5f;
+	central->scaleY = (vertex[3].y - vertex[0].y)*0.5f;
+	central->x = vertex[0].x + central->scaleX;
+	central->y = vertex[0].y + central->scaleY;
 }
-void Object::SetVertexUV(CUSTOMVERTEX* Vertex, float Tu, float Tv, float scaleTu, float scaleTv) {
-	Vertex[0].tu = Tu;
-	Vertex[0].tv = Tv;
+void Object::SetVertexUV(CUSTOMVERTEX* vertex, float Tu, float Tv, float scaleTu, float scaleTv) {
+	vertex[0].tu = Tu;
+	vertex[0].tv = Tv;
 
-	Vertex[1].tu = Tu + scaleTu;
-	Vertex[1].tv = Tv;
+	vertex[1].tu = Tu + scaleTu;
+	vertex[1].tv = Tv;
 
-	Vertex[2].tu = Tu + scaleTu;
-	Vertex[2].tv = Tv + scaleTv;
+	vertex[2].tu = Tu + scaleTu;
+	vertex[2].tv = Tv + scaleTv;
 
-	Vertex[3].tu = Tu;
-	Vertex[3].tv = Tv + scaleTv;
+	vertex[3].tu = Tu;
+	vertex[3].tv = Tv + scaleTv;
 
 }
-void Object::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+void Object::RevolveZ(CUSTOMVERTEX* vertex, float rad, CENTRAL_STATE central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 
-	float CharVertexX[4];
-	float CharVertexY[4];
+	float vertexX[4];
+	float vertexY[4];
 
-	CharVertexX[0] = Central.x - Central.scale_x;
-	CharVertexX[1] = Central.x + Central.scale_x;
-	CharVertexX[2] = Central.x + Central.scale_x;
-	CharVertexX[3] = Central.x - Central.scale_x;
+	vertexX[0] = central.x - central.scaleX;
+	vertexX[1] = central.x + central.scaleX;
+	vertexX[2] = central.x + central.scaleX;
+	vertexX[3] = central.x - central.scaleX;
 
-	CharVertexY[0] = Central.y - Central.scale_y;
-	CharVertexY[1] = Central.y - Central.scale_y;
-	CharVertexY[2] = Central.y + Central.scale_y;
-	CharVertexY[3] = Central.y + Central.scale_y;
+	vertexY[0] = central.y - central.scaleY;
+	vertexY[1] = central.y - central.scaleY;
+	vertexY[2] = central.y + central.scaleY;
+	vertexY[3] = central.y + central.scaleY;
 
 	for (int i = 0; i < 4; i++) {
 
-		CharVertexX[i] -= Central.x;
-		CharVertexY[i] -= Central.y;
+		vertexX[i] -= central.x;
+		vertexY[i] -= central.y;
 
-		float KEEPER = CharVertexX[i];
+		float buf = vertexX[i];
 
-		CharVertexX[i] = (CharVertexX[i] * cos(-Rad)) - (CharVertexY[i] * sin(-Rad));
-		CharVertexY[i] = (CharVertexY[i] * cos(-Rad)) + (KEEPER * sin(-Rad));
+		vertexX[i] = (vertexX[i] * cos(-rad)) - (vertexY[i] * sin(-rad));
+		vertexY[i] = (vertexY[i] * cos(-rad)) + (buf * sin(-rad));
 
-		CharVertexX[i] += Central.x;
-		CharVertexY[i] += Central.y;
+		vertexX[i] += central.x;
+		vertexY[i] += central.y;
 
 	}
 
-	Vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
+	vertex[0] = { vertexX[0], vertexY[0], 1.f, 1.f, color, tu, tv };
+	vertex[1] = { vertexX[1], vertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { vertexX[2], vertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { vertexX[3], vertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
 
 }
 
-void Object::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, float RevolvingShaftX, float RevolvingShaftY, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+void Object::RevolveZ(CUSTOMVERTEX* vertex, float rad, CENTRAL_STATE central, float revolvingShaftX, float revolvingShaftY, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 
-	float CharVertexX[4];
-	float CharVertexY[4];
+	float vertexX[4];
+	float vertexY[4];
 
-	CharVertexX[0] = Central.x - Central.scale_x;
-	CharVertexX[1] = Central.x + Central.scale_x;
-	CharVertexX[2] = Central.x + Central.scale_x;
-	CharVertexX[3] = Central.x - Central.scale_x;
+	vertexX[0] = central.x - central.scaleX;
+	vertexX[1] = central.x + central.scaleX;
+	vertexX[2] = central.x + central.scaleX;
+	vertexX[3] = central.x - central.scaleX;
 
-	CharVertexY[0] = Central.y - Central.scale_y;
-	CharVertexY[1] = Central.y - Central.scale_y;
-	CharVertexY[2] = Central.y + Central.scale_y;
-	CharVertexY[3] = Central.y + Central.scale_y;
+	vertexY[0] = central.y - central.scaleY;
+	vertexY[1] = central.y - central.scaleY;
+	vertexY[2] = central.y + central.scaleY;
+	vertexY[3] = central.y + central.scaleY;
 
 	for (int i = 0; i < 4; i++) {
 
-		CharVertexX[i] -= RevolvingShaftX;
-		CharVertexY[i] -= RevolvingShaftY;
+		vertexX[i] -= revolvingShaftX;
+		vertexY[i] -= revolvingShaftY;
 
-		float KEEPER = CharVertexX[i];
+		float buf = vertexX[i];
 
-		CharVertexX[i] = (CharVertexX[i] * cos(-Rad)) - (CharVertexY[i] * sin(-Rad));
-		CharVertexY[i] = (CharVertexY[i] * cos(-Rad)) + (KEEPER * sin(-Rad));
+		vertexX[i] = (vertexX[i] * cos(-rad)) - (vertexY[i] * sin(-rad));
+		vertexY[i] = (vertexY[i] * cos(-rad)) + (buf * sin(-rad));
 
-		CharVertexX[i] += RevolvingShaftX;
-		CharVertexY[i] += RevolvingShaftY;
+		vertexX[i] += revolvingShaftX;
+		vertexY[i] += revolvingShaftY;
 
 	}
 
-	Vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
+	vertex[0] = { vertexX[0], vertexY[0], 1.f, 1.f, color, tu, tv };
+	vertex[1] = { vertexX[1], vertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { vertexX[2], vertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { vertexX[3], vertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
 
 }
 
-void Object::RevolveTexture(CUSTOMVERTEX* Vertex, int Deg) {
+void Object::RevolveTexture(CUSTOMVERTEX* vertex, int deg) {
 
-	float VertexX;
-	float VertexY;
+	float vertexX;
+	float vertexY;
 	//TUTV入れ替えて画像だけ指定回数回す
-	for (int i = 0; i < Deg; ++i) {
-		VertexX = Vertex[0].tu;
-		Vertex[0].tu = Vertex[1].tu;
-		Vertex[1].tu = Vertex[2].tu;
-		Vertex[2].tu = Vertex[3].tu;
-		Vertex[3].tu = VertexX;
-		VertexY = Vertex[0].tv;
-		Vertex[0].tv = Vertex[1].tv;
-		Vertex[1].tv = Vertex[2].tv;
-		Vertex[2].tv = Vertex[3].tv;
-		Vertex[3].tv = VertexY;
+	for (int i = 0; i < deg; ++i) {
+		vertexX = vertex[0].tu;
+		vertex[0].tu = vertex[1].tu;
+		vertex[1].tu = vertex[2].tu;
+		vertex[2].tu = vertex[3].tu;
+		vertex[3].tu = vertexX;
+		vertexY = vertex[0].tv;
+		vertex[0].tv = vertex[1].tv;
+		vertex[1].tv = vertex[2].tv;
+		vertex[2].tv = vertex[3].tv;
+		vertex[3].tv = vertexY;
 	}
 }
 

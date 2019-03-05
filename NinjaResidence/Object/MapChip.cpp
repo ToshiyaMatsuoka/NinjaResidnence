@@ -25,7 +25,7 @@ MapChip::MapChip(DirectX* pDirectX, SoundOperater* pSoundOperater) :Object(pDire
 MapChip::~MapChip()
 {
 	m_ReverseCount = 0;
-	for (int i = 0; i < m_SizeY; i++)
+	for (int i = 0; i < m_MapSizeY; i++)
 	{
 		MapData[i].clear();
 		vector<int>().swap(MapData[i]);
@@ -44,9 +44,9 @@ MapChip::~MapChip()
 	pBaseTarget.clear();
 }
 
-void MapChip::Create(std::string filename, MapDataState MapState)
+void MapChip::Create(std::string filename, MapDataState mapState)
 {
-	m_MapDataState = MapState;
+	m_MapDataState = mapState;
 	int y = 0;
 
 	std::ifstream ifs(filename);
@@ -55,13 +55,13 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 	getline(ifs, str);
 	replace(str.begin(), str.end(), ',', ' ');
 	std::stringstream MapSizeStream(str);
-	MapSizeStream >> m_SizeX >> m_SizeY;
+	MapSizeStream >> m_MapSizeX >> m_MapSizeY;
 
-	MapData.resize(m_SizeY);
+	MapData.resize(m_MapSizeY);
 
-	for (int j = 0; j<m_SizeY; j++)
+	for (int j = 0; j<m_MapSizeY; j++)
 	{
-		MapData[j].resize(m_SizeX);
+		MapData[j].resize(m_MapSizeX);
 	}
 
 	while (getline(ifs, str))
@@ -78,28 +78,28 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 				if (blocktype < BT_PARTITIONBOARD)
 				{
 					PairNum = MapData[y][x] % 100;
-					block = { x,y,PairNum,blocktype,MapState,this };
+					block = { x,y,PairNum,blocktype,mapState,this };
 					TargetVector.push_back(block);
 					m_TargetCount++;
 				}
 				else if (blocktype > BT_TORCH && blocktype < WOOD_REVERSE_ZONE)
 				{
 					PairNum = MapData[y][x] % 100;
-					block = { x,y,PairNum,blocktype,MapState,this };
+					block = { x,y,PairNum,blocktype,mapState,this };
 					GimmickVector.push_back(block);
 					m_GimmickCount++;
 				}
 				else  if (blocktype == WOOD_REVERSE_ZONE)
 				{
 					PairNum = MapData[y][x] % 100;
-					block = { x,y,PairNum,blocktype,MapState,this };
+					block = { x,y,PairNum,blocktype,mapState,this };
 					m_ReversePoint.push_back(block);
 					m_ReverseCount++;
 				}
 				else if (blocktype == ROCK_REVERSE_ZONE)
 				{
 					PairNum = MapData[y][x] % 100;
-					block = { x,y,PairNum,blocktype,MapState,this };
+					block = { x,y,PairNum,blocktype,mapState,this };
 					m_ReversePoint.push_back(block);
 					m_ReverseCount++;
 				}
@@ -110,31 +110,31 @@ void MapChip::Create(std::string filename, MapDataState MapState)
 	if (y > static_cast<int>(MapData.size())) break;
 	}
 
-	if (MapState == REVERSE)
+	if (mapState == REVERSE)
 	{
 		CreateGimmick();
 		m_ReverseBuffer.resize(m_ReverseCount);
 	}
 }
 
-void MapChip::MapDataVectorHitSet(int MapDataVectorSetY, int MapDataVectorSetX, int GimmickY, int GimmickX)
+void MapChip::MapDataVectorHitSet(int mapY, int mapX, int gimmickY, int gimmickX)
 {
-	for (int j = 0;j < GimmickY;j++)
+	for (int j = 0;j < gimmickY;j++)
 	{
-		for (int i = 0;i < GimmickX;i++)
+		for (int i = 0;i < gimmickX;i++)
 		{
-			MapData[MapDataVectorSetY + j][MapDataVectorSetX + i] = 900;
+			MapData[mapY + j][mapX + i] = 900;
 		}
 	}
 }
 
-void MapChip::MapDataVectorZeroSet(int MapDataVectorSetY, int MapDataVectorSetX, int GimmickY, int GimmickX)
+void MapChip::MapDataVectorZeroSet(int mapY, int mapX, int gimmickY, int gimmickX)
 {
-	for (int j = -1;j < GimmickY;j++)
+	for (int j = -1;j < gimmickY;j++)
 	{
-		for (int i = 0;i < GimmickX;i++)
+		for (int i = 0;i < gimmickX;i++)
 		{
-			MapData[MapDataVectorSetY + j][MapDataVectorSetX + i] = 0;
+			MapData[mapY + j][mapX + i] = 0;
 		}
 	}
 }
@@ -203,11 +203,11 @@ void MapChip::Render()
 	}
 	int BottomCellPos = ((m_MapScrollY * -1) + DISPLAY_HEIGHT) / static_cast<int>(CELL_SIZE) + 1;
 	int RightCellPos = ((m_MapScrollX * -1) + DISPLAY_WIDTH) / static_cast<int>(CELL_SIZE) + 1;
-	if (BottomCellPos > m_SizeY) {
-		BottomCellPos = m_SizeY;
+	if (BottomCellPos > m_MapSizeY) {
+		BottomCellPos = m_MapSizeY;
 	}
-	if (RightCellPos > m_SizeX) {
-		RightCellPos = m_SizeX;
+	if (RightCellPos > m_MapSizeX) {
+		RightCellPos = m_MapSizeX;
 	}
 
 	for (int j = TopCellPos; j < BottomCellPos;j++)
@@ -329,12 +329,12 @@ void MapChip::CellInit() {
 
 }
 
-int MapChip::SearchBlockX(BLOCKTYPE Block) {
-	for (int j = 0; j < m_SizeY; j++)
+int MapChip::SearchBlockX(BLOCKTYPE block) {
+	for (int j = 0; j < m_MapSizeY; j++)
 	{
-		for (int i = 0; i < m_SizeX; i++)
+		for (int i = 0; i < m_MapSizeX; i++)
 		{
-			if (MapData[j][i] == Block)
+			if (MapData[j][i] == block)
 			{
 				return i;
 			}
@@ -343,12 +343,12 @@ int MapChip::SearchBlockX(BLOCKTYPE Block) {
 	return 2;
 }
 
-int MapChip::SearchBlockY(BLOCKTYPE Block) {
-	for (int j = 0; j < m_SizeY; j++)
+int MapChip::SearchBlockY(BLOCKTYPE block) {
+	for (int j = 0; j < m_MapSizeY; j++)
 	{
-		for (int i = 0; i < m_SizeX; i++)
+		for (int i = 0; i < m_MapSizeX; i++)
 		{
-			if (MapData[j][i] == Block)
+			if (MapData[j][i] == block)
 			{
 				return j;
 			}
@@ -359,37 +359,37 @@ int MapChip::SearchBlockY(BLOCKTYPE Block) {
 
 CUSTOMVERTEX* MapChip::GetTargetPosition(int targetType)
 {
-	CUSTOMVERTEX* Buf = NULL;
+	CUSTOMVERTEX* buf = NULL;
 	for (auto ite : pBaseTarget)
 	{
 		BlockInfo* InfoBuf = ite->GetTargetInfo();
 		if (InfoBuf->GimmickType!= targetType) {
 			continue;
 		}
-		Buf = ite->GetTargetPosition();
+		buf = ite->GetTargetPosition();
 	}
-	return Buf;
+	return buf;
 }
 
-float MapChip::GetGimmickPosition(bool isAxisX, int MapYPos, int MapXPos)
+float MapChip::GetGimmickPosition(bool isAxisX, int mapYPos, int mapXPos)
 {
-	float Buf = 0;
+	float buf = 0;
 	for (auto ite : pBaseTarget)
 	{
-		if (!ite->GetGimmickActive(MapXPos)) {
+		if (!ite->GetGimmickActive(mapXPos)) {
 			continue;
 		}
-		Buf = ite->GetGimmickPosition(isAxisX, m_MapDataState);
-		if (Buf != 0) break;
+		buf = ite->GetGimmickPosition(isAxisX, m_MapDataState);
+		if (buf != 0) break;
 	}
-	return Buf;
+	return buf;
 }
 
-bool MapChip::GetGimmckActive(int MapXPos)
+bool MapChip::GetGimmckActive(int mapXPos)
 {
 	for (auto ite : pBaseTarget)
 	{
-		return ite->GetGimmickActive(MapXPos);
+		return ite->GetGimmickActive(mapXPos);
 	}
 	return false;
 };

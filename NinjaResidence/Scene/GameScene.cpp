@@ -346,14 +346,15 @@ void GameScene::LoadResouce()
 	m_pDirectX->LoadTexture("Resource/Texture/StageClear.png", "CLEAR_TEX");
 	m_pDirectX->LoadTexture("Resource/Texture/StageFailure.png", "FAILURE_TEX");
 	m_pDirectX->LoadTexture("Resource/Texture/effect.png", "EFFECT_TEX");
+
 	m_pDirectX->SetFont(25, 10, "DEBUG_FONT");
 
 	m_pSoundOperater->AddFile("Resource/Sound/nc62985.wav", "DECISION",SE);
 }
 
-void GameScene::TextureRender(std::string TextureKey, CUSTOMVERTEX* TextureSize)
+void GameScene::TextureRender(std::string textureKey, CUSTOMVERTEX* textureSize)
 {
-	m_pDirectX->DrawTexture(TextureKey, TextureSize);
+	m_pDirectX->DrawTexture(textureKey, textureSize);
 }
 
 void GameScene::StageTurning()

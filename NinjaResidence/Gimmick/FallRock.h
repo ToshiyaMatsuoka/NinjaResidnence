@@ -13,8 +13,8 @@ class FallRock : public BaseGimmick
 public:
 	void Activate();
 	void Update();
-	void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse);
-	FallRock(BlockInfo Gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater);
+	void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState);
+	FallRock(BlockInfo gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater);
 	virtual ~FallRock();
 private:
 	MapChip * m_pMapChip = NULL;

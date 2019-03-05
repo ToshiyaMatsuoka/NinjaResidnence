@@ -6,8 +6,8 @@
 #include "BaseTarget.h"
 #include "../TargetandGimmickType.h"
 
-BaseTarget::BaseTarget(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater)
-	:m_TargetInfo(Target), m_GimmickInfo(Gimmick), m_pDirectX(pDirectX)
+BaseTarget::BaseTarget(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater)
+	:m_TargetInfo(target), m_GimmickInfo(gimmick), m_pDirectX(pDirectX)
 {
 	m_pSoundOperater = pSoundOperater;
 	for (int i = 0; i < 4; ++i) {
@@ -18,16 +18,16 @@ BaseTarget::BaseTarget(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, S
 	switch (m_GimmickInfo.GimmickType)
 	{
 	case BT_PARTITIONBOARD:
-		m_pBaseGimmick = new PartitionBoard(Gimmick, pDirectX, m_GimmickInfo.pMapChip, m_pSoundOperater);
+		m_pBaseGimmick = new PartitionBoard(gimmick, pDirectX, m_GimmickInfo.pMapChip, m_pSoundOperater);
 		break;
 	case BT_FALLROCK:
-		m_pBaseGimmick = new FallRock(Gimmick, pDirectX, m_GimmickInfo.pMapChip, m_pSoundOperater);
+		m_pBaseGimmick = new FallRock(gimmick, pDirectX, m_GimmickInfo.pMapChip, m_pSoundOperater);
 		break;
 	case BT_WATER:
-		m_pBaseGimmick = new Water(Gimmick, pDirectX, m_pSoundOperater);
+		m_pBaseGimmick = new Water(gimmick, pDirectX, m_pSoundOperater);
 		break;
 	case BT_ADHEREBOARD:
-		//m_pBaseGimmick = new AdhereBoard(Gimmick, pDirectX);
+		//m_pBaseGimmick = new AdhereBoard(gimmick, pDirectX);
 		break;
 	}
 }

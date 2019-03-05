@@ -40,7 +40,7 @@ public:
 	void NotPushedAnyButton();
 	void Render();       //ゲームシーン（でプレイヤーや敵の描画したりとか）の描画関数
 	void LoadResouce();
-	void TextureRender(std::string TextureKey, CUSTOMVERTEX* TextureSize);
+	void TextureRender(std::string textureKey, CUSTOMVERTEX* textureSize);
 	/**
 	* @brief ポーズシーンへの切り替え
 	*/

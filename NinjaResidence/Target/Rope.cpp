@@ -7,7 +7,7 @@
 
 
 
-Rope::Rope(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(Target, Gimmick, pDirectX,pSoundOperater)
+Rope::Rope(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(target, gimmick, pDirectX,pSoundOperater)
 {
 }
 
@@ -34,27 +34,27 @@ void Rope::Update()
 }
 
 
-void Rope::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void Rope::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
 	if (m_GimmickInfo.GimmickType == BT_WATER)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_PARTITIONBOARD)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_FALLROCK)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 
-	if (MapDataReverse != m_TargetInfo.MapDataState)
+	if (mapReverseState != m_TargetInfo.MapDataState)
 	{
 		return;
 	}
-	float ScrollY = static_cast<float>(MapScrollY);
-	float ScrollX = static_cast<float>(MapScrollX);
+	float scrollY = static_cast<float>(mapScrollY);
+	float scrollX = static_cast<float>(mapScrollX);
 
 	m_TargetPosX = static_cast<float>(m_TargetInfo.PositionX);
 	m_TargetPosY = static_cast<float>(m_TargetInfo.PositionY);
@@ -62,31 +62,31 @@ void Rope::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	VertexSetUp::SetVertexUV(m_TargetVertex, 0.f, BLOCK_INTEGRATION_WIDTH * 6.f, 0.5f);
 
 	
-	m_TargetVertex[0].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f;
-	m_TargetVertex[0].y = (CELL_SIZE * (m_TargetPosY - 1)) + ScrollY;
-	m_TargetVertex[1].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f + CELL_SIZE;
-	m_TargetVertex[1].y = (CELL_SIZE * (m_TargetPosY - 1)) + ScrollY;
-	m_TargetVertex[2].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f + CELL_SIZE;
-	m_TargetVertex[2].y = (CELL_SIZE * m_TargetPosY) + ScrollY + m_CellSize;
-	m_TargetVertex[3].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f;
-	m_TargetVertex[3].y = (CELL_SIZE * m_TargetPosY) + ScrollY + m_CellSize;
+	m_TargetVertex[0].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f;
+	m_TargetVertex[0].y = (CELL_SIZE * (m_TargetPosY - 1)) + scrollY;
+	m_TargetVertex[1].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f + CELL_SIZE;
+	m_TargetVertex[1].y = (CELL_SIZE * (m_TargetPosY - 1)) + scrollY;
+	m_TargetVertex[2].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f + CELL_SIZE;
+	m_TargetVertex[2].y = (CELL_SIZE * m_TargetPosY) + scrollY + m_CellSize;
+	m_TargetVertex[3].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f;
+	m_TargetVertex[3].y = (CELL_SIZE * m_TargetPosY) + scrollY + m_CellSize;
 
 
 	m_pDirectX->DrawTexture("BLOCK_INTEGRATION_B_TEX", m_TargetVertex);
 	if (m_isActive) {
-		CUSTOMVERTEX DivededRope[4];
-		DivededRope[0].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f;
-		DivededRope[0].y = (CELL_SIZE * (m_TargetPosY - 1)) + ScrollY + m_Movement;
-		DivededRope[1].x = (CELL_SIZE * m_TargetPosX) + ScrollX + CELL_SIZE + 5.f;
-		DivededRope[1].y = (CELL_SIZE * (m_TargetPosY - 1)) + ScrollY + m_Movement;
-		DivededRope[2].x = (CELL_SIZE * m_TargetPosX) + ScrollX + CELL_SIZE + 5.f;
-		DivededRope[2].y = (CELL_SIZE * m_TargetPosY) + ScrollY + m_CellSize + m_Movement;
-		DivededRope[3].x = (CELL_SIZE * m_TargetPosX) + ScrollX + 5.f;
-		DivededRope[3].y = (CELL_SIZE * m_TargetPosY) + ScrollY + m_CellSize + m_Movement;
+		CUSTOMVERTEX divededRope[4];
+		divededRope[0].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f;
+		divededRope[0].y = (CELL_SIZE * (m_TargetPosY - 1)) + scrollY + m_Movement;
+		divededRope[1].x = (CELL_SIZE * m_TargetPosX) + scrollX + CELL_SIZE + 5.f;
+		divededRope[1].y = (CELL_SIZE * (m_TargetPosY - 1)) + scrollY + m_Movement;
+		divededRope[2].x = (CELL_SIZE * m_TargetPosX) + scrollX + CELL_SIZE + 5.f;
+		divededRope[2].y = (CELL_SIZE * m_TargetPosY) + scrollY + m_CellSize + m_Movement;
+		divededRope[3].x = (CELL_SIZE * m_TargetPosX) + scrollX + 5.f;
+		divededRope[3].y = (CELL_SIZE * m_TargetPosY) + scrollY + m_CellSize + m_Movement;
 
-		VertexSetUp::SetVertexUV(DivededRope, 0.f, BLOCK_INTEGRATION_WIDTH * 6.f, 0.5f);
+		VertexSetUp::SetVertexUV(divededRope, 0.f, BLOCK_INTEGRATION_WIDTH * 6.f, 0.5f);
 
-		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_B_TEX", DivededRope);
+		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_B_TEX", divededRope);
 	}
 }
 

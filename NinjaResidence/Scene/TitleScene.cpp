@@ -53,18 +53,18 @@ void TitleScene::Render()
 {	
 	m_pDirectX->DrawTexture("BACKGROUND_TEX", m_BackgroundVertex);
 
-	CUSTOMVERTEX Vertex[4];
-	CreateSquareVertex(Vertex, m_Logo);
-	m_pDirectX->DrawTexture("LOGO_TEX", Vertex);
+	CUSTOMVERTEX vertex[4];
+	CreateSquareVertex(vertex, m_Logo);
+	m_pDirectX->DrawTexture("LOGO_TEX", vertex);
 
-	CreateSquareVertex(Vertex, m_StartSize, m_CursorAlfa[0]);
-	m_pDirectX->DrawTexture("TITLE_MENU_START_TEX", Vertex);
+	CreateSquareVertex(vertex, m_StartSize, m_CursorAlfa[0]);
+	m_pDirectX->DrawTexture("TITLE_MENU_START_TEX", vertex);
 
-	CreateSquareVertex(Vertex, m_SettingSize, m_CursorAlfa[1]);
-	m_pDirectX->DrawTexture("TITLE_MENU_SETTING_TEX", Vertex);
+	CreateSquareVertex(vertex, m_SettingSize, m_CursorAlfa[1]);
+	m_pDirectX->DrawTexture("TITLE_MENU_SETTING_TEX", vertex);
 
-	CreateSquareVertex(Vertex, m_EndSize, m_CursorAlfa[2]);
-	m_pDirectX->DrawTexture("TITLE_MENU_END_TEX", Vertex);
+	CreateSquareVertex(vertex, m_EndSize, m_CursorAlfa[2]);
+	m_pDirectX->DrawTexture("TITLE_MENU_END_TEX", vertex);
 }
 
 void TitleScene::LoadResouce()
@@ -110,38 +110,38 @@ void TitleScene::CursorResize() {
 	switch (SelectingCursor = m_pCursol->GetCursolPosition())
 	{
 	case Cursol::START:
-		m_StartSize.scale_x = SelectingXScale;
-		m_StartSize.scale_y = SelectingYScale;
+		m_StartSize.scaleX = SelectingXScale;
+		m_StartSize.scaleY = SelectingYScale;
 
-		m_SettingSize.scale_x = InitXScale;
-		m_SettingSize.scale_y = InitYScale;
+		m_SettingSize.scaleX = InitXScale;
+		m_SettingSize.scaleY = InitYScale;
 
-		m_EndSize.scale_x = InitXScale;
-		m_EndSize.scale_y = InitYScale;
+		m_EndSize.scaleX = InitXScale;
+		m_EndSize.scaleY = InitYScale;
 		m_CursorAlfa[1] = InitColor;
 		m_CursorAlfa[2] = InitColor;
 		break;
 	case Cursol::OPTION:
-		m_SettingSize.scale_x = SelectingXScale;
-		m_SettingSize.scale_y = SelectingYScale;
+		m_SettingSize.scaleX = SelectingXScale;
+		m_SettingSize.scaleY = SelectingYScale;
 
-		m_StartSize.scale_x = InitXScale;
-		m_StartSize.scale_y = InitYScale;
+		m_StartSize.scaleX = InitXScale;
+		m_StartSize.scaleY = InitYScale;
 
-		m_EndSize.scale_x = InitXScale;
-		m_EndSize.scale_y = InitYScale;
+		m_EndSize.scaleX = InitXScale;
+		m_EndSize.scaleY = InitYScale;
 		m_CursorAlfa[0] = InitColor;
 		m_CursorAlfa[2] = InitColor;
 		break;
 	case Cursol::END:
-		m_EndSize.scale_x = SelectingXScale;
-		m_EndSize.scale_y = SelectingYScale;
+		m_EndSize.scaleX = SelectingXScale;
+		m_EndSize.scaleY = SelectingYScale;
 
-		m_StartSize.scale_x = InitXScale;
-		m_StartSize.scale_y = InitYScale;
+		m_StartSize.scaleX = InitXScale;
+		m_StartSize.scaleY = InitYScale;
 
-		m_SettingSize.scale_x = InitXScale;
-		m_SettingSize.scale_y = InitYScale;
+		m_SettingSize.scaleX = InitXScale;
+		m_SettingSize.scaleY = InitYScale;
 		m_CursorAlfa[0] = InitColor;
 		m_CursorAlfa[1] = InitColor;
 		break;

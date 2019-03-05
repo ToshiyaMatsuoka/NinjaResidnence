@@ -10,13 +10,13 @@
 
 using namespace PlayerAnimation;
 
-HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara, XinputDevice* pXinputDevice) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
+HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip, GameChara* gameChara, XinputDevice* pXinputDevice) :SkillBase(pDirectX, pSoundOperater, mapChip, gameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*0.5f,CELL_SIZE*0.5f };
-	m_pMapChip = MapChip;
-	m_pGameChara = GameChara;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_pMapChip = mapChip;
+	m_pGameChara = gameChara;
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 	m_pXinputDevice = pXinputDevice;
 	m_SkillType = HIGH_SHURIKEN_ART;
 }
@@ -113,7 +113,7 @@ bool HighShuriken::PermitActive() {
 		return false;
 	}
 	if (m_isChoseDeg && !m_isActive) {
-		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scale_x);
+		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		m_Central.y = m_pGameChara->GetPositionY();
 		PrevMapScrollX = m_MapScrollX;
 		PrevMapScrollY = m_MapScrollY;
@@ -132,7 +132,7 @@ void HighShuriken::InitPosition() {
 	m_isActive = false;
 	m_DirectionDeg = 0;
 
-	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scale_x;
+	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY();
 }
 
@@ -154,10 +154,10 @@ bool HighShuriken::Update()
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
 
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX - 1) {
+	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX - 1) {
 		InitPosition();
 	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_SizeY - 1) {
+	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_MapSizeY - 1) {
 		InitPosition();
 	}
 	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
@@ -214,10 +214,10 @@ void HighShuriken::Render()
 
 }
 
-void HighShuriken::Reverse(Object* MapChip) {
-	m_pMapChip = MapChip;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+void HighShuriken::Reverse(Object* mapChip) {
+	m_pMapChip = mapChip;
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 	InitPosition();
 }
 
@@ -227,7 +227,7 @@ float HighShuriken::InputRightStickDeg() {
 	if (XaxisValue == 0 && YaxisValue == 0) { 
 		return 0.f;
 	}
-	float Rad = static_cast<float>(std::atan2(YaxisValue, XaxisValue));
-	static float Deg = 0;
-	return Deg = RadToDeg(Rad);
+	float rad = static_cast<float>(std::atan2(YaxisValue, XaxisValue));
+	static float deg = 0;
+	return deg = RadToDeg(rad);
 }

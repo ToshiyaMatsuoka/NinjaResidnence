@@ -33,8 +33,8 @@ void StageSelectScene::InitPosStageImage()
 	const float STAGEIMAGE_SCALE_Y = 80.f;
 	for (int i = 0; i < 6; i++)
 	{
-		m_StageImage[i].scale_x = STAGEIMAGE_SCALE_X;
-		m_StageImage[i].scale_y = STAGEIMAGE_SCALE_Y;
+		m_StageImage[i].scaleX = STAGEIMAGE_SCALE_X;
+		m_StageImage[i].scaleY = STAGEIMAGE_SCALE_Y;
 		m_StageImage[i].y = static_cast<float>((i / 2) + 1) * 200.f;
 		if (i % 2)
 		{
@@ -53,8 +53,8 @@ void StageSelectScene::InitPosStageSelectNumber()
 	const float STAGESELECTNUMBER_SCALE_Y = 50.f;
 	for (int i = 0; i < 6; i++)
 	{
-		m_StageSelectNumber[i].scale_x = STAGESELECTNUMBER_SCALE_X;
-		m_StageSelectNumber[i].scale_y = STAGESELECTNUMBER_SCALE_Y;
+		m_StageSelectNumber[i].scaleX = STAGESELECTNUMBER_SCALE_X;
+		m_StageSelectNumber[i].scaleY = STAGESELECTNUMBER_SCALE_Y;
 		m_StageSelectNumber[i].y = (static_cast<float>((i / 2) + 1) * 200.f) + 5.f;
 		if (i % 2)
 		{
@@ -199,26 +199,26 @@ void StageSelectScene::Render()
 
 	m_pDirectX->DrawTexture("SELECT_BG_TEX", m_BackgroundVertex);
 
-	CUSTOMVERTEX StageImage[4];
+	CUSTOMVERTEX stageImage[4];
 	if (m_StageNum != 8) 	{
 		for (int i = 0; i < 6; ++i) {
-			CreateSquareVertex(StageImage, m_StageImage[i]);
-			m_pDirectX->DrawTexture("STAGEIMAGE_TEX", StageImage);
+			CreateSquareVertex(stageImage, m_StageImage[i]);
+			m_pDirectX->DrawTexture("STAGEIMAGE_TEX", stageImage);
 
-			CreateSquareVertex(StageImage, m_StageSelectNumber[i]);
-			m_pDirectX->DrawTexture(m_StageSelectNumberkey[i], StageImage);
+			CreateSquareVertex(stageImage, m_StageSelectNumber[i]);
+			m_pDirectX->DrawTexture(m_StageSelectNumberkey[i], stageImage);
 		}
 	}
 	else {
-		CreateSquareVertex(StageImage, m_StageImage[0]);
-		m_pDirectX->DrawTexture("STAGEIMAGED_TEX", StageImage);
+		CreateSquareVertex(stageImage, m_StageImage[0]);
+		m_pDirectX->DrawTexture("STAGEIMAGED_TEX", stageImage);
 	}
 
-	CreateSquareVertex(StageImage, m_StageSelectBack);
-	m_pDirectX->DrawTexture("STAGESELECTBACK_TEX", StageImage);
+	CreateSquareVertex(stageImage, m_StageSelectBack);
+	m_pDirectX->DrawTexture("STAGESELECTBACK_TEX", stageImage);
 
-	CreateSquareVertex(StageImage, m_SelectCursol, m_CursorAlfa);
-	m_pDirectX->DrawTexture("KUNAI_TEX", StageImage);
+	CreateSquareVertex(stageImage, m_SelectCursol, m_CursorAlfa);
+	m_pDirectX->DrawTexture("KUNAI_TEX", stageImage);
 #ifdef _DEBUG
 	RECT testName = { 0, 100, 1250, 720 };
 	char TestName[ARRAY_LONG];

@@ -27,16 +27,16 @@ public:
 	/**
 	* @brief マップチップの生成
 	* @param filename CSVファイルの相対パス
-	* @param MapState 表か裏かの指定
+	* @param mapState 表か裏かの指定
 	* @sa enum MapDataState
 	*/
-	void Create(std::string filename, MapDataState MapState);
+	void Create(std::string filename, MapDataState mapState);
 	//! ギミックの起動
 	void Activate(int X, int Y);
 	//! 指定箇所にマップに900を詰める
-	void MapDataVectorHitSet(int MapDataVectorSetY, int MapDataVectorSetX, int GimmickY, int GimmickX);
+	void MapDataVectorHitSet(int mapY, int mapX, int gimmickY, int gimmickX);
 	//! 指定箇所にマップに0を詰める
-	void MapDataVectorZeroSet(int MapDataVectorSetY, int MapDataVectorSetX, int GimmickY, int GimmickX);
+	void MapDataVectorZeroSet(int mapY, int mapX, int gimmickY, int gimmickX);
 	//! マップデータの確認
 	int GimmickMapDataCheck(int y, int x);
 	//! ギミックペアの作成
@@ -47,14 +47,14 @@ public:
 		return m_MapDataState;
 	}
 	//! 0に近い指定のブロックのマップ座標の取得
-	int SearchBlockX(MapBlock::BLOCKTYPE Block);
+	int SearchBlockX(MapBlock::BLOCKTYPE block);
 	//! 0に近い指定のブロックのマップ座標の取得
-	int SearchBlockY(MapBlock::BLOCKTYPE Block);
+	int SearchBlockY(MapBlock::BLOCKTYPE block);
 	CUSTOMVERTEX* GetTargetPosition(int targetType);
 	//! ギミックの座標の取得
-	float GetGimmickPosition(bool isAxisX, int MapYPos,int MapXPos);
+	float GetGimmickPosition(bool isAxisX, int mapYPos,int mapXPos);
 	//! ギミックの起動状態の取得
-	bool GetGimmckActive(int MapXPos);
+	bool GetGimmckActive(int mapXPos);
 
 private:
 	int m_MapSelected = 0;

@@ -8,11 +8,11 @@
 
 using namespace PlayerAnimation;
 
-FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip,GameChara)
+FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip, GameChara* gameChara) :SkillBase(pDirectX, pSoundOperater, mapChip,gameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*2.f,CELL_SIZE*2.f };
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 	m_SkillType = FIRE_ART;
 }
 
@@ -47,7 +47,7 @@ void FireArt::KeyOperation(KeyDirection vec)
 bool FireArt::PermitActive() {
 	if (!m_isActive) {
 		m_Direction = static_cast<float>(m_pGameChara->GetFacing());
-		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scale_x);
+		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		m_Central.y = m_pGameChara->GetPositionY();
 		m_isChoseDeg = false;
 		return true;
@@ -63,7 +63,7 @@ bool FireArt::PermitActive() {
 
 void FireArt::InitPosition() {
 	m_isActive = false;
-	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * (m_Central.scale_x + 5.f);
+	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * (m_Central.scaleX + 5.f);
 	m_Central.y = m_pGameChara->GetPositionY();
 	m_Animation = 0.f;
 }
@@ -74,17 +74,17 @@ bool FireArt::Update()
 	if (!m_isActive) {
 		return true;
 	}
-	static int AnimeCount = 0;
-	++AnimeCount;
-	if (AnimeCount > 10) {
+	static int animeCount = 0;
+	++animeCount;
+	if (animeCount > 10) {
 		m_Animation += 1.f;
-		AnimeCount = 0;
+		animeCount = 0;
 	}
 	if (m_Direction == FACING_RIGHT) {
 		m_DirectionBias = ZERO;
 	}
 	else m_DirectionBias = ONE;
-	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scale_x;
+	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY()-10.f;
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
@@ -100,8 +100,8 @@ bool FireArt::Update()
 		if (MapPosX < 0) {
 			MapPosX = m_MapPositionX;
 		}
-		if (MapPosX > m_SizeX-1) {
-			MapPosX = m_SizeX - 1;
+		if (MapPosX > m_MapSizeX-1) {
+			MapPosX = m_MapSizeX - 1;
 		}
 
 		if (m_pMapChip->GetMapChipData(m_MapPositionY, MapPosX) > 100)
@@ -124,21 +124,21 @@ void FireArt::Render()
 		return;
 	}
 	if (m_isActive) {
-		CUSTOMVERTEX Vertex[4];
-		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, m_DirectionBias * m_CharTu, m_CharTv * 8, m_CharTu * m_Direction, m_CharTv);
-		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
+		CUSTOMVERTEX vertex[4];
+		CreateSquareVertex(vertex, m_Central, DEFFALT_COLOR, m_DirectionBias * m_CharTu, m_CharTv * 8, m_CharTu * m_Direction, m_CharTv);
+		m_pDirectX->DrawTexture("CHARA_TEX", vertex);
 		m_Central.x += CELL_SIZE * 2.125f * m_Direction;
-		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR,(m_DirectionBias + 1)* m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
-		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
+		CreateSquareVertex(vertex, m_Central, DEFFALT_COLOR,(m_DirectionBias + 1)* m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
+		m_pDirectX->DrawTexture("CHARA_TEX", vertex);
 		m_Central.x += CELL_SIZE * 2.125f * m_Direction;
-		CreateSquareVertex(Vertex, m_Central, DEFFALT_COLOR, (m_DirectionBias +2 ) * m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
-		m_pDirectX->DrawTexture("CHARA_TEX", Vertex);
+		CreateSquareVertex(vertex, m_Central, DEFFALT_COLOR, (m_DirectionBias +2 ) * m_CharTu, m_CharTv * 8, m_CharTu*m_Direction, m_CharTv);
+		m_pDirectX->DrawTexture("CHARA_TEX", vertex);
 
 	}
 }
 
-void FireArt::Reverse(Object* MapChip) {
-	m_pMapChip = MapChip;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+void FireArt::Reverse(Object* mapChip) {
+	m_pMapChip = mapChip;
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 }

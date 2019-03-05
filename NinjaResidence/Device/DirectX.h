@@ -101,15 +101,15 @@ public:
 	/**
 	* @brief 画像読み込み
 	* @param FilePath 画像ファイルパス
-	* @param TextureKey 画像の格納キー
+	* @param textureKey 画像の格納キー
 	*/
-	void LoadTexture(LPCSTR FilePath, std::string TextureKey);
+	void LoadTexture(LPCSTR FilePath, std::string textureKey);
 	/**
 	* @brief 画像表示
-	* @param TextureKey 画像の格納キー
-	* @param TextureSize 頂点情報
+	* @param textureKey 画像の格納キー
+	* @param textureSize 頂点情報
 	*/
-	void DrawTexture(std::string TextureKey, const CUSTOMVERTEX* TextureSize);
+	void DrawTexture(std::string textureKey, const CUSTOMVERTEX* textureSize);
 	/**
 	* @brief 画像消去
 	* @param TexKey 画像の格納キー

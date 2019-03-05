@@ -33,7 +33,7 @@ enum SCENE_NUM
 
 struct CENTRAL_STATE
 {
-	float x, y, scale_x, scale_y;
+	float x, y, scaleX, scaleY;
 };
 
 class Scene {
@@ -49,9 +49,9 @@ public:
 		return m_NextScene;
 	}
 
-	void SetNextScene(SCENE_NUM NextScene)
+	void SetNextScene(SCENE_NUM nextScene)
 	{
-		m_NextScene = NextScene;
+		m_NextScene = nextScene;
 	}
 
 	void EndGame() {
@@ -62,18 +62,18 @@ public:
 	void LoadAnimation();
 	/**
 	*@brief CUSTOMVERTEXにパラメータを入れる
-	* @param Vertex 値を入れる配列
-	* @param Central 中心座標情報
+	* @param vertex 値を入れる配列
+	* @param central 中心座標情報
 	* @param color 色
 	* @param tu 切り取り画像の左端
 	* @param tv 切り取り画像の上端
 	* @param scaleTu 切り取り画像の右端
 	* @param scaleTv 切り取り画像の下端
 	*/
-	void CreateSquareVertex(CUSTOMVERTEX* Vertex, CENTRAL_STATE Central, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
+	void CreateSquareVertex(CUSTOMVERTEX* vertex, CENTRAL_STATE central, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
 	/**
 	*@brief CUSTOMVERTEXにパラメータを入れる
-	* @param Vertex 値を入れる配列
+	* @param vertex 値を入れる配列
 	* @param x 原点からのX軸距離
 	* @param y 原点からのY軸距離
 	* @param color 色
@@ -82,7 +82,7 @@ public:
 	* @param scaleTu 切り取り画像の右端
 	* @param scaleTv 切り取り画像の下端
 	*/
-	void CreateSquareVertex(CUSTOMVERTEX* Vertex, float x, float y, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
+	void CreateSquareVertex(CUSTOMVERTEX* vertex, float x, float y, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
 
 	int GetStageNum() {
 		return m_StageNum;
@@ -116,7 +116,7 @@ protected:
 		return deg * (D3DX_PI / 180);
 	}
 
-	void RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
+	void RevolveZ(CUSTOMVERTEX* vertex, float rad, CENTRAL_STATE central, DWORD  color = 0xffffffff, float tu = 0, float tv = 0, float scaleTu = 1, float scaleTv = 1);
 	//次のシーン
 	SCENE_NUM m_NextScene = SCENE_NONE;
 private:

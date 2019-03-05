@@ -6,7 +6,7 @@
 #include "BaseGimmick.h"
 
 
-BaseGimmick::BaseGimmick(BlockInfo Gimmick, DirectX* pDirectX,SoundOperater* pSoundOperater) :m_GimmickInfo(Gimmick)
+BaseGimmick::BaseGimmick(BlockInfo gimmick, DirectX* pDirectX,SoundOperater* pSoundOperater) :m_GimmickInfo(gimmick)
 {
 	m_pSoundOperater = pSoundOperater;
 	for (int i = 0; i < 4; ++i) {

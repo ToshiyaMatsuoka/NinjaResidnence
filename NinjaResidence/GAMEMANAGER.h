@@ -31,7 +31,7 @@ public:
 	static void ChangeDisplayMode(void);
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 private:
-	const char ApiName[10] = "忍者屋敷";
+	const char API_NAME[10] = "忍者屋敷";
 	static DirectX* pDirectX;
 	static SceneManager* pSceneManager;
 	static HWND hWnd;

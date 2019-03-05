@@ -8,33 +8,33 @@
 using  namespace MapBlock;
 using namespace PlayerAnimation;
 
-GameChara::GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip) :Object(pDirectX, pSoundOperater)
+GameChara::GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip) :Object(pDirectX, pSoundOperater)
 {
 	m_Central = { 0.f,0.f,(CELL_SIZE * 2.f),(CELL_SIZE * 4.f) };
 
-	//MapChipの情報を取得するために必要
-	m_pMapChip = MapChip;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	//mapChipの情報を取得するために必要
+	m_pMapChip = mapChip;
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 
 	m_Central.x = static_cast<float>(m_pMapChip->SearchBlockX(START_ZONE))*CELL_SIZE;
 	m_Central.y = static_cast<float>(m_pMapChip->SearchBlockY(START_ZONE))*CELL_SIZE;
 	CreateSquareVertex(m_Central, m_WorldCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
 	CreateSquareVertex(m_Central, m_DisplayCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
 
-	int ScrollXBuf = 0;
-	int ScrollYBuf = 0;
-	int ScrollBehindX = 0;
-	int ScrollBehindY = 0;
+	int scrollXBuf = 0;
+	int scrollYBuf = 0;
+	int scrollBehindX = 0;
+	int scrollBehindY = 0;
 	do {
-		ScrollXBuf = m_MapScrollX;
-		ScrollYBuf = m_MapScrollY;
+		scrollXBuf = m_MapScrollX;
+		scrollYBuf = m_MapScrollY;
 
 		MapScrool();
-		ScrollBehindX = (m_MapScrollX - ScrollXBuf);
-		ScrollBehindY = (m_MapScrollY - ScrollYBuf);
+		scrollBehindX = (m_MapScrollX - scrollXBuf);
+		scrollBehindY = (m_MapScrollY - scrollYBuf);
 
-	} while (0 != ScrollBehindX || 0 != ScrollBehindY);
+	} while (0 != scrollBehindX || 0 != scrollBehindY);
 
 }
 
@@ -48,7 +48,7 @@ void GameChara::InitJumpParam() {
 	m_isJump = false;
 	m_isJumpRight = false;
 	m_isJumpLeft = false;
-	m_AccelerationY = InitialAcceleration;
+	m_AccelerationY = INITIAL_ACCELERATION;
 	m_RiseFlameTime = 0;
 }
 
@@ -67,7 +67,6 @@ bool GameChara::PermitJumping() {
 	m_HeldOntoWallRight = !RightCollisionCheck(NONE) && (RightCollisionCheck(START_ZONE) || !RightCollisionCheck(START_ZONE));
 	m_MapLeftDirectionPosition += 1;
 	m_MapRightDirectionPosition -= 1;
-
 
 	if (!m_isInTheAir) {
 		m_isInertiaMoving = false;
@@ -91,8 +90,8 @@ void GameChara::Jump()
 	TopCollision();
 	SideCollision();
 
-	if (m_Central.y - m_Central.scale_y < 0) {
-		m_Central.y = m_Central.scale_y;
+	if (m_Central.y - m_Central.scaleY < 0) {
+		m_Central.y = m_Central.scaleY;
 		m_isInertiaMoving = true;
 		InitJumpParam();
 		return;
@@ -101,9 +100,9 @@ void GameChara::Jump()
 		m_ChangeAnimation = JUMPING;
 	}
 	m_TurnAnimation = 0.f;
-	static int AnimeCount = 0;
-	++AnimeCount;
-	if (AnimeCount > 3) {
+	static int animeCount = 0;
+	++animeCount;
+	if (animeCount > 3) {
 		m_TurnAnimation = 1.f;
 	}
 	if (m_RiseFlameTime < 15) {
@@ -114,7 +113,7 @@ void GameChara::Jump()
 
 		return;
 	}
-	AnimeCount = 0;
+	animeCount = 0;
 	AddGravity();
 	InitJumpParam();
 }
@@ -182,7 +181,7 @@ void GameChara::MoveOperation(KeyDirection vec)
 
 void GameChara::Dash()
 {
-	static int AnimeCount = 0;
+	static int animeCount = 0;
 	m_isDash = true;
 	m_Central.x += MOVE_SPEED * static_cast<float>(m_Facing);
 	SideCollision();
@@ -195,10 +194,10 @@ void GameChara::Dash()
 		m_pSoundOperater->Start("DASH");
 	}
 	m_ChangeAnimation = DASH;
-	++AnimeCount;
-	if (AnimeCount > 2) {
+	++animeCount;
+	if (animeCount > 2) {
 		TurnTheAnimation(8);
-		AnimeCount = 0;
+		animeCount = 0;
 	}
 
 }
@@ -206,7 +205,7 @@ void GameChara::Dash()
 void GameChara::PrevSaveMapPos()
 {
 	m_PrevLeftPosition = m_Central.x;
-	m_PrevRightPosition = m_Central.x+ m_Central.scale_x;
+	m_PrevRightPosition = m_Central.x+ m_Central.scaleX;
 	m_PrevPositionY = m_Central.y;
 }
 
@@ -232,13 +231,6 @@ void GameChara::KeyOperation(KeyDirection vec)
 		//左に移動
 		MoveOperation(MOVE_LEFT);
 		break;
-	case Walk:
-		////m_pSoundOperater->Start("DECISION");
-		//if (MOVE_SPEED > 10) {
-		//	MOVE_SPEED = 3.f;
-		//}
-		//else MOVE_SPEED = 15.f;
-		break;
 	case PUSH_NONE:
 		NoOperation();
 		break;
@@ -255,7 +247,7 @@ void GameChara::KeyOperation(KeyDirection vec)
 		m_isInertiaMoving = true;
 		break;
 	case MAP_RIGHT:
-		if (m_Central.x + m_MapScrollX> ScrollLeftRange)
+		if (m_Central.x + m_MapScrollX > SCROLL_LEFT_RANGE)
 		{
 			m_MapScrollX -= 5;
 		}
@@ -265,7 +257,7 @@ void GameChara::KeyOperation(KeyDirection vec)
 			m_MapScrollX = 0;
 			break;
 		}
-		if (m_Central.x + m_Central.scale_x + m_MapScrollX< ScrollRightRange)
+		if (m_Central.x + m_Central.scaleX + m_MapScrollX < SCROLL_RIGHT_RANGE)
 		{
 			m_MapScrollX += 5;
 		}
@@ -276,27 +268,23 @@ void GameChara::KeyOperation(KeyDirection vec)
 	case MAP_UP:
 		UpScrollOparation();
 		break;
-#ifdef _DEBUG
-	case DEBUG:
-		m_Central.y -= MOVE_SPEED+ GRAVITY;
-#endif
 	}
 }
 
 void GameChara::DownScrollOparation()
 {
-	if (m_Central.y+m_MapScrollY <= ScrollDownRange)
+	if (m_Central.y+m_MapScrollY <= SCROLL_DOWN_RANGE)
 	{
 		m_MapScrollY -= 5;
-		if (m_MapScrollY <= static_cast<int>((CELL_SIZE * -m_SizeY))) {
-			m_MapScrollY = static_cast<int>((CELL_SIZE*-m_SizeY));
+		if (m_MapScrollY <= static_cast<int>((CELL_SIZE * -m_MapSizeY))) {
+			m_MapScrollY = static_cast<int>((CELL_SIZE*-m_MapSizeY));
 		}
-		if (m_Central.y - m_Central.scale_y + m_MapScrollY > DISPLAY_HEIGHT)
+		if (m_Central.y - m_Central.scaleY + m_MapScrollY > DISPLAY_HEIGHT)
 		{
 			return;
 		}
 		//スクロールの制限
-		if (m_Central.y - m_Central.scale_y + m_MapScrollY < static_cast<float>(ScrollUpRange) + VERTICAL_SCROLLING_LEVEL)
+		if (m_Central.y - m_Central.scaleY + m_MapScrollY < static_cast<float>(SCROLL_UP_RANGE) + VERTICAL_SCROLLING_LEVEL)
 		{
 			m_MapScrollY += 5;
 		}
@@ -304,7 +292,7 @@ void GameChara::DownScrollOparation()
 }
 
 void GameChara::UpScrollOparation() {
-	if (m_Central.y + m_MapScrollY >= ScrollUpRange)
+	if (m_Central.y + m_MapScrollY >= SCROLL_UP_RANGE)
 	{
 		m_MapScrollY += 5;
 		if (m_MapScrollY >= 0) {
@@ -315,7 +303,7 @@ void GameChara::UpScrollOparation() {
 			return;
 		}	
 		//スクロールの制限
-		if (m_Central.y + m_MapScrollY > static_cast<float>(ScrollDownRange) - VERTICAL_SCROLLING_LEVEL)
+		if (m_Central.y + m_MapScrollY > static_cast<float>(SCROLL_DOWN_RANGE) - VERTICAL_SCROLLING_LEVEL)
 		{
 			m_MapScrollY -= 5;
 		}
@@ -325,18 +313,18 @@ void GameChara::UpScrollOparation() {
 void GameChara::NoOperation() {
 	if (DownCollisionAnything()) {
 		m_ChangeAnimation = STAND;
-		static int AnimeCount = 0;
-		++AnimeCount;
-		if (AnimeCount > 10) {
+		static int animeCount = 0;
+		++animeCount;
+		if (animeCount > 10) {
 			TurnTheAnimation(3);
-			AnimeCount = 0;
+			animeCount = 0;
 		}
 
 	}
 
 }
 
-void GameChara::MapReversePointSearch(int PairNumber, MapDataState MapState)
+void GameChara::MapReversePointSearch(int PairNumber, MapDataState mapState)
 {
 	int BlockY = 0;
 	int BlockX = 0;
@@ -345,7 +333,7 @@ void GameChara::MapReversePointSearch(int PairNumber, MapDataState MapState)
 	int ScrollBehindX = 0;
 	int ScrollBehindY = 0;
 	for (unsigned int i = 0; i < m_ReversePoint.size(); ++i) {
-		bool isSameMapState = m_ReversePoint[i].MapDataState == MapState;
+		bool isSameMapState = m_ReversePoint[i].MapDataState == mapState;
 		bool isSamePair = PairNumber == m_ReversePoint[i].PairNumber;
 		if (isSameMapState && isSamePair) {
 			BlockY = m_ReversePoint[i].PositionY;
@@ -370,39 +358,39 @@ void GameChara::MapReversePointSearch(int PairNumber, MapDataState MapState)
 	} while (0 != ScrollBehindX || 0 != ScrollBehindY);
 }
 
-void GameChara::Reverce(Object* MapChip, int PairNumber)
+void GameChara::Reverce(Object* mapChip, int PairNumber)
 {
-	m_pMapChip = MapChip;
-	m_SizeY = m_pMapChip->GetColunm();
-	m_SizeX = m_pMapChip->GetRow();
+	m_pMapChip = mapChip;
+	m_MapSizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
 	MapReversePointSearch(PairNumber,m_pMapChip->GetMapDataState());
 }
 
 void GameChara::UpdateMapPos()
 {
-	m_DisplayCoordinate[0].y = m_Central.y + m_MapScrollY - m_Central.scale_y;
+	m_DisplayCoordinate[0].y = m_Central.y + m_MapScrollY - m_Central.scaleY;
 	m_DisplayCoordinate[0].x = m_Central.x + m_MapScrollX;
-	m_DisplayCoordinate[1].y = m_Central.y + m_MapScrollY - m_Central.scale_y;
-	m_DisplayCoordinate[1].x = m_Central.x + m_MapScrollX + m_Central.scale_x;
+	m_DisplayCoordinate[1].y = m_Central.y + m_MapScrollY - m_Central.scaleY;
+	m_DisplayCoordinate[1].x = m_Central.x + m_MapScrollX + m_Central.scaleX;
 	m_DisplayCoordinate[2].y = m_Central.y + m_MapScrollY;
-	m_DisplayCoordinate[2].x = m_Central.x + m_MapScrollX + m_Central.scale_x;
+	m_DisplayCoordinate[2].x = m_Central.x + m_MapScrollX + m_Central.scaleX;
 	m_DisplayCoordinate[3].y = m_Central.y + m_MapScrollY;
 	m_DisplayCoordinate[3].x = m_Central.x + m_MapScrollX;
 
 	m_MapLeftDirectionPosition = static_cast<int>(m_Central.x / CELL_SIZE);
-	m_MapRightDirectionPosition = static_cast<int>((m_Central.x + m_Central.scale_x*0.5f) / CELL_SIZE);
+	m_MapRightDirectionPosition = static_cast<int>((m_Central.x + m_Central.scaleX*0.5f) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y + 10.f) / CELL_SIZE);
-	if (m_MapPositionY >= m_SizeY) {
-		m_MapPositionY = m_SizeY - 1;
+	if (m_MapPositionY >= m_MapSizeY) {
+		m_MapPositionY = m_MapSizeY - 1;
 	}
 }
 
 void GameChara::MapScrool()
 {
 	//下にスクロール移動
-	if (m_Central.y + m_MapScrollY > static_cast<float>(ScrollDownRange))
+	if (m_Central.y + m_MapScrollY > static_cast<float>(SCROLL_DOWN_RANGE))
 	{
-		if (m_Central.y > m_SizeY*CELL_SIZE) {
+		if (m_Central.y > m_MapSizeY*CELL_SIZE) {
 			return;
 		}
 		m_MapScrollY -= VERTICAL_SCROLLING_LEVEL;
@@ -411,28 +399,28 @@ void GameChara::MapScrool()
 	}
 	else m_isScrollingDown = false;
 	//上にスクロール移動
-	if (m_Central.y + m_MapScrollY < static_cast<float>(ScrollUpRange))
+	if (m_Central.y + m_MapScrollY < static_cast<float>(SCROLL_UP_RANGE))
 	{
-		if (m_Central.y >= static_cast<float>(ScrollUpRange))
+		if (m_Central.y >= static_cast<float>(SCROLL_UP_RANGE))
 		{
 			m_MapScrollY += VERTICAL_SCROLLING_LEVEL;
 		}
 	}
 
 	//右にスクロール移動
-	if (m_Central.x + m_Central.scale_x+m_MapScrollX> static_cast<float>(ScrollRightRange))
+	if (m_Central.x + m_Central.scaleX+m_MapScrollX> static_cast<float>(SCROLL_RIGHT_RANGE))
 	{
-		if ((m_Central.x + m_Central.scale_x <= (((m_SizeX-1) * CELL_SIZE) - static_cast<float>(ScrollXScope)))||(m_Central.x + m_Central.scale_x>DISPLAY_WIDTH))
+		if ((m_Central.x + m_Central.scaleX <= (((m_MapSizeX-1) * CELL_SIZE) - static_cast<float>(SCROLL_X_SCOPE)))||(m_Central.x + m_Central.scaleX>DISPLAY_WIDTH))
 		{
-			m_MapScrollX -= ScrollSpeed;
+			m_MapScrollX -= SCROLL_SPEED;
 		}
 	}
 	//左にスクロール移動
-	if (m_Central.x + m_MapScrollX < static_cast<float>(ScrollLeftRange))
+	if (m_Central.x + m_MapScrollX < static_cast<float>(SCROLL_LEFT_RANGE))
 	{
-		if (m_Central.x >= static_cast<float>(ScrollXScope) || (m_Central.x<0))
+		if (m_Central.x >= static_cast<float>(SCROLL_X_SCOPE) || (m_Central.x<0))
 		{
-			m_MapScrollX += ScrollSpeed;
+			m_MapScrollX += SCROLL_SPEED;
 		}
 	}
 }
@@ -455,11 +443,11 @@ void GameChara::ThrowAnime() {
 	}
 	if (AnimeOn) {
 		AnimationCount++;
-		static int AnimeCount = 0;
-		++AnimeCount;
-		if (AnimeCount > 2) {
+		static int animeCount = 0;
+		++animeCount;
+		if (animeCount > 2) {
 			TurnTheAnimation(6);
-			AnimeCount = 0;
+			animeCount = 0;
 		}
 	}
 	else return;
@@ -478,16 +466,16 @@ void GameChara::FireArtAnime() {
 	static bool AnimeOn = false;
 
 	if (m_isFire) {
-		static int AnimeCount = 0;
-		++AnimeCount;
-		if (AnimeCount > 2) {
+		static int animeCount = 0;
+		++animeCount;
+		if (animeCount > 2) {
 			if (m_TurnAnimation > 2) {
 				static bool anime = true;
 				m_TurnAnimation += ((anime) ? 0 : -1);
 				anime = !anime;
 			}
 			else m_TurnAnimation++;
-			AnimeCount = 0;
+			animeCount = 0;
 		}
 	}
 }
@@ -513,19 +501,11 @@ bool GameChara::Update()
 		TopCollision();
 		SetGround();
 	}
-	else /*if (m_isJump)*/ {
-		//AddGravity();
+	else {
 		m_isInertiaMoving = true;
 		InitJumpParam();
 	}
 
-	if (m_pMapChip->GetMapChipData(m_MapPositionY - 2, m_MapRightDirectionPosition) > 100)
-	{
-
-		//m_pMapChip->Activate(m_MapRightDirectionPosition, m_MapPositionY - 2);
-
-	}
-	
 	return CollisionIventBlock();
 }
 
@@ -636,7 +616,7 @@ bool GameChara::LeftCollisionCheck(int block) {
 }
 
 bool GameChara::RightCollisionCheck(int block) {
-	if (m_MapRightDirectionPosition >= m_SizeX) {
+	if (m_MapRightDirectionPosition >= m_MapSizeX) {
 		m_MapRightDirectionPosition -= 1;
 	}
 	if ((m_pMapChip->GetMapChipData(m_MapPositionY - 1, m_MapRightDirectionPosition) == block) ||
@@ -688,7 +668,7 @@ bool GameChara::RightDirectionCollision() {
 
 bool GameChara::LookDownWater() {
 	bool buf = false;
-	for (int i = 0; i < m_SizeY - m_MapPositionY - 1; ++i) {
+	for (int i = 0; i < m_MapSizeY - m_MapPositionY - 1; ++i) {
 		if (!buf) {
 			// 下にブロックがあるかの確認
 			int MapdateBuf = m_pMapChip->GetMapChipData(m_MapPositionY + i, m_MapLeftDirectionPosition);
@@ -750,7 +730,7 @@ void GameChara::Render()
 	CENTRAL_STATE CharCentral = { 0 };
 	TranslateCentral_State(&CharCentral, m_DisplayCoordinate);
 	CharCentral.x -= 25.f;
-	CharCentral.scale_x = 120.f;
+	CharCentral.scaleX = 120.f;
 	CreateSquareVertex(CharCentral, Chara, 0xFFFFFFFF,( m_TurnAnimation+m_DirectionBias) * TU, m_ChangeAnimation * TV, TU * m_Facing, TV);
 	TextureRender("CHARA_TEX", Chara);
 
@@ -773,7 +753,7 @@ void GameChara::Render()
 }
 
 void GameChara::AddGravity() {
-	if (m_Central.y > m_SizeY*CELL_SIZE) {
+	if (m_Central.y > m_MapSizeY*CELL_SIZE) {
 		return;
 	}
 	//重力を毎フレームかける
@@ -798,13 +778,13 @@ float GameChara::GetPositionX()
 	case FACING_LEFT:
 		return m_Central.x + static_cast<float>(m_MapScrollX);
 	case FACING_RIGHT:
-		return m_Central.x + m_Central.scale_x + static_cast<float>(m_MapScrollX);
+		return m_Central.x + m_Central.scaleX + static_cast<float>(m_MapScrollX);
 	}
 	return 0.f;
 }
 
 bool GameChara::SetGround() {
-	static int AnimeCount = 0;
+	static int animeCount = 0;
 
 	if (DownCollisionAnything())
 	{
@@ -827,22 +807,22 @@ bool GameChara::SetGround() {
 			}
 		}
 		m_ChangeAnimation = WATER_ART;
-		static int AnimeCount = 0;
-		++AnimeCount;
-		if (AnimeCount > 10) {
+		static int animeCount = 0;
+		++animeCount;
+		if (animeCount > 10) {
 			TurnTheAnimation(3);
-			AnimeCount = 0;
+			animeCount = 0;
 		}
 		return true;
 	}
 	else if (!m_isJump && !m_isUsingArt) {
 		m_ChangeAnimation = JUMPING;
-		if (AnimeCount % 3) {
-			m_TurnAnimation = (AnimeCount % 2) ? 4.0f : 5.0f;
+		if (animeCount % 3) {
+			m_TurnAnimation = (animeCount % 2) ? 4.0f : 5.0f;
 		}
-		++AnimeCount;
-		if (AnimeCount > 1000) {
-			AnimeCount = 0;
+		++animeCount;
+		if (animeCount > 1000) {
+			animeCount = 0;
 		}
 
 	}
@@ -873,7 +853,6 @@ bool GameChara::TopCollision() {
 			&& DESCRIPTION_BOARD != m_pMapChip->GetMapChipData(m_MapPositionY - 4, m_MapRightDirectionPosition);
 
 		if ((CollLeft || CollRight || CollCenter)) {
-			//m_Central.y = ((m_MapPositionY) * CELL_SIZE)+1.f;
 			m_CollisionHead = true;
 			m_isJump = false;
 			m_Central.y = m_PrevPositionY;
@@ -927,7 +906,7 @@ void GameChara::SideCollision() {
 	{
 		while(LeftCollision());
 	}
-	if (m_PrevRightPosition < m_Central.x + m_Central.scale_x)
+	if (m_PrevRightPosition < m_Central.x + m_Central.scaleX)
 	{
 		while (RightCollision());
 	}

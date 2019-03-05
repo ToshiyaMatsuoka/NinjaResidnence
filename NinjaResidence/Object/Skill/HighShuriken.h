@@ -23,12 +23,12 @@ public:
 
 	bool Update();
 	void Render();
-	void Reverse(Object* MapChip);
+	void Reverse(Object* mapChip);
 
 	float InputRightStickDeg();
 
 
-	HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara, XinputDevice* pXinputDevice);
+	HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip, GameChara* gameChara, XinputDevice* pXinputDevice);
 	~HighShuriken();
 	bool GetActive() { return m_isActive; };
 private:

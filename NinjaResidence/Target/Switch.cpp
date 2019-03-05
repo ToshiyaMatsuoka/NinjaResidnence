@@ -7,7 +7,7 @@
 
 
 
-Switch::Switch(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(Target, Gimmick, pDirectX,pSoundOperater)
+Switch::Switch(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(target, gimmick, pDirectX,pSoundOperater)
 {
 }
 
@@ -27,16 +27,16 @@ void Switch::Update()
 }
 
 
-void Switch::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void Switch::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
-	if (MapDataReverse == m_TargetInfo.MapDataState)
+	if (mapReverseState == m_TargetInfo.MapDataState)
 	{
 		m_TargetPosX = static_cast<float>(m_TargetInfo.PositionX);
 		m_TargetPosY = static_cast<float>(m_TargetInfo.PositionY);
 		//TODO:的のオンオフ切り替え
-		if (MapDataReverse == m_TargetInfo.MapDataState)
+		if (mapReverseState == m_TargetInfo.MapDataState)
 		{
-			VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY, (CELL_SIZE * m_TargetPosX) + MapScrollX, CELL_SIZE, CELL_SIZE);
+			VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + mapScrollY, (CELL_SIZE * m_TargetPosX) + mapScrollX, CELL_SIZE, CELL_SIZE);
 
 			VertexSetUp::SetVertexUV(m_TargetVertex, BLOCK_INTEGRATION_WIDTH * 4.f, 0.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 
@@ -46,15 +46,15 @@ void Switch::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 
 	if (m_GimmickInfo.GimmickType == BT_WATER)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_PARTITIONBOARD)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_FALLROCK)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 }
 

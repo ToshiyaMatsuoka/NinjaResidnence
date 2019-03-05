@@ -9,8 +9,8 @@ using namespace PlayerAnimation;
 ClawShot::ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*0.625f,CELL_SIZE*0.625f };
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 
 	m_SkillType = CLAWSHOT;
 }
@@ -78,7 +78,7 @@ bool ClawShot::PermitActive() {
 		return false;
 	}
 	if (m_isChoseDeg && !m_isActive) {
-		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scale_x);
+		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		RopeBatteryPosY = m_Central.y = m_pGameChara->GetPositionY();
 		PrevMapScrollX = m_MapScrollX;
 		PrevMapScrollY = m_MapScrollY;
@@ -105,7 +105,7 @@ bool ClawShot::PermitActive() {
 //
 void ClawShot::InitPosition() {
 	m_isActive = false;
-	RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scale_x;
+	RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	RopeBatteryPosY = m_Central.y = m_pGameChara->GetPositionY();
 	m_DirectionDeg = 0;
 }
@@ -115,7 +115,7 @@ bool ClawShot::Update()
 	if (m_isChoseDeg) {
 		m_DirectionArrow.x = m_pGameChara->GetPositionX() + m_Direction * CELL_SIZE * 2;
 		m_DirectionArrow.y = m_pGameChara->GetPositionY();
-		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scale_x;
+		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 		RopeBatteryPosY = m_Central.y = m_pGameChara->GetPositionY();
 	}
 
@@ -132,10 +132,10 @@ bool ClawShot::Update()
 		m_DirectionBias = ZERO;
 	}
 	else m_DirectionBias = ONE;
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX - 1) {
+	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX - 1) {
 		InitPosition();
 	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_SizeY - 1) {
+	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_MapSizeY - 1) {
 		InitPosition();
 	}
 	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
@@ -193,8 +193,8 @@ void ClawShot::Render()
 		//長さから画像の中心を割り出す
 		m_RopeCentral.x = (BehindLength * 0.5f * m_Direction + RopeBatteryPosX );
 		m_RopeCentral.y = RopeBatteryPosY-1.f;
-		m_RopeCentral.scale_x = BehindLength * 0.5f;
-		m_RopeCentral.scale_y = 3.5f;
+		m_RopeCentral.scaleX = BehindLength * 0.5f;
+		m_RopeCentral.scaleY = 3.5f;
 		RevolveZ(RopeVertex, DegToRad(m_DirectionDeg), m_RopeCentral, RopeBatteryPosX, RopeBatteryPosY, DEFFALT_COLOR, BLOCK_INTEGRATION_WIDTH * 6.0f, 0,13.f/512.f);
 		RevolveTexture(RopeVertex, 1);
 		///////////////////////////////////////////////
@@ -209,8 +209,8 @@ void ClawShot::Render()
 
 void ClawShot::Reverse(Object* MapChip) {
 	m_pMapChip = MapChip;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 
 	InitPosition();
 }

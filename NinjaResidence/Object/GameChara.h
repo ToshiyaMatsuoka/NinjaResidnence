@@ -47,14 +47,14 @@ public:
 	void KeyOperation(KeyDirection vec);
 	bool Update();
 	void Render();
-	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip);
+	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip);
 	~GameChara();
 
 	/**
 	* @breaf どんでん返し処理
 	* @author Toshiya Matsuoka
 	*/
-	void Reverce(Object* MapChip, int BlockNumber);
+	void Reverce(Object* mapChip, int blockNumber);
 
 	/**
 	* @brief 前フレームの位置保存
@@ -112,7 +112,7 @@ public:
 	* @brief キャラのディスプレイ上中心Y座標の取得
 	* @author Toshiya Matsuoka
 	*/
-	float GetPositionY() { return m_Central.y - (m_Central.scale_y/2.f) + static_cast<float>(m_MapScrollY);}
+	float GetPositionY() { return m_Central.y - (m_Central.scaleY/2.f) + static_cast<float>(m_MapScrollY);}
 
 	/**
 	* @brief キャラの向いている方向の取得
@@ -150,20 +150,20 @@ private:
 	//! ダッシュ動作
 	void Dash();
 	//! 移動量
-	float MOVE_SPEED = CELL_SIZE * 0.375f;
+	const float MOVE_SPEED = CELL_SIZE * 0.375f;
 	const int VERTICAL_SCROLLING_LEVEL = 20;
-	const int ScrollSpeed = 15;
+	const int SCROLL_SPEED = 15;
 	bool m_isDash = false;
 	//m_DisplayCoordinateのY座標がこの値を下回ると上にスクロールする
-	const int ScrollUpRange = 150;
+	const int SCROLL_UP_RANGE = 150;
 	//m_DisplayCoordinateのY座標がこの値を超えると上にスクロールする
-	const int ScrollDownRange = 630;
+	const int SCROLL_DOWN_RANGE = 630;
 	//m_DisplayCoordinateのX座標がこの値を下回ると左にスクロールする
-	const int ScrollLeftRange = 300;
+	const int SCROLL_LEFT_RANGE = 300;
 	//m_DisplayCoordinateのX座標がこの値を超えると右にスクロールする
-	const int ScrollRightRange = 980;
+	const int SCROLL_RIGHT_RANGE = 980;
 	//両端からのX座標の稼働範囲
-	const int ScrollXScope = 300;
+	const int SCROLL_X_SCOPE = 300;
 	/**
 	* @brief マップ座標の更新
 	*/
@@ -174,8 +174,8 @@ private:
 	void MapScrool();
 	//! 慣性移動の許可
 	bool m_isInertiaMoving = false;
-	//void MoveOperation(KeyDirection vec, CUSTOMVERTEX* pWorldCharaCoordinate, CUSTOMVERTEX* pDisplayCharaCoordinate, float MoveQuantity);
-	void MapReversePointSearch(int BlockNumber, MapDataState MapState);
+
+	void MapReversePointSearch(int blockNumber, MapDataState mapState);
 	//! 当たり判定描画用
 	float m_CollisionTu = 80 / 512.f;
 	//! 当たり判定描画用
@@ -218,8 +218,8 @@ private:
 	bool m_isJumpRight = false;
 	bool m_isJumpLeft = false;
 	bool m_isUsingArt = false;
-	const float InitialAcceleration = CELL_SIZE * 1.25f;
-	float m_AccelerationY = InitialAcceleration;
+	const float INITIAL_ACCELERATION = CELL_SIZE * 1.25f;
+	float m_AccelerationY = INITIAL_ACCELERATION;
 	float m_AccelerationX = MOVE_SPEED * 1.5f;
 
 	bool m_GameFailure = false;

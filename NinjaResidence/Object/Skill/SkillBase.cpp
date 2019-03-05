@@ -21,22 +21,22 @@ SkillBase::~SkillBase()
 
 bool SkillBase::CollisionRope()
 {
-	CENTRAL_STATE Central = { 0,0,0,0 };
-	TranslateCentral_State(m_pMapChip->GetTargetPosition(BT_ROPE), &Central);
+	CENTRAL_STATE central = { 0,0,0,0 };
+	TranslateCentral_State(m_pMapChip->GetTargetPosition(BT_ROPE), &central);
 
-	m_ropeX = static_cast<int>((Central.x - m_MapScrollX) / CELL_SIZE);
-	m_ropeY = static_cast<int>((Central.y - m_MapScrollY) / CELL_SIZE);
+	m_ropeX = static_cast<int>((central.x - m_MapScrollX) / CELL_SIZE);
+	m_ropeY = static_cast<int>((central.y - m_MapScrollY) / CELL_SIZE);
 
-	return ContactSpecifyObject(&Central);
+	return ContactSpecifyObject(&central);
 }
 
 bool SkillBase::CollisionTarget()
 {
-	CENTRAL_STATE Central = { 0 };
-	TranslateCentral_State(m_pMapChip->GetTargetPosition(BT_TARGET), &Central);
-	bool coll=ContactSpecifyObject(&Central);
-	m_targetX = static_cast<int>((Central.x - m_MapScrollX) / CELL_SIZE);
-	m_targetY = static_cast<int>((Central.y - m_MapScrollY) / CELL_SIZE);
+	CENTRAL_STATE central = { 0 };
+	TranslateCentral_State(m_pMapChip->GetTargetPosition(BT_TARGET), &central);
+	bool coll=ContactSpecifyObject(&central);
+	m_targetX = static_cast<int>((central.x - m_MapScrollX) / CELL_SIZE);
+	m_targetY = static_cast<int>((central.y - m_MapScrollY) / CELL_SIZE);
 	return coll;
 }
 

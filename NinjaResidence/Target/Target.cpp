@@ -11,7 +11,7 @@ float DegToRad(float deg) {
 	return deg * (D3DX_PI / 180);
 }
 
-Target::Target(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(Target, Gimmick, pDirectX,pSoundOperater)
+Target::Target(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(target, gimmick, pDirectX,pSoundOperater)
 {
 
 }
@@ -37,22 +37,22 @@ void Target::Update()
 }
 
 
-void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
+void Target::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState)
 {
 	DWORD Color = 0xffffffff;
 	if (m_GimmickInfo.GimmickType == BT_WATER)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_PARTITIONBOARD)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
 	if (m_GimmickInfo.GimmickType == BT_FALLROCK)
 	{
-		m_pBaseGimmick->Render(MapScrollY, MapScrollX, MapDataReverse);
+		m_pBaseGimmick->Render(mapScrollY, mapScrollX, mapReverseState);
 	}
-	if (MapDataReverse != m_TargetInfo.MapDataState)
+	if (mapReverseState != m_TargetInfo.MapDataState)
 	{
 		return;
 	}
@@ -69,9 +69,9 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	}
 	m_TargetPosX = static_cast<float>(m_TargetInfo.PositionX);
 	m_TargetPosY = static_cast<float>(m_TargetInfo.PositionY);
-	if (MapDataReverse == m_TargetInfo.MapDataState)
+	if (mapReverseState == m_TargetInfo.MapDataState)
 	{
-		VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + MapScrollY, (CELL_SIZE * m_TargetPosX) + MapScrollX , CELL_SIZE, CELL_SIZE);
+		VertexSetUp::SetVertex(m_TargetVertex, (CELL_SIZE * (m_TargetPosY)) + mapScrollY, (CELL_SIZE * m_TargetPosX) + mapScrollX , CELL_SIZE, CELL_SIZE);
 		float deg = 0;
 		switch (m_TargetInfo.PairNumber % 10) {
 			//上向き
@@ -103,35 +103,35 @@ void Target::Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse)
 	}
 }
 
-void Target::RevolveZ(CUSTOMVERTEX* Vertex, float Rad,DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
+void Target::RevolveZ(CUSTOMVERTEX* vertex, float rad,DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 
 	float CharVertexX[4];
 	float CharVertexY[4];
-	float bufX = ((Vertex[1].x - Vertex[0].x) / 2.f) + Vertex[0].x;
-	float bufY = ((Vertex[3].y - Vertex[0].y) / 2.f) + Vertex[0].y;
+	float bufX = ((vertex[1].x - vertex[0].x) / 2.f) + vertex[0].x;
+	float bufY = ((vertex[3].y - vertex[0].y) / 2.f) + vertex[0].y;
 
 	for (int i = 0; i < 4; i++) {
 
-		CharVertexX[i] = Vertex[i].x;
-		CharVertexY[i] = Vertex[i].y;
+		CharVertexX[i] = vertex[i].x;
+		CharVertexY[i] = vertex[i].y;
 
 		CharVertexX[i] -= bufX;
 		CharVertexY[i] -= bufY;
 
 		float KEEPER = CharVertexX[i];
 
-		CharVertexX[i] = (CharVertexX[i] * cos(-Rad)) - (CharVertexY[i] * sin(-Rad));
-		CharVertexY[i] = (CharVertexY[i] * cos(-Rad)) + (KEEPER * sin(-Rad));
+		CharVertexX[i] = (CharVertexX[i] * cos(-rad)) - (CharVertexY[i] * sin(-rad));
+		CharVertexY[i] = (CharVertexY[i] * cos(-rad)) + (KEEPER * sin(-rad));
 
 		CharVertexX[i] += bufX;
 		CharVertexY[i] += bufY;
 
 	}
 
-	Vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
+	vertex[0] = { CharVertexX[0], CharVertexY[0], 1.f, 1.f, color, tu, tv };
+	vertex[1] = { CharVertexX[1], CharVertexY[1], 1.f, 1.f, color, tu + scaleTu, tv };
+	vertex[2] = { CharVertexX[2], CharVertexY[2], 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	vertex[3] = { CharVertexX[3], CharVertexY[3], 1.f, 1.f, color, tu, tv + scaleTv };
 
 }
 

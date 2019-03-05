@@ -33,8 +33,8 @@ void StageSelectScene::InitPosStageImage()
 	const float STAGEIMAGE_SCALE_Y = 80.f;
 	for (int i = 0; i < 6; i++)
 	{
-		m_StageImage[i].scale_x = STAGEIMAGE_SCALE_X;
-		m_StageImage[i].scale_y = STAGEIMAGE_SCALE_Y;
+		m_StageImage[i].scaleX = STAGEIMAGE_SCALE_X;
+		m_StageImage[i].scaleY = STAGEIMAGE_SCALE_Y;
 		m_StageImage[i].y = static_cast<float>((i / 2) + 1) * 200.f;
 		if (i % 2)
 		{
@@ -53,8 +53,8 @@ void StageSelectScene::InitPosStageSelectNumber()
 	const float STAGESELECTNUMBER_SCALE_Y = 50.f;
 	for (int i = 0; i < 6; i++)
 	{
-		m_StageSelectNumber[i].scale_x = STAGESELECTNUMBER_SCALE_X;
-		m_StageSelectNumber[i].scale_y = STAGESELECTNUMBER_SCALE_Y;
+		m_StageSelectNumber[i].scaleX = STAGESELECTNUMBER_SCALE_X;
+		m_StageSelectNumber[i].scaleY = STAGESELECTNUMBER_SCALE_Y;
 		m_StageSelectNumber[i].y = (static_cast<float>((i / 2) + 1) * 200.f) + 5.f;
 		if (i % 2)
 		{

@@ -81,9 +81,9 @@ public:
 
 	/**
 	* @brief XinputDeviceでゲームパッドデバイスの取得
-	* @param GamePadNumber パッド番号（0ベース）
+	* @param gamePadNumber パッド番号（0ベース）
 	*/
-	void GetControl(int GamePadNumber = 0);
+	void GetControl(int gamePadNumber = 0);
 
 	/**
 	* @brief XinputDeviceでゲームパッドの入力取得
@@ -95,75 +95,75 @@ public:
 
 	/**
 	* @brief 全てのボタンに対してCheckButtonStateを行う
-	* @sa CheckButtonState(WORD ButtomID, int ButtomIndex)
+	* @sa CheckButtonState(WORD buttonID, int buttonIndex)
 	*/
 	void BottonCheck();
 
 	/**
 	* @brief GetControlとBottonCheckを纏めて行う
-	* @param GamePadNumber パッド番号（0ベース）
+	* @param gamePadNumber パッド番号（0ベース）
 	* @sa GetControl
 	* @sa BottonCheck
 	*/
 
-	void DeviceUpdate(int GamePadNumber = 0);
+	void DeviceUpdate(int gamePadNumber = 0);
 	/**
 	* @brief XinputDeviceでゲームパッドの左アナログスティック入力取得
-	* @param Trigger トリガーの左右認識番号
+	* @param trigger トリガーの左右認識番号
 	* @return 0～255の値、押してなければ0
 	* @sa enum AnalogTrigger
 	*/
-	int GetAnalogTrigger(AnalogTrigger Trigger);
+	int GetAnalogTrigger(AnalogTrigger trigger);
 
 	/**
 	* @brief XinputDeviceでゲームパッドの左アナログスティック入力取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 傾いていればTrue、そうでなければFalse
 	* @sa enum Analog
 	*/
-	bool GetAnalogL(Analog AnalogState);
+	bool GetAnalogL(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの右アナログスティック入力取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 傾いていればTrue、そうでなければFalse
 	* @sa enum Analog
 	*/
-	bool GetAnalogR(Analog AnalogState);
+	bool GetAnalogR(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの左アナログスティック入力取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 傾き具合の数値　MAX＝32767　MIN＝-32768
 	* @sa enum Analog
 	*/
-	int GetAnalogLValue(Analog AnalogState);
+	int GetAnalogLValue(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの右アナログスティック入力取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 傾き具合の数値　MAX＝32767　MIN＝-32768
 	* @sa enum Analog
 	*/
-	int GetAnalogRValue(Analog AnalogState);
+	int GetAnalogRValue(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの左アナログスティック入力状態取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 方向け状態
 	* @sa enum Analog
 	* @sa enum PADSTATE
 	*/
-	PADSTATE GetAnalogLState(Analog AnalogState);
+	PADSTATE GetAnalogLState(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの左アナログスティック入力状態取得
-	* @param AnalogState スティックの方向け先番号
+	* @param analogState スティックの方向け先番号
 	* @return 方向け状態
 	* @sa enum Analog
 	* @sa enum PADSTATE
 	*/
-	PADSTATE GetAnalogRState(Analog AnalogState);
+	PADSTATE GetAnalogRState(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの右トリガー入力状態取得
@@ -181,10 +181,10 @@ public:
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの左アナログスティック入力状態振り分け
-	* @param AnalogState ANALOG_X　or　ANALOG_Y
+	* @param analogState ANALOG_X　or　ANALOG_Y
 	* @sa enum Analog
 	*/
-	void AnalogLStateDivide(Analog AnalogState);
+	void AnalogLStateDivide(Analog analogState);
 
 	/**
 	* @brief  XinputDeviceでゲームパッドの右トリガー入力状態振り分け
@@ -198,27 +198,27 @@ public:
 
 	/**
 	* @brief 左右のバイブレーションモーターを動作させる
-	* @param LeftValue バイブレーション値 MAX＝65535　MIN＝0
-	* @param RightValue バイブレーション値 MAX＝65535　MIN＝0
+	* @param leftValue バイブレーション値 MAX＝65535　MIN＝0
+	* @param rightValue バイブレーション値 MAX＝65535　MIN＝0
 	* @details 右は高周波モーター、左は低周波モーター
 	*/
-	void RunVibration(unsigned int LeftValue = 0, unsigned int RightValue = 0);
+	void RunVibration(unsigned int leftValue = 0, unsigned int rightValue = 0);
 
 	/**
 	* @brief XinputDeviceでゲームパッドの右アナログスティック入力状態振り分け
-	* @param AnalogState ANALOG_X　or　ANALOG_Y
+	* @param analogState ANALOG_X　or　ANALOG_Y
 	* @sa enum Analog
 	*/
-	void AnalogRStateDivide(Analog AnalogState);
+	void AnalogRStateDivide(Analog analogState);
 
 	/**
 	* @brief Dinputでキーボードの状態取得
-	* @param ButtomID 取得したいXInputボタン番号
-	* @param ButtomIndex 取得したいボタンの配列番号
+	* @param buttonID 取得したいXInputボタン番号
+	* @param buttonIndex 取得したいボタンの配列番号
 	* @sa enum ButtonIndex
-	* @details 使用時には　m_PadState[ButtomID]　の中身を確認すること
+	* @details 使用時には　m_PadState[buttonID]　の中身を確認すること
 	*/
-	void CheckButtonState(WORD ButtomID, ButtonIndex ButtomIndex);
+	void CheckButtonState(WORD buttonID, ButtonIndex buttonIndex);
 
 	XinputDevice() {};
 	~XinputDevice() {};

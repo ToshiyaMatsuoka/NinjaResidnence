@@ -12,8 +12,8 @@ class PartitionBoard : public BaseGimmick
 public:
 	void Activate();
 	void Update();
-	void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse);
-	PartitionBoard(BlockInfo Gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater);
+	void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState);
+	PartitionBoard(BlockInfo gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater);
 	virtual ~PartitionBoard();
 private:
 	MapChip * m_pMapChip = NULL;

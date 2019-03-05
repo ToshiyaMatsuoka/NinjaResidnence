@@ -33,10 +33,10 @@ Scene::~Scene()
 
 
 void Scene::CreateSquareVertex(CUSTOMVERTEX* Vertex, CENTRAL_STATE Central, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
-	Vertex[0] = { Central.x - Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu, tv };
-	Vertex[1] = { Central.x + Central.scale_x, Central.y - Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv };
-	Vertex[2] = { Central.x + Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
-	Vertex[3] = { Central.x - Central.scale_x, Central.y + Central.scale_y, 1.f, 1.f, color, tu, tv + scaleTv };
+	Vertex[0] = { Central.x - Central.scaleX, Central.y - Central.scaleY, 1.f, 1.f, color, tu, tv };
+	Vertex[1] = { Central.x + Central.scaleX, Central.y - Central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv };
+	Vertex[2] = { Central.x + Central.scaleX, Central.y + Central.scaleY, 1.f, 1.f, color, tu + scaleTu, tv + scaleTv };
+	Vertex[3] = { Central.x - Central.scaleX, Central.y + Central.scaleY, 1.f, 1.f, color, tu, tv + scaleTv };
 }
 void Scene::CreateSquareVertex(CUSTOMVERTEX* Vertex, float x,float y, DWORD  color, float tu, float tv, float scaleTu, float scaleTv) {
 	Vertex[0] = { 0,  0, 1.f, 1.f, color, tu, tv };
@@ -64,15 +64,15 @@ void Scene::RevolveZ(CUSTOMVERTEX* Vertex, float Rad, CENTRAL_STATE Central, DWO
 	float CharVertexX[4];
 	float CharVertexY[4];
 
-	CharVertexX[0] = Central.x - Central.scale_x;
-	CharVertexX[1] = Central.x + Central.scale_x;
-	CharVertexX[2] = Central.x + Central.scale_x;
-	CharVertexX[3] = Central.x - Central.scale_x;
+	CharVertexX[0] = Central.x - Central.scaleX;
+	CharVertexX[1] = Central.x + Central.scaleX;
+	CharVertexX[2] = Central.x + Central.scaleX;
+	CharVertexX[3] = Central.x - Central.scaleX;
 
-	CharVertexY[0] = Central.y - Central.scale_y;
-	CharVertexY[1] = Central.y - Central.scale_y;
-	CharVertexY[2] = Central.y + Central.scale_y;
-	CharVertexY[3] = Central.y + Central.scale_y;
+	CharVertexY[0] = Central.y - Central.scaleY;
+	CharVertexY[1] = Central.y - Central.scaleY;
+	CharVertexY[2] = Central.y + Central.scaleY;
+	CharVertexY[3] = Central.y + Central.scaleY;
 
 	for (int RoteCnt = 0; RoteCnt < 4; RoteCnt++) {
 

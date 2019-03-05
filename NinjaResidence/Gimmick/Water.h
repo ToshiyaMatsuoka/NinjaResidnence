@@ -12,9 +12,9 @@ class Water : public BaseGimmick
 public:
 	void Activate();
 	void Update();
-	void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse );
-	float GetGimmickPosition(bool isAxisX, MapDataState MapDataReverse);
-	Water(BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
+	void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState );
+	float GetGimmickPosition(bool isAxisX, MapDataState mapReverseState);
+	Water(BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
 	~Water();
 private:
 	float m_TopPosition = 0;

@@ -11,8 +11,8 @@ Shuriken::Shuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* Map
 	m_Central = { 500,0,CELL_SIZE*0.5f,CELL_SIZE*0.5f };
 	m_pMapChip = MapChip;
 	m_pGameChara = GameChara;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 
 	m_SkillType = SHURIKEN;
 }
@@ -76,7 +76,7 @@ bool Shuriken::PermitActive() {
 		return false;
 	}
 	if (m_isChoseDeg && !m_isActive) {
-		m_Central.x = m_pGameChara->GetPositionX() +( m_Direction * m_Central.scale_x);
+		m_Central.x = m_pGameChara->GetPositionX() +( m_Direction * m_Central.scaleX);
 		m_Central.y = m_pGameChara->GetPositionY();
 		PrevMapScrollX = m_MapScrollX;
 		PrevMapScrollY = m_MapScrollY;
@@ -94,7 +94,7 @@ bool Shuriken::PermitActive() {
 }
 void Shuriken::InitPosition() {
 	m_isActive = false;
-	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scale_x;
+	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY();
 	m_DirectionDeg = 0;
 }
@@ -116,10 +116,10 @@ bool Shuriken::Update()
 	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
 	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
 	//終了判定
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_SizeX-1) {
+	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX-1) {
 		InitPosition();
 	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_SizeY-1) {
+	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_MapSizeY-1) {
 		InitPosition();
 	}
 	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
@@ -170,7 +170,7 @@ void Shuriken::Render()
 
 void Shuriken::Reverse(Object* MapChip) {
 	m_pMapChip = MapChip;
-	m_SizeX = m_pMapChip->GetRow();
-	m_SizeY = m_pMapChip->GetColunm();
+	m_MapSizeX = m_pMapChip->GetRow();
+	m_MapSizeY = m_pMapChip->GetColunm();
 	InitPosition();
 }

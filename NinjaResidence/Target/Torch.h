@@ -20,7 +20,7 @@ public:
 	/**
 	* @author Toshiya Matsuoka
 	*/
-	void Render(int MapScrollY, int MapScrollX, MapDataState MapDataReverse);
-	Torch(BlockInfo Target, BlockInfo Gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
+	void Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState);
+	Torch(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater);
 	~Torch();
 };
