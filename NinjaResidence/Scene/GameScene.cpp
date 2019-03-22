@@ -118,9 +118,6 @@ SCENE_NUM  GameScene::Update()
 }
 
 void GameScene::KeyOperation() {
-	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_SPACE) /*|| PadPush == m_pXinputDevice->GetButton(ButtonStart)*/) {
-		m_pGameChara->KeyOperation(Walk);
-	}
 
 	if (KeyPush == m_pDirectX->GetKeyStatus(DIK_W) || PadPush == m_pXinputDevice->GetButton(ButtonY))
 	{
@@ -239,11 +236,6 @@ void GameScene::KeyOperation() {
 	if (KeyOn == m_pDirectX->GetKeyStatus(DIK_F) || PadOn == m_pXinputDevice->GetTriggerRState())
 	{
 		m_pGameChara->KeyOperation(MAP_UP);
-	}
-
-	//テスト用処理
-	if (m_pDirectX->GetKeyStatus(DIK_PGUP) || m_pXinputDevice->GetButton(ButtonRightThumb)) {
-		m_pGameChara->KeyOperation(DEBUG);
 	}
 }
 
