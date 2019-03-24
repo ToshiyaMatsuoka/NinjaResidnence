@@ -72,9 +72,9 @@ public:
 	}
 	
 private:
-	int m_BGMvolume = 100;
-	int m_SEvolume = 100;
-	int m_ALLvolume = 100;
+	int m_BGMvolume = 50;
+	int m_SEvolume = 50;
+	int m_ALLvolume = 50;
 
 	//! 音量の最大桁数と設定項目数
 	static const int VOLUME_MAX_NUM = 3;

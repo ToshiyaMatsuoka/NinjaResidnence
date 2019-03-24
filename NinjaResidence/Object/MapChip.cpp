@@ -36,7 +36,7 @@ MapChip::~MapChip()
 	TargetVector.clear();
 	m_ReversePoint.clear();
 
-	for (int i = (pBaseTarget.size() - 1); i >= 0; --i)
+	for (int i = (static_cast<int>(pBaseTarget.size()) - 1); i >= 0; --i)
 	{
 		delete pBaseTarget[i];
 		pBaseTarget[i] = NULL;
