@@ -4,7 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #include "HighShuriken.h"
-#include "../../Device/XinputDevice.h"
+#include "Device/XinputDevice.h"
 
 
 

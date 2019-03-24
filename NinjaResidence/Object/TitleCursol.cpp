@@ -3,7 +3,7 @@
 * @brief タイトルのカーソル処理
 * @author Toshiya Matsuoka
 */
-#include "../Scene/TitleScene.h"
+#include "Scene/TitleScene.h"
 #include "TitleCursol.h"
 
 using namespace Cursol;

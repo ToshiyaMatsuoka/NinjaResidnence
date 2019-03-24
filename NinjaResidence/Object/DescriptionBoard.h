@@ -5,8 +5,8 @@
 */
 #pragma once
 
-#include "../Scene/GameScene.h"
-#include "MapChip.h"
+#include "Scene/GameScene.h"
+#include "Object/MapChip.h"
 
 class GameChara;
 class MapChip;

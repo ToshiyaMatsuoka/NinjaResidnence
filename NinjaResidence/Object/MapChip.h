@@ -5,8 +5,8 @@
 */
 #pragma once
 
-#include "../Scene/GameScene.h"
-#include "Object.h"
+#include "Scene/GameScene.h"
+#include "Object/Object.h"
 
 class BaseTarget;
 class GameScene;

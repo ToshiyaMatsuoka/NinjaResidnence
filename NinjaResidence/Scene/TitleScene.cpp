@@ -5,7 +5,7 @@
 */
 #include "Scene.h"
 #include "TitleScene.h"
-#include "../Object/TitleCursol.h"
+#include "Object/TitleCursol.h"
 
 
 TitleScene::TitleScene(DirectX* pDirectX, SoundOperater* pSoundOperater) :Scene(pDirectX,pSoundOperater)

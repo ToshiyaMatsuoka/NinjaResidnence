@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #include "PartitionBoard.h"
-#include "../Object/MapChip.h"
+#include "Object/MapChip.h"
 #include <string>
 
 PartitionBoard::PartitionBoard(BlockInfo gimmick, DirectX* pDirectX, MapChip* pMapChip, SoundOperater* pSoundOperater) :BaseGimmick(gimmick, pDirectX,pSoundOperater)

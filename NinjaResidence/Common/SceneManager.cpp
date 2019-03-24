@@ -4,10 +4,10 @@
 * @author Kojiro Kawahara
 */
 #include "SceneManager.h"
-#include "./Scene/TitleScene.h"
-#include "./Scene/StageSelectScene.h"
-#include "./Scene/GameScene.h"
-#include "./Scene/VolumeSelectScene.h"
+#include "Scene/TitleScene.h"
+#include "Scene/StageSelectScene.h"
+#include "Scene/GameScene.h"
+#include "Scene/VolumeSelectScene.h"
 
 Scene*	SceneManager::m_pScene = NULL;
 
@@ -33,7 +33,11 @@ SceneManager::~SceneManager()
 
 int SceneManager::Update()
 {
-
+#ifdef _DEBUG
+	if (m_pSoundOperater) {
+		m_pSoundOperater->BGMSetVolume(5);
+	}
+#endif
 	KeyOperation();
 	if (m_pScene->GetSoundSetting()) {
 		

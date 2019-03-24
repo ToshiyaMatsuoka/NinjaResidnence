@@ -5,13 +5,13 @@
 */
 #pragma once
 
-#include "../Gimmick/BaseGimmick.h"
+#include "Gimmick/BaseGimmick.h"
 
-#include "../Gimmick/PartitionBoard.h"
-#include "../Gimmick/Water.h"
-#include "../Gimmick/FallRock.h"
+#include "Gimmick/PartitionBoard.h"
+#include "Gimmick/Water.h"
+#include "Gimmick/FallRock.h"
 
-#include "../Device/DirectX.h"
+#include "Device/DirectX.h"
 
 
 class BaseTarget

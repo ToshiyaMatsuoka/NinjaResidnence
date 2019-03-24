@@ -6,8 +6,8 @@
 #pragma once
 #include <vector>
 
-#include "../BlockInfo.h"
-#include "../Scene/Scene.h"
+#include "BlockInfo.h"
+#include "Scene/Scene.h"
 
 
 enum KeyDirection

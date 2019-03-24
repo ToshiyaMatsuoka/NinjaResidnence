@@ -4,8 +4,8 @@
 * @author Kojiro Kawahara
 */
 #include "Target.h"
-#include "../Device/DirectX.h"
-#include "../TargetandGimmickType.h"
+#include "Device/DirectX.h"
+#include "TargetandGimmickType.h"
 
 float DegToRad(float deg) {
 	return deg * (D3DX_PI / 180);

@@ -4,8 +4,8 @@
 * @author Toshiya Matsuoka
 */
 #pragma once
-#include "../GameChara.h"
-#include "../SkillSelect.h"
+#include "Object/GameChara.h"
+#include "Object/SkillSelect.h"
 
 
 

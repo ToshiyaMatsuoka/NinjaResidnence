@@ -4,7 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #pragma once
-#include "Object.h"
+#include "Object/Object.h"
 
 enum SkillType {
 	SHURIKEN,

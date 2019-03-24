@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #include "MapChip.h"
-#include "../TargetandGimmickType.h"
+#include "TargetandGimmickType.h"
 
 using std::vector;
 using namespace MapBlock;

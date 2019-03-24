@@ -5,7 +5,7 @@
 */
 #pragma once
 #include "SkillBase.h"
-#include "../MapChip.h"
+#include "Object/MapChip.h"
 
 class SkillBase;
 

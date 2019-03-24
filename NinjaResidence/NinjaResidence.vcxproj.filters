@@ -23,6 +23,9 @@
     <Filter Include="Target">
       <UniqueIdentifier>{960ab4e0-1844-484c-9361-91d3476f2f31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c53a4256-df3c-451c-9460-71b42439d78c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Device\DirectX.cpp">
@@ -115,8 +118,12 @@
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Common\GameManager.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SceneManager.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Device\DirectX.h">
@@ -209,9 +216,17 @@
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="TargetandGimmickType.h" />
-    <ClInclude Include="BlockInfo.h" />
+    <ClInclude Include="Common\BlockInfo.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameManager.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SceneManager.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TargetandGimmickType.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

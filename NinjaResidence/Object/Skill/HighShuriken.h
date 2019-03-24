@@ -5,8 +5,8 @@
 */
 
 #pragma once
-#include "SkillBase.h"
-#include "../MapChip.h"
+#include "Object/Skill/SkillBase.h"
+#include "Object/MapChip.h"
 
 class SkillBase;
 class XinputDevice;

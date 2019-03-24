@@ -4,7 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #pragma once
-#include "BaseTarget.h"
+#include "Target/BaseTarget.h"
 
 class Rope :public BaseTarget
 {

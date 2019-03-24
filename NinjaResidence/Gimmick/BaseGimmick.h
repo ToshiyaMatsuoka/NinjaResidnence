@@ -5,9 +5,9 @@
 */
 #pragma once
 
-#include "../BlockInfo.h"
-#include "../TargetandGimmickType.h"
-#include "../Object/Object.h"
+#include "BlockInfo.h"
+#include "TargetandGimmickType.h"
+#include "Object/Object.h"
 
 
 class BaseGimmick 

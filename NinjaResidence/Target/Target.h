@@ -5,9 +5,9 @@
 */
 #pragma once
 
-#include "BaseTarget.h"
-#include "../BlockInfo.h"
-#include "../Object/Object.h"
+#include "Target/BaseTarget.h"
+#include "BlockInfo.h"
+#include "Object/Object.h"
 
 class MapReverse;
 

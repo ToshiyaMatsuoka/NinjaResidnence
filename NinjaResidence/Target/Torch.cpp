@@ -4,8 +4,8 @@
 * @author Kojiro Kawahara
 */
 #include "Torch.h"
-#include "../Device/DirectX.h"
-#include "../TargetandGimmickType.h"
+#include "Device/DirectX.h"
+#include "TargetandGimmickType.h"
 
 Torch::Torch(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater) :BaseTarget(target, gimmick, pDirectX,pSoundOperater)
 {

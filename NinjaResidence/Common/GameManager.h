@@ -5,8 +5,8 @@
 */
 #pragma once
 
-#include "./Device/DirectX.h"
-#include "./Device/SoundOperater.h"
+#include "Device/DirectX.h"
+#include "Device/SoundOperater.h"
 #include<iostream>
 #include <fstream>
 #include<sstream>

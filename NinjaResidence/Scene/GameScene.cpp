@@ -4,10 +4,10 @@
 * @author Kojiro Kawahara
 */
 #include "GameScene.h"
-#include "../Object/Skill/Shuriken.h"
-#include "../Object/Skill/HighShuriken.h"
-#include "../Object/Skill/FireArt.h"
-#include "../Object/Skill/ClawShot.h"
+#include "Object/Skill/Shuriken.h"
+#include "Object/Skill/HighShuriken.h"
+#include "Object/Skill/FireArt.h"
+#include "Object/Skill/ClawShot.h"
 
 GameScene::GameScene(DirectX* pDirectX, SoundOperater* pSoundOperater) :Scene(pDirectX,pSoundOperater)
 {

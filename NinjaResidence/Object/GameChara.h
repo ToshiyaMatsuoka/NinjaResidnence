@@ -6,8 +6,8 @@
 #pragma once
 
 #include <vector>
-#include "Object.h"
-#include "MapChip.h"
+#include "Object/Object.h"
+#include "Object/MapChip.h"
 
 class GameScene;
 class MapReverse;

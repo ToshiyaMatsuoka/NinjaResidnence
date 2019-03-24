@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #include "BaseTarget.h"
-#include "../TargetandGimmickType.h"
+#include "TargetandGimmickType.h"
 
 BaseTarget::BaseTarget(BlockInfo target, BlockInfo gimmick, DirectX* pDirectX, SoundOperater* pSoundOperater)
 	:m_TargetInfo(target), m_GimmickInfo(gimmick), m_pDirectX(pDirectX)

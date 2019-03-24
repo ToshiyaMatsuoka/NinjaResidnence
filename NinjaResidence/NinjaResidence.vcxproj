@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\GameManager.cpp" />
+    <ClCompile Include="Common\SceneManager.cpp" />
     <ClCompile Include="Device\DirectX.cpp" />
     <ClCompile Include="Device\SoundOperater.cpp" />
     <ClCompile Include="Device\XinputDevice.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gimmick\BaseGimmick.cpp" />
     <ClCompile Include="Gimmick\FallRock.cpp" />
     <ClCompile Include="Gimmick\PartitionBoard.cpp" />
@@ -39,7 +40,6 @@
     <ClCompile Include="Object\Skill\Shuriken.cpp" />
     <ClCompile Include="Object\Skill\SkillBase.cpp" />
     <ClCompile Include="Object\TitleCursol.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\PauseScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -53,11 +53,13 @@
     <ClCompile Include="Target\Torch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlockInfo.h" />
+    <ClInclude Include="Common\BlockInfo.h" />
+    <ClInclude Include="Common\GameManager.h" />
+    <ClInclude Include="Common\SceneManager.h" />
+    <ClInclude Include="Common\TargetandGimmickType.h" />
     <ClInclude Include="Device\DirectX.h" />
     <ClInclude Include="Device\SoundOperater.h" />
     <ClInclude Include="Device\XinputDevice.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gimmick\BaseGimmick.h" />
     <ClInclude Include="Gimmick\FallRock.h" />
     <ClInclude Include="Gimmick\PartitionBoard.h" />
@@ -80,8 +82,6 @@
     <ClInclude Include="Scene\StageSelectScene.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\VolumeSelectScene.h" />
-    <ClInclude Include="TargetandGimmickType.h" />
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Target\BaseTarget.h" />
     <ClInclude Include="Target\Rope.h" />
     <ClInclude Include="Target\Switch.h" />
@@ -148,11 +148,11 @@
     <LibraryPath>.\SoundLib\Release_x86\Lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>SoundLib\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>SoundLib\Include;$(DXSDK_DIR)Include;$(ProjectDir)Common;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>SoundLib\Release_x64;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>SoundLib\Include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>SoundLib\Include;$(DXSDK_DIR)Include;$(ProjectDir);$(ProjectDir)Common\;$(IncludePath)</IncludePath>
     <LibraryPath>SoundLib\Debug_x64;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -171,6 +171,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

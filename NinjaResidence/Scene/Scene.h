@@ -5,8 +5,8 @@
 */
 #pragma once
 
-#include "../GameManager.h"
-#include "../Device/XinputDevice.h"
+#include "GameManager.h"
+#include "Device/XinputDevice.h"
 
 #define CENTRAL_Y (DISPLAY_HEIGHT / 2)
 #define CENTRAL_X (DISPLAY_WIDTH / 2)

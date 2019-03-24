@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #include "Scene.h"
-#include "../BlockInfo.h"
+#include "BlockInfo.h"
 
 int Scene::m_StageNum = 8;
 bool Scene::m_SoundSetting = false;

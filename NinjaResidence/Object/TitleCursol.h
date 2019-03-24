@@ -5,7 +5,7 @@
 */
 #pragma once
 
-#include "Object.h"
+#include "Object/Object.h"
 
 namespace Cursol {
 	enum CursolPosition {

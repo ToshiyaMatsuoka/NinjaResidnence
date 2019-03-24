@@ -5,17 +5,17 @@
 */
 #pragma once
 
-#include "../Object/MapChip.h"
-#include "./Scene.h"
-#include "../Object/GameChara.h"
-#include "../Object/MapReverse.h"
-#include "../Object/SkillSelect.h"
-#include "../Object/DescriptionBoard.h"
-#include "./PauseScene.h"
-#include "../Target/Target.h"
-#include "../Target/Rope.h"
-#include "../Target/Switch.h"
-#include "../Target/Torch.h"
+#include "Object/MapChip.h"
+#include "Scene/Scene.h"
+#include "Object/GameChara.h"
+#include "Object/MapReverse.h"
+#include "Object/SkillSelect.h"
+#include "Object/DescriptionBoard.h"
+#include "Scene/PauseScene.h"
+#include "Target/Target.h"
+#include "Target/Rope.h"
+#include "Target/Switch.h"
+#include "Target/Torch.h"
 #define _CRTDBG_MAP_ALLOC
 #define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 

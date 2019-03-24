@@ -4,7 +4,7 @@
 * @author Toshiya Matsuoka
 */
 #pragma once
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 
 enum TargetingMenu {

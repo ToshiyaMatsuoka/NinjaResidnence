@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #pragma once
-#include "BaseTarget.h"
+#include "Target/BaseTarget.h"
 class Switch :
 	public BaseTarget
 {

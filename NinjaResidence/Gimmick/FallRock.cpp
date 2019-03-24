@@ -4,7 +4,7 @@
 * @author Kojiro Kawahara
 */
 #include "FallRock.h"
-#include "../Object/MapChip.h"
+#include "Object/MapChip.h"
 #include <string>
 
 

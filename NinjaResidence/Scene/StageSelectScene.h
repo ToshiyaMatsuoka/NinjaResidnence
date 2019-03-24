@@ -5,7 +5,7 @@
 */
 #pragma once
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 enum SCENE_NUM;
 class Scene;
