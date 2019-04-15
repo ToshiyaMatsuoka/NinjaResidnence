@@ -172,7 +172,6 @@ void MapChip::Activate(int X, int Y)
 {
 	for (auto& ite : pBaseTarget)
 	{
-
 		if (X == ite->GetTargetInfo()->PositionX && Y == ite->GetTargetInfo()->PositionY)
 		{
 			ite->ActivateTarget();
@@ -288,6 +287,22 @@ void MapChip::Render()
 					continue;
 				}
 			}
+			if (m_isReversing) {
+				m_Rad += 0.001f;
+				if ((i + j) == 0) {
+					RevolveY(CELL, m_Rad);
+				}
+				if (((i + j) % 2) == 0) {
+					RevolveY(CELL, -m_Rad * 2);
+				}
+				else {
+					RevolveY(CELL, m_Rad);
+				}
+				if (m_Rad > 5.f) {
+					m_Rad = 0;
+					m_isReversing = false;
+				}
+			}
 			TextureRender("BLOCK_INTEGRATION_A_TEX", CELL);
 
 		}
@@ -393,3 +408,36 @@ bool MapChip::GetGimmckActive(int mapXPos)
 	}
 	return false;
 };
+
+void MapChip::RevolveY(CUSTOMVERTEX* Vertex, float Rad) {
+
+	float CharVertexX[4];
+
+	CharVertexX[0] = Vertex[0].x;
+	CharVertexX[1] = Vertex[1].x;
+	CharVertexX[2] = Vertex[2].x;
+	CharVertexX[3] = Vertex[3].x;
+
+	float centralX = (Vertex[1].x - Vertex[0].x) * 0.5f + Vertex[0].x;
+
+	for (int RoteCnt = 0; RoteCnt < 4; RoteCnt++) {
+
+		CharVertexX[RoteCnt] -= centralX;
+		Vertex[RoteCnt].z -= 1;
+
+		float KEEPER = CharVertexX[RoteCnt];
+
+		CharVertexX[RoteCnt] = (CharVertexX[RoteCnt] * cos(-Rad)) - (Vertex[RoteCnt].z * sin(-Rad));
+		Vertex[RoteCnt].z = (Vertex[RoteCnt].z * cos(-Rad)) + (KEEPER * sin(-Rad));
+
+		CharVertexX[RoteCnt] += centralX;
+		Vertex[RoteCnt].z += 1;
+
+	}
+
+	Vertex[0] = { CharVertexX[0], Vertex[0].y, Vertex[0].z, 1.f, Vertex[0].color, Vertex[0].tu, Vertex[0].tv };
+	Vertex[1] = { CharVertexX[1], Vertex[1].y, Vertex[1].z, 1.f, Vertex[1].color, Vertex[1].tu, Vertex[1].tv };
+	Vertex[2] = { CharVertexX[2], Vertex[2].y, Vertex[2].z, 1.f, Vertex[2].color, Vertex[2].tu, Vertex[2].tv };
+	Vertex[3] = { CharVertexX[3], Vertex[3].y, Vertex[3].z, 1.f, Vertex[3].color, Vertex[3].tu, Vertex[3].tv };
+
+}

@@ -72,7 +72,7 @@ public:
 	void TextureRender(std::string textureKey, CUSTOMVERTEX* textureSize);
 
 	Object(DirectX* pDirectX, SoundOperater* pSoundOperater);
-	Object(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip) {};
+	//Object(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip) {};
 	virtual ~Object();
 
 	/**
@@ -230,4 +230,6 @@ protected:
 	static std::vector<BlockInfo> m_ReversePoint;
 	static std::vector<MapScrollBuffer> m_ReverseBuffer;
 	static int m_ReverseCount;
+	static bool m_isReversing;
+	static float m_Rad;
 };

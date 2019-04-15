@@ -87,7 +87,6 @@ bool SoundOperater::AllStop()
 	bool SuccessAddFile = true;
 	for (unsigned int i = 0; i < m_SoundKey.size(); ++i) {
 		SuccessAddFile = m_pSoundManager->Stop(m_SoundKey[i].Key);
-		Sleep(100);
 	}	
 	return SuccessAddFile;
 }

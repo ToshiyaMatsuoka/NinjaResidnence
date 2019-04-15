@@ -56,7 +56,11 @@ public:
 	//! ギミックの起動状態の取得
 	bool GetGimmckActive(int mapXPos);
 
+
 private:
+
+	void RevolveY(CUSTOMVERTEX* Vertex, float Rad);
+
 	int m_MapSelected = 0;
 	int m_MapSelectedWIDTH = 0;
 	int m_MapSelectedHEIGHT = 0;

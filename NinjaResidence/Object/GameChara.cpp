@@ -211,6 +211,7 @@ void GameChara::PrevSaveMapPos()
 
 void GameChara::KeyOperation(KeyDirection vec)
 {
+	if (m_isReversing) return;
 	m_isFire = false;
 	m_isUsingArt = false;
 	m_isDash = false;
@@ -918,6 +919,7 @@ void GameChara::MoveInertia() {
 	int InertiaTimeMax = 10;
 	if (!m_isJump) {
 		++InertiaTime;
+		m_ChangeAnimation = STAND;
 	}
 	m_Central.x += MOVE_SPEED * static_cast<float>(m_Facing);
 	SideCollision();
