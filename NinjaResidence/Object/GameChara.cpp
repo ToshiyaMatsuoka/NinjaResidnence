@@ -46,12 +46,12 @@ void GameChara::InitJumpParam() {
 	m_isJump = false;
 	m_isJumpRight = false;
 	m_isJumpLeft = false;
-	m_AccelerationY = INITIAL_ACCELERATION;
+	m_Acceleration.Y = INITIAL_ACCELERATION;
 	m_RiseFlameTime = 0;
 }
 
 void GameChara::AccelarationControl() {
-	m_AccelerationY -= CELL_SIZE / 20.f;
+	m_Acceleration.Y -= CELL_SIZE / 20.f;
 
 }
 
@@ -84,7 +84,7 @@ void GameChara::Jump()
 	if (!m_isJump) {
 		return;
 	}
-	m_Central.y -= m_AccelerationY;
+	m_Central.y -= m_Acceleration.Y;
 	TopCollision();
 	SideCollision();
 
@@ -131,7 +131,7 @@ void GameChara::JumpingLateralMotion() {
 	}
 	if (m_isJumpRight) {
 		//右に移動
-		m_Central.x += m_AccelerationX;
+		m_Central.x += m_Acceleration.X;
 		m_Facing = FACING_RIGHT;
 		m_DirectionBias = ZERO;
 
@@ -140,7 +140,7 @@ void GameChara::JumpingLateralMotion() {
 	}
 	if (m_isJumpLeft) {
 		//左に移動
-		m_Central.x -= m_AccelerationX;
+		m_Central.x -= m_Acceleration.X;
 		m_Facing = FACING_LEFT;
 		m_DirectionBias = ONE;
 
@@ -763,7 +763,7 @@ void GameChara::AddGravity() {
 		SetGround();
 		return;
 	}
-	m_Central.y += GRAVITY + GravityAcceleration;
+	m_Central.y += GRAVITY + m_GravityAcceleration;
 	SideCollision();
 	SetGround();
 }

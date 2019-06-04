@@ -65,12 +65,12 @@ public:
 	/**
 	* @brief マップ上の左側のX座標取得
 	*/
-	int GetMapLeftDirectionPosition() { return m_MapLeftDirectionPosition; }
+	int GetMapLeftDirectionPosition() { return m_MapPosition.Left; }
 
 	/**
 	* @brief マップ上のY座標取得
 	*/
-	int GetMapPositionY() { return m_MapPositionY; }
+	int GetMapPositionY() { return m_MapPosition.Y; }
 
 	/**
 	* @brief ゲームの終了イベントブロックとの接触判定
@@ -104,7 +104,7 @@ public:
 	void DebugMove();
 
 	/**
-	* @brief キャラのディスプレイ上前端の取得
+	* @brief キャラのディスプレイ上前方の取得
 	* @author Toshiya Matsuoka
 	*/
 	float GetPositionX();
@@ -112,7 +112,7 @@ public:
 	* @brief キャラのディスプレイ上中心Y座標の取得
 	* @author Toshiya Matsuoka
 	*/
-	float GetPositionY() { return m_Central.y - (m_Central.scaleY/2.f) + static_cast<float>(m_MapScrollY);}
+	float GetPositionY() { return m_Central.y - (m_Central.scaleY/2.f) + static_cast<float>(m_MapScroll.Y);}
 
 	/**
 	* @brief キャラの向いている方向の取得
@@ -157,24 +157,16 @@ private:
 	const int VERTICAL_SCROLLING_LEVEL = 20;
 	const int SCROLL_SPEED = 15;
 	bool m_isDash = false;
+	//両端からのX座標の稼働範囲
+	const int SCROLL_VARTICAL_RANGE = 300;
 	//m_DisplayCoordinateのY座標がこの値を下回ると上にスクロールする
 	const int SCROLL_UP_RANGE = 150;
 	//m_DisplayCoordinateのY座標がこの値を超えると上にスクロールする
 	const int SCROLL_DOWN_RANGE = 630;
 	//m_DisplayCoordinateのX座標がこの値を下回ると左にスクロールする
-	const int SCROLL_LEFT_RANGE = 300;
+	const int SCROLL_LEFT_RANGE = SCROLL_VARTICAL_RANGE;
 	//m_DisplayCoordinateのX座標がこの値を超えると右にスクロールする
-	const int SCROLL_RIGHT_RANGE = 980;
-	//両端からのX座標の稼働範囲
-	const int SCROLL_X_SCOPE = 300;
-	/**
-	* @brief マップ座標の更新
-	*/
-	void UpdateMapPos();
-	/**
-	* @brief 画面スクロール
-	*/
-	void MapScrool();
+	const int SCROLL_RIGHT_RANGE = DISPLAY_WIDTH - SCROLL_VARTICAL_RANGE;
 	//! 慣性移動の許可
 	bool m_isInertiaMoving = false;
 
@@ -187,7 +179,7 @@ private:
 	MapReverse* m_pMapReverse = NULL;
 	MapChip* m_pMapChip = NULL;
 
-	float GravityAcceleration = 0;
+	float m_GravityAcceleration = 0;
 
 	//! ディスプレイ上のキャラの矩形
 	CUSTOMVERTEX m_DisplayCoordinate[4];
@@ -222,10 +214,20 @@ private:
 	bool m_isJumpLeft = false;
 	bool m_isUsingArt = false;
 	const float INITIAL_ACCELERATION = CELL_SIZE * 1.25f;
-	float m_AccelerationY = INITIAL_ACCELERATION;
-	float m_AccelerationX = MOVE_SPEED * 1.5f;
+	Vector2 m_Acceleration = { MOVE_SPEED * 1.5f,INITIAL_ACCELERATION };
 
 	bool m_GameFailure = false;
+
+	/**
+	* @brief マップ座標の更新
+	*/
+	void UpdateMapPos();
+
+	/**
+	* @brief 画面スクロール
+	*/
+	void MapScrool();
+
 	/**
 	* @breaf 移動処理
 	*/
@@ -237,27 +239,30 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	bool PermitJumping();
+
 	/**
 	* @breaf ジャンプの動作
 	* @author Toshiya Matsuoka
 	*/
 	void Jump();
+
 	/**
 	* @breaf 壁ジャンプ用横移動処理
 	* @author Toshiya Matsuoka
 	*/
 	void JumpingLateralMotion();
+
 	/**
 	* @breaf ジャンプの動作変数の初期化
 	* @author Toshiya Matsuoka
 	*/
 	void InitJumpParam();
+
 	/**
 	* @breaf ジャンプの上昇量調整
 	* @author Toshiya Matsuoka
 	*/
 	void AccelarationControl();
-
 
 	/**
 	* @breaf 投擲アニメ処理
@@ -265,18 +270,19 @@ private:
 	*/
 	void ThrowAnime();
 
-
 	/**
 	* @breaf 課重力処理
 	* @author Toshiya Matsuoka
 	*/
 	void AddGravity();
+
 	/**
 	* @breaf 下に対する何かしらの当たり判定
 	* @return 当たっていればtrue
 	* @author Toshiya Matsuoka
 	*/
-	bool DownCollisionAnything(void);
+	bool DownCollisionAnything();
+
 	/**
 	* @breaf 下方向に対する当たり判定
 	* @param block 指定のブロック番号
@@ -285,6 +291,7 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	bool DownCollisionCheck(int block);
+
 	/**
 	* @breaf 上方向に対する当たり判定
 	* @param block 指定のブロック番号
@@ -293,6 +300,7 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	bool TopCollisionCheck(int block);
+
 	/**
 	* @breaf 右方向に対する当たり判定
 	* @param block 指定のブロック番号
@@ -301,6 +309,7 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	bool RightCollisionCheck(int block);
+
 	/**
 	* @breaf 左方向に対する当たり判定
 	* @param block 指定のブロック番号
@@ -309,31 +318,37 @@ private:
 	* @author Toshiya Matsuoka
 	*/
 	bool LeftCollisionCheck(int block);
+
 	/**
 	* @breaf 接地判定
 	* @author Toshiya Matsuoka
 	*/
 	bool SetGround();
+
 	/**
 	* @breaf 上方当たり判定
 	* @author Toshiya Matsuoka
 	*/
 	bool TopCollision();
+
 	/**
 	* @breaf 左方当たり判定
 	* @author Toshiya Matsuoka
 	*/
 	bool LeftCollision();
+
 	/**
 	* @breaf 右方当たり判定
 	* @author Toshiya Matsuoka
 	*/
 	bool RightCollision();
+
 	/**
 	* @breaf 左右の当たり判定
 	* @author Toshiya Matsuoka
 	*/
 	void SideCollision();
+
 	/**
 	* @breaf 慣性移動
 	* @author Toshiya Matsuoka
