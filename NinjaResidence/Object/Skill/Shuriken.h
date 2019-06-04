@@ -22,10 +22,10 @@ public:
 
 	bool Update();
 	void Render();
-	void Reverse(Object* MapChip);
+	void Reverse(MapChip* MapChip);
 
 
-	Shuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara);
+	Shuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* MapChip, GameChara* GameChara);
 	~Shuriken();
 	bool GetActive() { return m_isActive; };
 private:

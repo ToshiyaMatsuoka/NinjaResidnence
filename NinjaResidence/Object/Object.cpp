@@ -5,10 +5,8 @@
 */
 #include "Object.h"
 
-int Object::m_MapScrollX = 0;
-int Object::m_MapScrollY = 0;
 std::vector<BlockInfo> Object::m_ReversePoint;
-std::vector<MapScrollBuffer> Object::m_ReverseBuffer;
+std::vector<MapScroll> Object::m_ReverseBuffer;
 int Object::m_ReverseCount = 0;
 bool Object::m_isReversing = false;
 float Object::m_Rad = 0;

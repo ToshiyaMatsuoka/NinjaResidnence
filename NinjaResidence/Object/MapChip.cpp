@@ -9,6 +9,7 @@
 using std::vector;
 using namespace MapBlock;
 
+MapScroll MapChip::m_MapScroll;
 int MapChip::m_TargetCount = 0;
 int MapChip::m_GimmickCount = 0;
 vector<BaseTarget*> MapChip::pBaseTarget;
@@ -24,6 +25,7 @@ MapChip::MapChip(DirectX* pDirectX, SoundOperater* pSoundOperater) :Object(pDire
 
 MapChip::~MapChip()
 {
+	m_MapScroll = { 0, 0 };
 	m_ReverseCount = 0;
 	for (int i = 0; i < m_MapSizeY; i++)
 	{
@@ -195,13 +197,13 @@ int MapChip::GimmickMapDataCheck(int y, int x)
 
 void MapChip::Render()
 {
-	int TopCellPos = (m_MapScrollY * -1)/ static_cast<int>(CELL_SIZE);
-	int LeftCellPos = (m_MapScrollX * -1) / static_cast<int>(CELL_SIZE);
+	int TopCellPos = (m_MapScroll.Y * -1)/ static_cast<int>(CELL_SIZE);
+	int LeftCellPos = (m_MapScroll.X * -1) / static_cast<int>(CELL_SIZE);
 	if (LeftCellPos<0) {
 		LeftCellPos = 0;
 	}
-	int BottomCellPos = ((m_MapScrollY * -1) + DISPLAY_HEIGHT) / static_cast<int>(CELL_SIZE) + 1;
-	int RightCellPos = ((m_MapScrollX * -1) + DISPLAY_WIDTH) / static_cast<int>(CELL_SIZE) + 1;
+	int BottomCellPos = ((m_MapScroll.Y * -1) + DISPLAY_HEIGHT) / static_cast<int>(CELL_SIZE) + 1;
+	int RightCellPos = ((m_MapScroll.X * -1) + DISPLAY_WIDTH) / static_cast<int>(CELL_SIZE) + 1;
 	if (BottomCellPos > m_MapSizeY) {
 		BottomCellPos = m_MapSizeY;
 	}
@@ -218,8 +220,8 @@ void MapChip::Render()
 				continue;
 			}
 			CellInit();
-			float top = FIELD_TOP + (CELL_SIZE * j) + static_cast<float>(m_MapScrollY);
-			float left = FIELD_LEFT + (CELL_SIZE * i) + static_cast<float>(m_MapScrollX);
+			float top = FIELD_TOP + (CELL_SIZE * j) + static_cast<float>(m_MapScroll.Y);
+			float left = FIELD_LEFT + (CELL_SIZE * i) + static_cast<float>(m_MapScroll.X);
 
 			CELL[0].x = left;
 			CELL[0].y = top;
@@ -309,20 +311,20 @@ void MapChip::Render()
 	}
 	for (BaseTarget* pi : pBaseTarget)
 	{
-		pi->Render(m_MapScrollY, m_MapScrollX, m_MapDataState);
+		pi->Render(m_MapScroll.Y, m_MapScroll.X, m_MapDataState);
 	}
 	
 #ifdef _DEBUG
 	RECT test = { 0,500,1250,700 };
 	char TestText[ARRAY_LONG];
-	sprintf_s(TestText, ARRAY_LONG, "MapScroll::X:%d,Y:%d", m_MapScrollX, m_MapScrollY);
+	sprintf_s(TestText, ARRAY_LONG, "MapScroll::X:%d,Y:%d", m_MapScroll.X, m_MapScroll.Y);
 	m_pDirectX->DrawWord(test, TestText, "DEBUG_FONT", DT_RIGHT, 0xffffffff);
 #endif
 }
 
 bool MapChip::Update() {
-	if (m_MapScrollY > 0) {
-		m_MapScrollY = 0;
+	if (m_MapScroll.Y > 0) {
+		m_MapScroll.Y = 0;
 	}
 	for (auto ite : pBaseTarget)
 	{

@@ -16,10 +16,10 @@ class MapChip;
 class MapReverse :public Object
 {
 public:
-	void GoMapReverse(Object** m_pBusyMapChip, Object** m_pIdleMapChip);
+	void GoMapReverse(MapChip** m_pBusyMapChip, MapChip** m_pIdleMapChip);
 	MapReverse(DirectX* pDirectX, SoundOperater* pSoundOperater, GameChara * gameChara);
 	~MapReverse();
-	bool CollisonReversePoint(int x, int y, Object* pBusyMapChip);
+	bool CollisonReversePoint(int x, int y, MapChip* pBusyMapChip);
 	bool getMapDataReverseState()
 	{
 		return MapDataReverseState;

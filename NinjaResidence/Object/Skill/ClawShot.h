@@ -21,10 +21,10 @@ public:
 
 	bool Update();
 	void Render();
-	void Reverse(Object* MapChip);
+	void Reverse(MapChip* MapChip);
 
 
-	ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara);
+	ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* MapChip, GameChara* GameChara);
 	~ClawShot();
 	bool GetActive() { return m_isActive; };
 private:

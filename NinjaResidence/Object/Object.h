@@ -39,9 +39,16 @@ enum KeyDirection
 	MAP_UP,
 };
 
-struct MapScrollBuffer {
-	int ScrollX = 0;
-	int ScrollY = -1000;
+struct Vec2Int {
+	int X = 0;
+	int Y = 0;
+};
+typedef Vec2Int MapScroll;
+typedef Vec2Int MapPosition;
+
+struct Vector2 {
+	float X = 0;
+	float Y = 0;
 };
 
 class Object
@@ -56,7 +63,6 @@ public:
 	virtual bool Update();
 
 	virtual void Render() {};
-	virtual void PrevSaveMapPos() {};
 	
 	/*
 	* @brief マップ内ブロックの起動処理
@@ -128,24 +134,9 @@ public:
 	*/
 	void SetVertexUV(CUSTOMVERTEX* vertex, float Tu, float Tv, float scaleTu, float scaleTv);
 
-	/**
-	* @brief CSV読み取りとマップデータ生成
-	* @param filename CSVファイルパス
-	* @param mapState 表か裏かの指定
-	* @sa enum MapDataState
-	*/
-	virtual void Create(std::string filename, MapDataState mapState) {};
-
-	/**
-	* @brief ギミックの座標取得
-	* @param isAxisX 欲しい軸はX座標であるか
-	* @param mapYPos マップY座標
-	* @param mapXPos マップX座標
-	*/
-	virtual float GetGimmickPosition(bool isAxisX,int mapYPos,int mapXPos) { return 0; };
 
 	virtual void Reverse(Object* mapChip) {};
-	virtual bool GetActive() { return false; };
+
 	//! 度数から弧度への変換
 	float DegToRad(float deg) {
 		return deg * (D3DX_PI / 180);
@@ -155,18 +146,9 @@ public:
 		return rad * ( 180/ D3DX_PI);
 	}
 
-	virtual int SearchBlockX(MapBlock::BLOCKTYPE block) {return 3;}
-
-	virtual int SearchBlockY(MapBlock::BLOCKTYPE block) {return 3;}
-
-	virtual bool GetGimmickActive() { return false; };
-
-	virtual CUSTOMVERTEX* GetTargetPosition(int targetType) { return NULL; };
 
 	bool ContactSpecifyObject(CENTRAL_STATE* object);
 
-	int GetMapScrollX() { return m_MapScrollX; };
-	int GetMapScrollY() { return m_MapScrollY; };
 
 	int GetRow() {
 		return m_MapSizeX;
@@ -202,9 +184,6 @@ protected:
 	DirectX* m_pDirectX = NULL;
 	SoundOperater* m_pSoundOperater = NULL;
 	CENTRAL_STATE m_Central;
-	static int m_MapScrollX;
-	static int m_MapScrollY;
-
 	std::vector< std::vector<int> > MapData;
 	
 	//!行
@@ -228,7 +207,7 @@ protected:
 	void RevolveTexture(CUSTOMVERTEX * vertex, int deg);
 
 	static std::vector<BlockInfo> m_ReversePoint;
-	static std::vector<MapScrollBuffer> m_ReverseBuffer;
+	static std::vector<MapScroll> m_ReverseBuffer;
 	static int m_ReverseCount;
 	static bool m_isReversing;
 	static float m_Rad;

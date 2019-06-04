@@ -6,7 +6,7 @@
 #include "ClawShot.h"
 using namespace PlayerAnimation;
 
-ClawShot::ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
+ClawShot::ClawShot(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* MapChip, GameChara* GameChara) :SkillBase(pDirectX, pSoundOperater, MapChip, GameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*0.625f,CELL_SIZE*0.625f };
 	m_MapSizeX = m_pMapChip->GetRow();
@@ -80,8 +80,7 @@ bool ClawShot::PermitActive() {
 	if (m_isChoseDeg && !m_isActive) {
 		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		RopeBatteryPosY = m_Central.y = m_pGameChara->GetPositionY();
-		PrevMapScrollX = m_MapScrollX;
-		PrevMapScrollY = m_MapScrollY;
+		m_PrevScroll = MapChip::GetScroll();
 
 		m_isChoseDeg = false;
 		return true;
@@ -122,12 +121,12 @@ bool ClawShot::Update()
 	if (!m_isActive) {
 		return true;
 	}
-	PrevMapScrollX -= m_MapScrollX;
-	PrevMapScrollY -= m_MapScrollY;
+	m_PrevScroll.X -= MapChip::GetScroll().X;
+	m_PrevScroll.Y -= MapChip::GetScroll().Y;
 	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg));
 	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg));
-	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
 	if (m_Direction == FACING_RIGHT) {
 		m_DirectionBias = ZERO;
 	}
@@ -163,8 +162,7 @@ bool ClawShot::Update()
 
 	//	InitPosition();
 	//}
-	PrevMapScrollX = m_MapScrollX;
-	PrevMapScrollY = m_MapScrollY;
+	m_PrevScroll = MapChip::GetScroll();
 
 	return true;
 }
@@ -207,7 +205,7 @@ void ClawShot::Render()
 	}
 }
 
-void ClawShot::Reverse(Object* MapChip) {
+void ClawShot::Reverse(MapChip* MapChip) {
 	m_pMapChip = MapChip;
 	m_MapSizeX = m_pMapChip->GetRow();
 	m_MapSizeY = m_pMapChip->GetColunm();

@@ -10,7 +10,7 @@
 
 using namespace PlayerAnimation;
 
-HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip, GameChara* gameChara, XinputDevice* pXinputDevice) :SkillBase(pDirectX, pSoundOperater, mapChip, gameChara)
+HighShuriken::HighShuriken(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* mapChip, GameChara* gameChara, XinputDevice* pXinputDevice) :SkillBase(pDirectX, pSoundOperater, mapChip, gameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*0.5f,CELL_SIZE*0.5f };
 	m_pMapChip = mapChip;
@@ -115,8 +115,7 @@ bool HighShuriken::PermitActive() {
 	if (m_isChoseDeg && !m_isActive) {
 		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		m_Central.y = m_pGameChara->GetPositionY();
-		PrevMapScrollX = m_MapScrollX;
-		PrevMapScrollY = m_MapScrollY;
+		m_PrevScroll = MapChip::GetScroll();
 		isOperation = false;
 		m_isChoseDeg = false;
 		return true;
@@ -146,13 +145,13 @@ bool HighShuriken::Update()
 	if (!m_isActive) {
 		return true;
 	}
-	PrevMapScrollX -= m_MapScrollX;
-	PrevMapScrollY -= m_MapScrollY;
-	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg)) - PrevMapScrollX;
-	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg)) + PrevMapScrollY;
+	m_PrevScroll.X -= MapChip::GetScroll().X;
+	m_PrevScroll.Y -= MapChip::GetScroll().Y;
+	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg)) - m_PrevScroll.X;
+	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg)) + m_PrevScroll.Y;
 	
-	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
 
 	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX - 1) {
 		InitPosition();
@@ -177,8 +176,7 @@ bool HighShuriken::Update()
 
 		InitPosition();
 	}
-	PrevMapScrollX = m_MapScrollX;
-	PrevMapScrollY = m_MapScrollY;
+	m_PrevScroll = MapChip::GetScroll();
 
 	return true;
 }
@@ -214,7 +212,7 @@ void HighShuriken::Render()
 
 }
 
-void HighShuriken::Reverse(Object* mapChip) {
+void HighShuriken::Reverse(MapChip* mapChip) {
 	m_pMapChip = mapChip;
 	m_MapSizeX = m_pMapChip->GetRow();
 	m_MapSizeY = m_pMapChip->GetColunm();

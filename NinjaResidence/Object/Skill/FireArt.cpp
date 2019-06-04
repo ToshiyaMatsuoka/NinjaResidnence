@@ -8,7 +8,7 @@
 
 using namespace PlayerAnimation;
 
-FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip, GameChara* gameChara) :SkillBase(pDirectX, pSoundOperater, mapChip,gameChara)
+FireArt::FireArt(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* mapChip, GameChara* gameChara) :SkillBase(pDirectX, pSoundOperater, mapChip,gameChara)
 {
 	m_Central = { 500,0,CELL_SIZE*2.f,CELL_SIZE*2.f };
 	m_MapSizeX = m_pMapChip->GetRow();
@@ -86,27 +86,27 @@ bool FireArt::Update()
 	else m_DirectionBias = ONE;
 	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY()-10.f;
-	m_MapPositionX = static_cast<int>((m_Central.x - m_MapScrollX) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - m_MapScrollY) / CELL_SIZE);
-	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH) {
-		//InitPosition();
-	}
-	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT) {
-		//InitPosition();
-	}
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
+	//if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH) {
+	//	InitPosition();
+	//}
+	//if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT) {
+	//	InitPosition();
+	//}
 	int buf = 0;
 	for (int i = -1; i <7; ++i) {
-		int MapPosX = m_MapPositionX + i * static_cast<int>(m_Direction);
-		if (MapPosX < 0) {
-			MapPosX = m_MapPositionX;
+		int mapPosX = m_MapPositionX + i * static_cast<int>(m_Direction);
+		if (mapPosX < 0) {
+			mapPosX = m_MapPositionX;
 		}
-		if (MapPosX > m_MapSizeX-1) {
-			MapPosX = m_MapSizeX - 1;
+		if (mapPosX > m_MapSizeX-1) {
+			mapPosX = m_MapSizeX - 1;
 		}
 
-		if (m_pMapChip->GetMapChipData(m_MapPositionY, MapPosX) > 100)
+		if (m_pMapChip->GetMapChipData(m_MapPositionY, mapPosX) > 100)
 		{
-			m_pMapChip->Activate(MapPosX, m_MapPositionY);
+			m_pMapChip->Activate(mapPosX, m_MapPositionY);
 		}
 		if (CollisionRope()) {
 			m_pMapChip->Activate(m_ropeX, m_ropeY);
@@ -137,7 +137,7 @@ void FireArt::Render()
 	}
 }
 
-void FireArt::Reverse(Object* mapChip) {
+void FireArt::Reverse(MapChip* mapChip) {
 	m_pMapChip = mapChip;
 	m_MapSizeX = m_pMapChip->GetRow();
 	m_MapSizeY = m_pMapChip->GetColunm();

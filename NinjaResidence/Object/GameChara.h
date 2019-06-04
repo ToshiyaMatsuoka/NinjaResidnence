@@ -47,14 +47,14 @@ public:
 	void KeyOperation(KeyDirection vec);
 	bool Update();
 	void Render();
-	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, Object* mapChip);
+	GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* mapChip);
 	~GameChara();
 
 	/**
 	* @breaf どんでん返し処理
 	* @author Toshiya Matsuoka
 	*/
-	void Reverce(Object* mapChip, int blockNumber);
+	void Reverce(MapChip* mapChip, int blockNumber);
 
 	/**
 	* @brief 前フレームの位置保存
@@ -136,15 +136,18 @@ public:
 
 private:
 
-	float m_PrevLeftPosition = 0;
-	float m_PrevRightPosition = 0;
-	float m_PrevPositionY = 0;
-	//キャラの左側のX座標
-	int m_MapLeftDirectionPosition = 0;
-	//キャラの右側のX座標
-	int m_MapRightDirectionPosition = 0;
-	//キャラの下側のY座標
-	int m_MapPositionY = 0;
+	struct MapPosition {
+		int Left, Right, Y;
+	};
+	struct Pos3Way {
+		float Left, Right, Y;
+	};
+
+	MapScroll m_MapScroll;
+	Pos3Way m_PrevPosition;
+
+	MapPosition m_MapPosition;
+
 	//! 毎フレームかける重力の値
 	const float GRAVITY = CELL_SIZE * 0.375f;
 	//! ダッシュ動作
@@ -182,7 +185,7 @@ private:
 	float m_CollisionTv = 160 / 512.f;
 
 	MapReverse* m_pMapReverse = NULL;
-	Object* m_pMapChip = NULL;
+	MapChip* m_pMapChip = NULL;
 
 	float GravityAcceleration = 0;
 

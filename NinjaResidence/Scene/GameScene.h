@@ -51,9 +51,9 @@ public:
 private:
 	GameChara* m_pGameChara = NULL;
 	//使用中のMapChip
-	Object* m_pBusyMapChip = NULL;
+	MapChip* m_pBusyMapChip = NULL;
 	//停止中のMapChip
-	Object* m_pIdleMapChip = NULL;
+	MapChip* m_pIdleMapChip = NULL;
 
 	SkillBase* m_pClawShot = NULL;
 	SkillBase* m_pHighShuriken = NULL;

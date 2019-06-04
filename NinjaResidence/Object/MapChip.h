@@ -56,6 +56,13 @@ public:
 	//! ギミックの起動状態の取得
 	bool GetGimmckActive(int mapXPos);
 
+	static MapScroll GetScroll() {
+		return m_MapScroll;
+	}
+
+	static void SetScroll(MapScroll scroll) {
+		m_MapScroll = scroll;
+	}
 
 private:
 
@@ -69,6 +76,8 @@ private:
 	void CellInit();
 	static int m_TargetCount;
 	static int m_GimmickCount;
+
+	static MapScroll m_MapScroll;
 
 
 	static std::vector<BaseTarget*> pBaseTarget;
