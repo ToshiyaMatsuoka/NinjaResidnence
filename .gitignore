@@ -40,3 +40,5 @@ Release/
 html/*
 !html/*.chm
 NinjaResidence/test.txt
+*.zip
+忍者屋敷/
