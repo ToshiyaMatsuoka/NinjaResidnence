@@ -39,6 +39,9 @@ private:
 	* @details 投擲前に角度指定フェイズを挟む
 	*/
 	bool PermitActive();
+
+	const float MAX_INCIDENCE_ANGLE = 90.0f;
+
 	int m_ropeX;
 	int m_ropeY;
 };

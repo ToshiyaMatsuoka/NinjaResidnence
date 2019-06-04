@@ -41,5 +41,7 @@ private:
 	*/
 	bool PermitActive();
 	bool isOperation = false;
+
+	const float MAX_INCIDENCE_ANGLE = 45.0f;
 };
 

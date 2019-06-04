@@ -55,8 +55,6 @@ bool FireArt::PermitActive() {
 	if (m_isActive) {
 		return true;
 	}
-	//else return false;
-
 
 	return false;
 }

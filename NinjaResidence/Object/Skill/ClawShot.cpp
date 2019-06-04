@@ -40,8 +40,8 @@ void ClawShot::KeyOperation(KeyDirection vec)
 			return;
 		}
 		m_DirectionDeg += 1.0f;
-		if (m_DirectionDeg > 90) {
-			m_DirectionDeg = 90;
+		if (m_DirectionDeg > MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = MAX_INCIDENCE_ANGLE;
 		}
 		if (m_DirectionDeg < 0) {
 			m_DirectionDeg = 0;
@@ -52,8 +52,8 @@ void ClawShot::KeyOperation(KeyDirection vec)
 			return;
 		}
 		m_DirectionDeg -= 1.0f;
-		if (m_DirectionDeg > 90) {
-			m_DirectionDeg = 90;
+		if (m_DirectionDeg > MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = MAX_INCIDENCE_ANGLE;
 		}
 		if (m_DirectionDeg < 0) {
 			m_DirectionDeg = 0;
@@ -96,8 +96,8 @@ bool ClawShot::PermitActive() {
 //	CENTRAL_STATE RopeCentral = { 0 };
 //	TranslateCentral_State(m_pMapChip->GetTargetPosition(BT_ROPE), &RopeCentral);
 //
-//	m_ropeX = static_cast<int>((RopeCentral.x - m_MapScrollX) / CELL_SIZE);
-//	m_ropeY = static_cast<int>((RopeCentral.y - m_MapScrollY) / CELL_SIZE);
+//	m_ropeX = static_cast<int>((RopeCentral.x - m_MapScroll.X) / CELL_SIZE);
+//	m_ropeY = static_cast<int>((RopeCentral.y - m_MapScroll.Y) / CELL_SIZE);
 //
 //	return ContactSpecifyObject(&RopeCentral);
 //}

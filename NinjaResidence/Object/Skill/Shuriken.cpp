@@ -39,11 +39,11 @@ void Shuriken::KeyOperation(KeyDirection vec)
 			return;
 		}
 		m_DirectionDeg += m_Direction;
-		if (m_DirectionDeg > 45) {
-			m_DirectionDeg = 45;
+		if (m_DirectionDeg > MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = MAX_INCIDENCE_ANGLE;
 		}
-		if (m_DirectionDeg < -45) {
-			m_DirectionDeg = -45;
+		if (m_DirectionDeg < -MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = -MAX_INCIDENCE_ANGLE;
 		}
 		break;
 	case DOWN:
@@ -51,11 +51,11 @@ void Shuriken::KeyOperation(KeyDirection vec)
 			return;
 		}
 		m_DirectionDeg -= m_Direction;
-		if (m_DirectionDeg > 45) {
-			m_DirectionDeg = 45;
+		if (m_DirectionDeg > MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = MAX_INCIDENCE_ANGLE;
 		}
-		if (m_DirectionDeg < -45) {
-			m_DirectionDeg = -45;
+		if (m_DirectionDeg < -MAX_INCIDENCE_ANGLE) {
+			m_DirectionDeg = -MAX_INCIDENCE_ANGLE;
 		}
 		break;
 	case END_ART:
