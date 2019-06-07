@@ -64,15 +64,38 @@ public:
 		m_MapScroll = scroll;
 	}
 
+	int GetRow() {
+		return m_MapSizeX;
+	}
+	int GetColunm() {
+		return m_MapSizeY;
+	}
+
+	int GetMapData(int height, int width) {
+		if (height >= m_MapSizeY) {
+			height = m_MapSizeY - 1;
+		}
+		if (height < 0) {
+			height = 0;
+		}
+		if (width >= m_MapSizeX) {
+			width = m_MapSizeX - 1;
+		}
+		if (width < 0) {
+			width = 0;
+		}
+		int buf = -1;
+		buf = MapData[height][width];
+		return buf;
+	}
+
 private:
 
 	void RevolveY(CUSTOMVERTEX* Vertex, float Rad);
 
 	int m_MapSelected = 0;
-	int m_MapSelectedWIDTH = 0;
-	int m_MapSelectedHEIGHT = 0;
-	CUSTOMVERTEX CELL[4];
-	//! CELLの初期化
+	CUSTOMVERTEX m_Cell[4];
+	//! m_Cellの初期化
 	void CellInit();
 	static int m_TargetCount;
 	static int m_GimmickCount;
@@ -85,4 +108,23 @@ private:
 	static std::vector<BlockInfo> TargetVector;
 
 	MapDataState m_MapDataState;
+
+	static float m_Rad;
+
+	void SetMapData(int height, int width,int setValue) {
+		if (height >= m_MapSizeY) {
+			height = m_MapSizeY - 1;
+		}
+		if (height < 0) {
+			height = 0;
+		}
+		if (width >= m_MapSizeX) {
+			width = m_MapSizeX - 1;
+		}
+		if (width < 0) {
+			width = 0;
+		}
+		MapData[height][width] = setValue;
+	}
+
 };

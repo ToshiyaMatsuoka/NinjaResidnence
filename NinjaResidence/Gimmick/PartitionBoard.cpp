@@ -40,7 +40,7 @@ void PartitionBoard::Update()
 	{
 		m_pSoundOperater->Stop("DOOR");
 		m_pMapChip->MapDataVectorZeroSet(m_GimmickInfo.PositionY, m_GimmickInfo.PositionX, 13, 3);
-		m_isActive = false;
+		//m_isActive = false;
 	}
 }
 

@@ -56,5 +56,12 @@ protected:
 	//! 座標の初期化
 	void InitPosition() {};
 	SkillType m_SkillType;
+
+	void DeActive() {
+		InitPosition();
+		m_isActive = false;
+		m_DirectionDeg = 0;
+	}
+
 };
 

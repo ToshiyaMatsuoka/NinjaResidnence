@@ -120,11 +120,13 @@ public:
 	* @author Toshiya Matsuoka
 	*/
 	PlayerAnimation::DIRECTION GetFacing() {return m_Facing;}
+
 	/**
 	* @brief 火遁アニメーション動作
 	* @author Toshiya Matsuoka
 	*/
 	void FireArtAnime();
+
 	/**
 	* @brief ゲーム失敗フラグの取得
 	* @author Toshiya Matsuoka
@@ -140,7 +142,9 @@ private:
 		int Left, Right, Y;
 	};
 	struct Pos3Way {
-		float Left, Right, Y;
+		float Left = 0;
+		float Right = 0;
+		float Y = 0;
 	};
 
 	MapScroll m_MapScroll;
@@ -290,7 +294,7 @@ private:
 	* @sa  MapBlock::BLOCKTYPE
 	* @author Toshiya Matsuoka
 	*/
-	bool DownCollisionCheck(int block);
+	bool DownCollisionBlock(int block);
 
 	/**
 	* @breaf 上方向に対する当たり判定
@@ -299,7 +303,7 @@ private:
 	* @sa  MapBlock::BLOCKTYPE
 	* @author Toshiya Matsuoka
 	*/
-	bool TopCollisionCheck(int block);
+	bool TopCollisionBlock(int block);
 
 	/**
 	* @breaf 右方向に対する当たり判定
@@ -308,7 +312,7 @@ private:
 	* @sa  MapBlock::BLOCKTYPE
 	* @author Toshiya Matsuoka
 	*/
-	bool RightCollisionCheck(int block);
+	bool RightCollisionBlock(int block);
 
 	/**
 	* @breaf 左方向に対する当たり判定
@@ -317,7 +321,7 @@ private:
 	* @sa  MapBlock::BLOCKTYPE
 	* @author Toshiya Matsuoka
 	*/
-	bool LeftCollisionCheck(int block);
+	bool LeftCollisionBlock(int block);
 
 	/**
 	* @breaf 接地判定

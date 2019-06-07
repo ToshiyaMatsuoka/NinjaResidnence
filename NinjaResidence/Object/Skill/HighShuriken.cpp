@@ -110,6 +110,7 @@ bool HighShuriken::PermitActive() {
 			m_DirectionBias = ZERO;
 		}
 		else m_DirectionBias = ONE;
+		InitPosition();
 		return false;
 	}
 	if (m_isChoseDeg && !m_isActive) {
@@ -128,9 +129,6 @@ bool HighShuriken::PermitActive() {
 
 
 void HighShuriken::InitPosition() {
-	m_isActive = false;
-	m_DirectionDeg = 0;
-
 	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY();
 }
@@ -138,6 +136,7 @@ void HighShuriken::InitPosition() {
 bool HighShuriken::Update()
 {
 	if (m_isChoseDeg) {
+		InitPosition();
 		m_DirectionArrow.x = m_pGameChara->GetPositionX() + m_Direction * CELL_SIZE * 2;
 		m_DirectionArrow.y = m_pGameChara->GetPositionY();
 	}
@@ -154,27 +153,27 @@ bool HighShuriken::Update()
 	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::Scroll().Y) / CELL_SIZE);
 
 	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX - 1) {
-		InitPosition();
+		DeActive();
 	}
 	if (m_MapPositionY == 0 || m_Central.y < 0 || m_Central.y > DISPLAY_HEIGHT || m_MapPositionY >= m_MapSizeY - 1) {
-		InitPosition();
+		DeActive();
 	}
-	int buf = m_pMapChip->GetMapChipData(m_MapPositionY, m_MapPositionX);
+	int buf = m_pMapChip->GetMapData(m_MapPositionY, m_MapPositionX);
 	if (buf > 100&&buf<200)
 	{
 		m_pMapChip->Activate(m_MapPositionX, m_MapPositionY);
-		InitPosition();
+		DeActive();
 	}
 	else if (buf < 100 && buf > MapBlock::NONE && buf != MapBlock::START_ZONE&&buf != MapBlock::DESCRIPTION_BOARD)
 	{
 		m_pSoundOperater->Start("CLAWSHOT", false);
-		InitPosition();
+		DeActive();
 	}
 
 	if (CollisionRope()) {
 		m_pMapChip->Activate(m_ropeX, m_ropeY);
 
-		InitPosition();
+		DeActive();
 	}
 	m_PrevScroll = MapChip::Scroll();
 

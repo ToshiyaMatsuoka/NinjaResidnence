@@ -15,6 +15,7 @@ int MapChip::m_GimmickCount = 0;
 vector<BaseTarget*> MapChip::pBaseTarget;
 vector<BlockInfo> MapChip::GimmickVector;
 vector<BlockInfo> MapChip::TargetVector;
+float MapChip::m_Rad = 0;
 
 MapChip::MapChip(DirectX* pDirectX, SoundOperater* pSoundOperater) :Object(pDirectX,pSoundOperater)
 {
@@ -125,7 +126,7 @@ void MapChip::MapDataVectorHitSet(int mapY, int mapX, int gimmickY, int gimmickX
 	{
 		for (int i = 0;i < gimmickX;i++)
 		{
-			MapData[mapY + j][mapX + i] = 900;
+			SetMapData(mapY + j,mapX + i, 900);
 		}
 	}
 }
@@ -136,7 +137,7 @@ void MapChip::MapDataVectorZeroSet(int mapY, int mapX, int gimmickY, int gimmick
 	{
 		for (int i = 0;i < gimmickX;i++)
 		{
-			MapData[mapY + j][mapX + i] = 0;
+			SetMapData(mapY + j, mapX + i, 0);
 		}
 	}
 }
@@ -223,14 +224,14 @@ void MapChip::Render()
 			float top = FIELD_TOP + (CELL_SIZE * j) + static_cast<float>(m_MapScroll.Y);
 			float left = FIELD_LEFT + (CELL_SIZE * i) + static_cast<float>(m_MapScroll.X);
 
-			CELL[0].x = left;
-			CELL[0].y = top;
-			CELL[1].x = (left + CELL_SIZE);
-			CELL[1].y = top;
-			CELL[2].x = (left + CELL_SIZE);
-			CELL[2].y = (top + CELL_SIZE);
-			CELL[3].x = left;
-			CELL[3].y = (top + CELL_SIZE);
+			m_Cell[0].x = left;
+			m_Cell[0].y = top;
+			m_Cell[1].x = (left + CELL_SIZE);
+			m_Cell[1].y = top;
+			m_Cell[2].x = (left + CELL_SIZE);
+			m_Cell[2].y = (top + CELL_SIZE);
+			m_Cell[3].x = left;
+			m_Cell[3].y = (top + CELL_SIZE);
 
 			m_MapSelected = MapData[j][i];
 			if (m_MapSelected < 100)
@@ -241,27 +242,27 @@ void MapChip::Render()
 				case ROCK_BLOCK:
 				case WOOD_TRACT:
 				case ROCK_TRACT:
-					SetVertexUV(CELL, BLOCK_INTEGRATION_WIDTH * (m_MapSelected - 1.f), 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH * (m_MapSelected - 1.f), 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 					break;
 				case GOAL_ZONE:
-					CELL[0].x -= CELL_SIZE * 0.5f;
-					CELL[0].y -= CELL_SIZE * 0.5f;
-					CELL[1].x += CELL_SIZE * 0.5f;
-					CELL[1].y -= CELL_SIZE * 0.5f;
-					CELL[2].x += CELL_SIZE * 0.5f;
-					CELL[3].x -= CELL_SIZE * 0.5f;
-					SetVertexUV(CELL, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+					m_Cell[0].x -= CELL_SIZE * 0.5f;
+					m_Cell[0].y -= CELL_SIZE * 0.5f;
+					m_Cell[1].x += CELL_SIZE * 0.5f;
+					m_Cell[1].y -= CELL_SIZE * 0.5f;
+					m_Cell[2].x += CELL_SIZE * 0.5f;
+					m_Cell[3].x -= CELL_SIZE * 0.5f;
+					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 					break;
 				case SPEAR:
-					SetVertexUV(CELL, BLOCK_INTEGRATION_WIDTH * 2.f, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 2.f);
+					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH * 2.f, BLOCK_INTEGRATION_HEIGHT * 3.f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT * 2.f);
 					break;
 				case DESCRIPTION_BOARD:
 				case DESCRIPTION_BOARD2:
-					SetVertexUV(CELL, 0.f, BLOCK_INTEGRATION_HEIGHT, 0.24f, BLOCK_INTEGRATION_HEIGHT*0.98f);
-					CELL[1].x += CELL_SIZE * 3.f;
-					CELL[2].x += CELL_SIZE * 3.f;
-					CELL[3].y += CELL_SIZE * 2.f;
-					CELL[2].y += CELL_SIZE * 2.f;
+					SetVertexUV(m_Cell, 0.f, BLOCK_INTEGRATION_HEIGHT, 0.24f, BLOCK_INTEGRATION_HEIGHT*0.98f);
+					m_Cell[1].x += CELL_SIZE * 3.f;
+					m_Cell[2].x += CELL_SIZE * 3.f;
+					m_Cell[3].y += CELL_SIZE * 2.f;
+					m_Cell[2].y += CELL_SIZE * 2.f;
 					break;
 				default:
 					continue;
@@ -271,14 +272,14 @@ void MapChip::Render()
 				switch (m_MapSelected/100)
 				{
 				case WOOD_REVERSE_ZONE:
-					SetVertexUV(CELL, BLOCK_INTEGRATION_WIDTH * 4.f, 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH * 4.f, 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 					break;
 				case ROCK_REVERSE_ZONE:
-					SetVertexUV(CELL, BLOCK_INTEGRATION_WIDTH * 5.f, 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH * 5.f, 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 					break;
 #ifdef _DEBUG
 				case 9: {
-					CUSTOMVERTEX test[4]{ CELL[0],CELL[1],CELL[2],CELL[3] };
+					CUSTOMVERTEX test[4]{ m_Cell[0],m_Cell[1],m_Cell[2],m_Cell[3] };
 					for (int i = 0; i < 4; ++i) {
 						test[i].color = 0xCCDDDDDD;
 					}
@@ -292,20 +293,20 @@ void MapChip::Render()
 			if (m_isReversing) {
 				m_Rad += 0.001f;
 				if ((i + j) == 0) {
-					RevolveY(CELL, m_Rad);
+					RevolveY(m_Cell, m_Rad);
 				}
 				if (((i + j) % 2) == 0) {
-					RevolveY(CELL, -m_Rad * 2);
+					RevolveY(m_Cell, -m_Rad * 2);
 				}
 				else {
-					RevolveY(CELL, m_Rad);
+					RevolveY(m_Cell, m_Rad);
 				}
 				if (m_Rad > 5.f) {
 					m_Rad = 0;
 					m_isReversing = false;
 				}
 			}
-			TextureRender("BLOCK_INTEGRATION_A_TEX", CELL);
+			TextureRender("BLOCK_INTEGRATION_A_TEX", m_Cell);
 
 		}
 	}
@@ -335,14 +336,14 @@ bool MapChip::Update() {
 
 void MapChip::CellInit() {
 	for (int i = 0; i < 4; i++) {
-		CELL[i].z = 1.0f;
-		CELL[i].rhw = 1.0f;
-		CELL[i].color = 0xFFFFFFFF;
+		m_Cell[i].z = 1.0f;
+		m_Cell[i].rhw = 1.0f;
+		m_Cell[i].color = 0xFFFFFFFF;
 	}
-	CELL[0].tv = 0.f;
-	CELL[1].tv = 0.f;
-	CELL[2].tv = BLOCK_INTEGRATION_WIDTH;
-	CELL[3].tv = BLOCK_INTEGRATION_WIDTH;
+	m_Cell[0].tv = 0.f;
+	m_Cell[1].tv = 0.f;
+	m_Cell[2].tv = BLOCK_INTEGRATION_WIDTH;
+	m_Cell[3].tv = BLOCK_INTEGRATION_WIDTH;
 
 }
 

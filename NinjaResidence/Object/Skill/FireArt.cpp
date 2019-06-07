@@ -102,7 +102,7 @@ bool FireArt::Update()
 			mapPosX = m_MapSizeX - 1;
 		}
 
-		if (m_pMapChip->GetMapChipData(m_MapPositionY, mapPosX) > 100)
+		if (m_pMapChip->GetMapData(m_MapPositionY, mapPosX) > 100)
 		{
 			m_pMapChip->Activate(mapPosX, m_MapPositionY);
 		}
