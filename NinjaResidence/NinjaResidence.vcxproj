@@ -76,6 +76,7 @@
     <ClInclude Include="Object\Skill\Shuriken.h" />
     <ClInclude Include="Object\Skill\SkillBase.h" />
     <ClInclude Include="Object\TitleCursol.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\PauseScene.h" />
     <ClInclude Include="Scene\Scene.h" />
@@ -87,6 +88,12 @@
     <ClInclude Include="Target\Switch.h" />
     <ClInclude Include="Target\Target.h" />
     <ClInclude Include="Target\Torch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NinjaResidence.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Texture\icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

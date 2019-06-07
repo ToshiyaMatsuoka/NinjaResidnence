@@ -9,6 +9,8 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include "resource.h"
+
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "d3d9.lib")
@@ -32,20 +34,23 @@ GameManager::GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
 	isWindowMode = true;	
 	isDeviceLost = false;
 	pDirectX = new DirectX;
-	WNDCLASS Wndclass;
-	pSoundOperater = new SoundOperater;
+	WNDCLASSEX Wndclass;
+	ZeroMemory(&Wndclass, sizeof(Wndclass));
+
 	//Windows初期化情報の設定
 	Wndclass.style = CS_HREDRAW | CS_VREDRAW;
 	Wndclass.lpfnWndProc = WndProc;
 	Wndclass.cbClsExtra = Wndclass.cbWndExtra = 0;
 	Wndclass.hInstance = hInstance;
-	Wndclass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	Wndclass.hIcon = Wndclass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	Wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	Wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	Wndclass.lpszMenuName = NULL;
 	Wndclass.lpszClassName = API_NAME;	//クラス名
+	Wndclass.cbSize = sizeof(Wndclass);
+
 	//Windowの登録
-	RegisterClass(&Wndclass);
+	RegisterClassEx(&Wndclass);
 	//Windowの生成
 	hWnd = CreateWindow(
 		API_NAME,					//ウィンドウのクラス名
@@ -62,6 +67,7 @@ GameManager::GameManager(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
 	);
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
+	pSoundOperater = new SoundOperater;
 	pDirectX->InitPresentParameters(hWnd);
 	pDirectX->BuildDXDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
 	pSoundOperater->Initialize();
