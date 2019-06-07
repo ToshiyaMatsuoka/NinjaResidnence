@@ -157,7 +157,7 @@ int GameManager::MessageLoop()
 {
 
 	MSG msg;
-	DWORD SyncOld = timeGetTime();	//	システム時間を取得
+	DWORD SyncOld = timeGetTime();
 	DWORD SyncNow;
 	timeBeginPeriod(1);
 	ZeroMemory(&msg, sizeof(msg));
@@ -173,7 +173,7 @@ int GameManager::MessageLoop()
 		else
 		{
 			SyncNow = timeGetTime();
-			if (SyncNow - SyncOld >= 1000 / 60)//1秒間に60回この中に入るはず
+			if (SyncNow - SyncOld >= 1000 / 60)
 			{
 				pDirectX->CheckKeyStatus();
 				pDirectX->RenderingBegin();
@@ -190,14 +190,12 @@ int GameManager::MessageLoop()
 				hWnd == GetActiveWindow()) {
 				HRESULT hr = NULL;
 				pDirectX->ClearDisplay();
-				pDirectX->DrawSceneBegin();
-				pDirectX->DrawSceneEnd();
 				pDirectX->PresentsDevice();
 
 				hr = pDirectX->ResetDevice(isWindowMode, &WinRect, hWnd);
 				pDirectX->ReleaseDx();
 
-				pDirectX->RecoverDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
+				pDirectX->BuildDXDevice(hWnd, isWindowMode, "Resource/Texture/ninja.png");
 				pSoundOperater->Initialize();
 				pSceneManager->LoadResouce();
 

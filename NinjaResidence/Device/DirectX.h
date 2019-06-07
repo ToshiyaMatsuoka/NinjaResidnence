@@ -114,7 +114,7 @@ public:
 	* @brief 画像消去
 	* @param TexKey 画像の格納キー
 	*/
-	void eraseTexture(std::string TexKey);
+	void EraseTexture(std::string TexKey);
 	/**
 	* @brief 画像全消去
 	*/
@@ -141,7 +141,7 @@ public:
 	* @brief DXフォント消去
 	* @param FontKey 表示文字設定の格納先配列番号
 	*/
-	void eraseFont(std::string FontKey);
+	void EraseFont(std::string FontKey);
 	/**
 	* @brief DXフォント全消去
 	*/
@@ -177,23 +177,17 @@ public:
 	HRESULT GetDeviceState() {
 		return DeviceState;
 	}
-	/**
-	* @brief DirectXデバイスの復帰
-	* @param hWnd ウィンドウハンドル
-	* @param isWindowMode ウィンドウモード　true:WindowMode　false:FullscreenMode
-	* @param FilePath デバイス生成チェック用画像ファイルパス
-	*/
-	HRESULT RecoverDevice(HWND hWnd, bool isWindowMode, LPCSTR FilePath);
 
 private:
-	std::map<std::string, LPDIRECT3DTEXTURE9> m_pTexture; //画像の情報を入れておく為のポインタ配列
 	LPDIRECTINPUTDEVICE8 m_pKeyDevice = NULL; 
 	LPDIRECTINPUT8 m_pDinput = NULL;			
 	IDirect3DDevice9*  m_pD3Device = NULL; //Direct3Dのデバイス
 	IDirect3D9*    m_pDirect3D = NULL; //DIrect3Dのインターフェース
 	D3DPRESENT_PARAMETERS m_D3dPresentParameters;		//	パラメータ
-	//D3DDISPLAYMODE		  m_D3DdisplayMode;
+
+	std::map<std::string, LPDIRECT3DTEXTURE9> m_pTexture;
 	std::map<std::string, LPD3DXFONT> m_pFont;
+
 	D3DPRESENT_PARAMETERS m_d3dppWin, m_d3dppFull;
 	static 	const int MaxKeyNumber = 256;
 
