@@ -150,30 +150,6 @@ public:
 	bool ContactSpecifyObject(CENTRAL_STATE* object);
 
 
-	int GetRow() {
-		return m_MapSizeX;
-	}
-	int GetColunm() {
-		return m_MapSizeY;
-	}
-
-	int GetMapChipData(int height, int width) {
-		if (height >= m_MapSizeY) {
-			height = m_MapSizeY - 1;
-		}
-		if (height < 0) {
-			height = 0;
-		}
-		if (width >= m_MapSizeX) {
-			width = m_MapSizeX - 1;
-		}
-		if (width < 0) {
-			width = 0;
-		}
-		int buf = -1;
-		buf = MapData[height][width];
-		return buf;
-	}
 
 	virtual MapDataState GetMapDataState() {
 		MapDataState State = STATE_FALSE;
@@ -210,5 +186,4 @@ protected:
 	static std::vector<MapScroll> m_ReverseBuffer;
 	static int m_ReverseCount;
 	static bool m_isReversing;
-	static float m_Rad;
 };

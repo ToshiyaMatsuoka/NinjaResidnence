@@ -115,7 +115,7 @@ bool HighShuriken::PermitActive() {
 	if (m_isChoseDeg && !m_isActive) {
 		m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		m_Central.y = m_pGameChara->GetPositionY();
-		m_PrevScroll = MapChip::GetScroll();
+		m_PrevScroll = MapChip::Scroll();
 		isOperation = false;
 		m_isChoseDeg = false;
 		return true;
@@ -145,13 +145,13 @@ bool HighShuriken::Update()
 	if (!m_isActive) {
 		return true;
 	}
-	m_PrevScroll.X -= MapChip::GetScroll().X;
-	m_PrevScroll.Y -= MapChip::GetScroll().Y;
+	m_PrevScroll.X -= MapChip::Scroll().X;
+	m_PrevScroll.Y -= MapChip::Scroll().Y;
 	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg)) - m_PrevScroll.X;
 	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg)) + m_PrevScroll.Y;
 	
-	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::Scroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::Scroll().Y) / CELL_SIZE);
 
 	if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH || m_MapPositionX >= m_MapSizeX - 1) {
 		InitPosition();
@@ -176,7 +176,7 @@ bool HighShuriken::Update()
 
 		InitPosition();
 	}
-	m_PrevScroll = MapChip::GetScroll();
+	m_PrevScroll = MapChip::Scroll();
 
 	return true;
 }

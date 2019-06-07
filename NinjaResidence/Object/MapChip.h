@@ -56,11 +56,11 @@ public:
 	//! ギミックの起動状態の取得
 	bool GetGimmckActive(int mapXPos);
 
-	static MapScroll GetScroll() {
+	static MapScroll Scroll() {
 		return m_MapScroll;
 	}
 
-	static void SetScroll(MapScroll scroll) {
+	static void Scroll(MapScroll scroll) {
 		m_MapScroll = scroll;
 	}
 

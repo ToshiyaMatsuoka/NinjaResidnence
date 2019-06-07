@@ -9,7 +9,6 @@ std::vector<BlockInfo> Object::m_ReversePoint;
 std::vector<MapScroll> Object::m_ReverseBuffer;
 int Object::m_ReverseCount = 0;
 bool Object::m_isReversing = false;
-float Object::m_Rad = 0;
 Object::Object(DirectX* pDirectX, SoundOperater* pSoundOperater):m_pDirectX(pDirectX), m_pSoundOperater(pSoundOperater)
 {
 }

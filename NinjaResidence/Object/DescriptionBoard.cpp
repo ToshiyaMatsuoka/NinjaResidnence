@@ -7,7 +7,7 @@
 
 using namespace MapBlock;
 
-DescriptionBoard::DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater,GameChara * gameChara, Object * pBusyMapChip) :Object(pDirectX, pSoundOperater)
+DescriptionBoard::DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater,GameChara * gameChara, MapChip* pBusyMapChip) :Object(pDirectX, pSoundOperater)
 {
 	m_pGameChara = gameChara;
 	m_pMapChip = pBusyMapChip;
@@ -23,30 +23,30 @@ DescriptionBoard::~DescriptionBoard()
 
 }
 
-void DescriptionBoard::GoDescriptionBoard(Object* pBusyMapChip)
+void DescriptionBoard::GoDescriptionBoard(MapChip* pBusyMapChip)
 {
 	m_pMapChip = pBusyMapChip;
-	int MapPosiinonX = m_pGameChara->GetMapLeftDirectionPosition();
-	int MapPosiinonY = m_pGameChara->GetMapPositionY();
-	if ((m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX + 1) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX + 2) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX - 1) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX + 1) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX + 2) == DESCRIPTION_BOARD) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX - 1) == DESCRIPTION_BOARD))
+	int MapPositionX = m_pGameChara->GetMapLeftDirectionPosition();
+	int MapPositionY = m_pGameChara->GetMapPositionY();
+	if ((m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX)		== DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX + 1) == DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX + 2) == DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX - 1) == DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX)		== DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX + 1) == DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX + 2) == DESCRIPTION_BOARD) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX - 1) == DESCRIPTION_BOARD))
 	{
 		DescriptionNumberdecision = Number1;
 	}
-	if ((m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX + 1) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX + 2) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 5, MapPosiinonX - 1) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX + 1) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX + 2) == DESCRIPTION_BOARD2) ||
-		(m_pMapChip->GetMapChipData(MapPosiinonY - 4, MapPosiinonX - 1) == DESCRIPTION_BOARD2))
+	if ((m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX)		== DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX + 1) == DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX + 2) == DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 5, MapPositionX - 1) == DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX)		== DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX + 1) == DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX + 2) == DESCRIPTION_BOARD2) ||
+		(m_pMapChip->GetMapData(MapPositionY - 4, MapPositionX - 1) == DESCRIPTION_BOARD2))
 	{
 		DescriptionNumberdecision = Number2;
 	}

@@ -9,7 +9,6 @@
 #include "Object/MapChip.h"
 
 class GameChara;
-class MapChip;
 
 class DescriptionBoard :public Object
 {
@@ -22,10 +21,10 @@ public:
 		Number2,
 	};
 	DescriptionNumber DescriptionNumberdecision;
-	void GoDescriptionBoard(Object * m_pBusyMapChip);
-	DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater, GameChara * gameChara, Object * m_pBusyMapChip);
+	void GoDescriptionBoard(MapChip* m_pBusyMapChip);
+	DescriptionBoard(DirectX* pDirectX,SoundOperater* pSoundOperater, GameChara * gameChara, MapChip* m_pBusyMapChip);
 	virtual ~DescriptionBoard();
 private:
 	GameChara* m_pGameChara = NULL;
-	Object* m_pMapChip = NULL;
+	MapChip* m_pMapChip = NULL;
 };

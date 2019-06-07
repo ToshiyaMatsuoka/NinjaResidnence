@@ -47,7 +47,7 @@ void MapReverse::GoMapReverse(MapChip** pBusyMapChip, MapChip** pIdleMapChip)
 	if ((CollCenter)&& m_ReversePair)
 	{
 		m_pSoundOperater->Start("REVERSE",false);
-		MapScroll msBuf = MapChip::GetScroll();
+		MapScroll msBuf = MapChip::Scroll();
 		for (int i = 0; i < m_ReverseCount; ++i) {
 			if (m_ReversePoint[i].PairNumber == m_ReversePair &&
 				m_ReversePoint[i].MapDataState == (*pBusyMapChip)->GetMapDataState()) {
@@ -59,7 +59,7 @@ void MapReverse::GoMapReverse(MapChip** pBusyMapChip, MapChip** pIdleMapChip)
 				if (i == m_ActiveReversePointNum) {
 					continue;
 				}
-				MapChip::SetScroll(m_ReverseBuffer[i]);
+				MapChip::Scroll(m_ReverseBuffer[i]);
 			}
 		}
 

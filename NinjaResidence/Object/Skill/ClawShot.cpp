@@ -80,7 +80,7 @@ bool ClawShot::PermitActive() {
 	if (m_isChoseDeg && !m_isActive) {
 		RopeBatteryPosX = m_Central.x = m_pGameChara->GetPositionX() + (m_Direction * m_Central.scaleX);
 		RopeBatteryPosY = m_Central.y = m_pGameChara->GetPositionY();
-		m_PrevScroll = MapChip::GetScroll();
+		m_PrevScroll = MapChip::Scroll();
 
 		m_isChoseDeg = false;
 		return true;
@@ -121,12 +121,12 @@ bool ClawShot::Update()
 	if (!m_isActive) {
 		return true;
 	}
-	m_PrevScroll.X -= MapChip::GetScroll().X;
-	m_PrevScroll.Y -= MapChip::GetScroll().Y;
+	m_PrevScroll.X -= MapChip::Scroll().X;
+	m_PrevScroll.Y -= MapChip::Scroll().Y;
 	m_Central.x += (MoveSpeed * m_Direction) * std::cos(DegToRad(m_DirectionDeg));
 	m_Central.y -= (MoveSpeed * m_Direction) * std::sin(DegToRad(m_DirectionDeg));
-	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::Scroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::Scroll().Y) / CELL_SIZE);
 	if (m_Direction == FACING_RIGHT) {
 		m_DirectionBias = ZERO;
 	}
@@ -162,7 +162,7 @@ bool ClawShot::Update()
 
 	//	InitPosition();
 	//}
-	m_PrevScroll = MapChip::GetScroll();
+	m_PrevScroll = MapChip::Scroll();
 
 	return true;
 }

@@ -84,8 +84,8 @@ bool FireArt::Update()
 	else m_DirectionBias = ONE;
 	m_Central.x = m_pGameChara->GetPositionX() + m_Direction * m_Central.scaleX;
 	m_Central.y = m_pGameChara->GetPositionY()-10.f;
-	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::GetScroll().X) / CELL_SIZE);
-	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::GetScroll().Y) / CELL_SIZE);
+	m_MapPositionX = static_cast<int>((m_Central.x - MapChip::Scroll().X) / CELL_SIZE);
+	m_MapPositionY = static_cast<int>((m_Central.y - MapChip::Scroll().Y) / CELL_SIZE);
 	//if (m_Central.x < 0 || m_Central.x > DISPLAY_WIDTH) {
 	//	InitPosition();
 	//}

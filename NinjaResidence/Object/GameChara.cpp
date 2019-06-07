@@ -19,13 +19,17 @@ GameChara::GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* 
 
 	m_Central.x = static_cast<float>(m_pMapChip->SearchBlockX(START_ZONE))*CELL_SIZE;
 	m_Central.y = static_cast<float>(m_pMapChip->SearchBlockY(START_ZONE))*CELL_SIZE;
+
 	CreateSquareVertex(m_Central, m_WorldCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
 	CreateSquareVertex(m_Central, m_DisplayCoordinate, 0xFFFFFFFF, 0, 0, m_CollisionTu, m_CollisionTv);
-	m_MapScroll = MapChip::GetScroll();
+
+	m_MapScroll = MapChip::Scroll();
+
 	int scrollXBuf = 0;
 	int scrollYBuf = 0;
 	int scrollBehindX = 0;
 	int scrollBehindY = 0;
+
 	do {
 		scrollXBuf = m_MapScroll.X;
 		scrollYBuf = m_MapScroll.Y;
@@ -35,7 +39,7 @@ GameChara::GameChara(DirectX* pDirectX, SoundOperater* pSoundOperater, MapChip* 
 		scrollBehindY = (m_MapScroll.Y - scrollYBuf);
 
 	} while (0 != scrollBehindX || 0 != scrollBehindY);
-	MapChip::SetScroll(m_MapScroll);
+	MapChip::Scroll(m_MapScroll);
 }
 
 GameChara::~GameChara()
@@ -250,6 +254,7 @@ void GameChara::KeyOperation(KeyDirection vec)
 		{
 			m_MapScroll.X -= 5;
 		}
+		MapChip::Scroll(m_MapScroll);
 		break;
 	case MAP_LEFT:
 		if (m_MapScroll.X >= 0) {
@@ -260,12 +265,15 @@ void GameChara::KeyOperation(KeyDirection vec)
 		{
 			m_MapScroll.X += 5;
 		}
-		break; 
+		MapChip::Scroll(m_MapScroll);
+		break;
 	case MAP_DOWN:
 		DownScrollOparation();
+		MapChip::Scroll(m_MapScroll);
 		break;
 	case MAP_UP:
 		UpScrollOparation();
+		MapChip::Scroll(m_MapScroll);
 		break;
 	}
 }
@@ -344,7 +352,7 @@ void GameChara::MapReversePointSearch(int PairNumber, MapDataState mapState)
 	m_Central.x = (BlockX * CELL_SIZE);
 	m_Central.y = (BlockY * CELL_SIZE);
 	UpdateMapPos();
-
+	m_MapScroll = MapChip::Scroll();
 	do {
 		ScrollXBuf = m_MapScroll.X;
 		ScrollYBuf = m_MapScroll.Y;
@@ -355,6 +363,7 @@ void GameChara::MapReversePointSearch(int PairNumber, MapDataState mapState)
 		ScrollBehindY = (m_MapScroll.Y - ScrollYBuf);
 
 	} while (0 != ScrollBehindX || 0 != ScrollBehindY);
+	MapChip::Scroll(m_MapScroll);
 }
 
 void GameChara::Reverce(MapChip* mapChip, int PairNumber)
@@ -407,9 +416,10 @@ void GameChara::MapScrool()
 	}
 
 	//右にスクロール移動
-	if (m_Central.x + m_Central.scaleX+m_MapScroll.X> static_cast<float>(SCROLL_RIGHT_RANGE))
+	if (m_Central.x + m_Central.scaleX + m_MapScroll.X > static_cast<float>(SCROLL_RIGHT_RANGE))
 	{
-		if ((m_Central.x + m_Central.scaleX <= (((m_MapSizeX-1) * CELL_SIZE) - static_cast<float>(SCROLL_VARTICAL_RANGE)))||(m_Central.x + m_Central.scaleX>DISPLAY_WIDTH))
+		if ((m_Central.x + m_Central.scaleX <= (((m_MapSizeX-1) * CELL_SIZE) - static_cast<float>(SCROLL_VARTICAL_RANGE))) ||
+			(m_Central.x + m_Central.scaleX > DISPLAY_WIDTH))
 		{
 			m_MapScroll.X -= SCROLL_SPEED;
 		}
@@ -450,6 +460,7 @@ void GameChara::ThrowAnime() {
 		}
 	}
 	else return;
+
 	if (m_TurnAnimation!=0) {
 		m_ChangeAnimation = THROWING;
 	}
@@ -481,7 +492,7 @@ void GameChara::FireArtAnime() {
 
 bool GameChara::Update()
 {
-	m_MapScroll = MapChip::GetScroll();
+	m_MapScroll = MapChip::Scroll();
 	ThrowAnime();
 	UpdateMapPos();
 	AddGravity();
@@ -505,7 +516,7 @@ bool GameChara::Update()
 		m_isInertiaMoving = true;
 		InitJumpParam();
 	}
-	MapChip::SetScroll(m_MapScroll);
+	MapChip::Scroll(m_MapScroll);
 	return CollisionIventBlock();
 }
 
