@@ -234,7 +234,7 @@ void MapChip::Render()
 			m_Cell[3].y = (top + CELL_SIZE);
 
 			m_MapSelected = MapData[j][i];
-			if (m_MapSelected < 100)
+			if (m_MapSelected < NOMAL_BLOCK_MAX)
 			{
 				switch (m_MapSelected)
 				{
@@ -269,7 +269,7 @@ void MapChip::Render()
 				}
 			}
 			else {
-				switch (m_MapSelected/100)
+				switch (m_MapSelected / NOMAL_BLOCK_MAX)
 				{
 				case WOOD_REVERSE_ZONE:
 					SetVertexUV(m_Cell, BLOCK_INTEGRATION_WIDTH * 4.f, 0, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);

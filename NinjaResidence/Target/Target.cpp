@@ -102,7 +102,7 @@ void Target::Render(int mapScrollY, int mapScrollX, MapDataState mapReverseState
 			break;
 		}
 
-		RevolveZ(m_TargetVertex, DegToRad(deg), Color, BLOCK_INTEGRATION_WIDTH * m_MotionBias, BLOCK_INTEGRATION_HEIGHT * 2, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
+		RevolveZ(m_TargetVertex, DegToRad(deg), Color, BLOCK_INTEGRATION_WIDTH * m_MotionBias, BLOCK_INTEGRATION_HEIGHT * 2.0f, BLOCK_INTEGRATION_WIDTH, BLOCK_INTEGRATION_HEIGHT);
 		m_pDirectX->DrawTexture("BLOCK_INTEGRATION_A_TEX", m_TargetVertex);
 	}
 }

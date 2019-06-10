@@ -197,7 +197,7 @@ void GameChara::Dash()
 	}
 	m_ChangeAnimation = DASH;
 	++animeCount;
-	if (animeCount > 2) {
+	if (animeCount > ANIMATION_INTERVAL) {
 		TurnTheAnimation(8);
 		animeCount = 0;
 	}
@@ -331,17 +331,15 @@ void GameChara::NoOperation() {
 
 }
 
-void GameChara::MapReversePointSearch(int PairNumber, MapDataState mapState)
+void GameChara::MapReversePointSearch(int pairNumber, MapDataState mapState)
 {
 	int BlockY = 0;
 	int BlockX = 0;
-	int ScrollXBuf = 0;
-	int ScrollYBuf = 0;
-	int ScrollBehindX = 0;
-	int ScrollBehindY = 0;
+	MapScroll ScrollBuf = {};
+	MapScroll ScrollBehind = {};
 	for (unsigned int i = 0; i < m_ReversePoint.size(); ++i) {
 		bool isSameMapState = m_ReversePoint[i].MapDataState == mapState;
-		bool isSamePair = PairNumber == m_ReversePoint[i].PairNumber;
+		bool isSamePair = pairNumber == m_ReversePoint[i].PairNumber;
 		if (isSameMapState && isSamePair) {
 			BlockY = m_ReversePoint[i].PositionY;
 			BlockX = m_ReversePoint[i].PositionX;
@@ -349,29 +347,26 @@ void GameChara::MapReversePointSearch(int PairNumber, MapDataState mapState)
 		}
 	}
 
-	m_Central.x = (BlockX * CELL_SIZE);
-	m_Central.y = (BlockY * CELL_SIZE);
+	m_Central = { (BlockX * CELL_SIZE), (BlockY * CELL_SIZE) ,m_Central.scaleX,m_Central.scaleY };
 	UpdateMapPos();
 	m_MapScroll = MapChip::Scroll();
 	do {
-		ScrollXBuf = m_MapScroll.X;
-		ScrollYBuf = m_MapScroll.Y;
+		ScrollBuf = m_MapScroll;
 
 		MapScrool();
 		SetGround();
-		ScrollBehindX = (m_MapScroll.X - ScrollXBuf);
-		ScrollBehindY = (m_MapScroll.Y - ScrollYBuf);
+		ScrollBehind = { (m_MapScroll.X - ScrollBuf.X), (m_MapScroll.Y - ScrollBuf.Y) };
 
-	} while (0 != ScrollBehindX || 0 != ScrollBehindY);
+	} while (0 != ScrollBehind.X || 0 != ScrollBehind.Y);
 	MapChip::Scroll(m_MapScroll);
 }
 
-void GameChara::Reverce(MapChip* mapChip, int PairNumber)
+void GameChara::Reverce(MapChip* mapChip, int pairNumber)
 {
 	m_pMapChip = mapChip;
 	m_MapSizeY = m_pMapChip->GetColunm();
 	m_MapSizeX = m_pMapChip->GetRow();
-	MapReversePointSearch(PairNumber,m_pMapChip->GetMapDataState());
+	MapReversePointSearch(pairNumber,m_pMapChip->GetMapDataState());
 }
 
 void GameChara::UpdateMapPos()
@@ -454,7 +449,7 @@ void GameChara::ThrowAnime() {
 		AnimationCount++;
 		static int animeCount = 0;
 		++animeCount;
-		if (animeCount > 2) {
+		if (animeCount > ANIMATION_INTERVAL) {
 			TurnTheAnimation(6);
 			animeCount = 0;
 		}
@@ -478,9 +473,9 @@ void GameChara::FireArtAnime() {
 	if (m_isFire && m_ChangeAnimation == FIREART) {
 		static int animeCount = 0;
 		++animeCount;
-		if (animeCount <= 2) return;
+		if (animeCount <= ANIMATION_INTERVAL) return;
 		animeCount = 0;
-		if (m_TurnAnimation <= 2) return;
+		if (m_TurnAnimation <= ANIMATION_INTERVAL) return;
 		static bool anime = true;
 		m_TurnAnimation += ((anime) ? 0 : -1);
 		anime = !anime;
@@ -558,18 +553,18 @@ bool GameChara::DownCollisionAnything() {
 	bool TorchMax = ((m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) < 500) ||
 		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left + 1) < 500) ||
 		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) < 500));
-	if (TorchMax && TorchMin&&D_Buf >100) {
+	if (TorchMax && TorchMin&&D_Buf > NOMAL_BLOCK_MAX) {
 		return false;
 	}
 
 	//的
-	bool TargetMin = ((m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) >= 100) ||
-		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left + 1) >= 100) ||
-		((D_Buf = m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right)) >= 100));
+	bool TargetMin = ((m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) >= NOMAL_BLOCK_MAX) ||
+		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left + 1) >= NOMAL_BLOCK_MAX) ||
+		((D_Buf = m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right)) >= NOMAL_BLOCK_MAX));
 	bool TargetMax = ((m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) < 300) ||
 		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left + 1) < 300) ||
 		(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) < 300));
-	if (TargetMax && TargetMin&&D_Buf >100&& D_Buf <1100) {
+	if (TargetMax && TargetMin&&D_Buf > NOMAL_BLOCK_MAX && D_Buf <1100) {
 		return false;
 	}
 
@@ -579,9 +574,9 @@ bool GameChara::DownCollisionAnything() {
 	bool ReverseCollRight = (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) < 1300) && (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) >= 1100);
 	
 	//基本ブロック
-	bool CollLeft = (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) < 100)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) > 0);
-	bool CollCenter = (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left+1) < 100)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left+1) > 0);
-	bool CollRight =(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) < 100)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) > 0);
+	bool CollLeft = (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) < NOMAL_BLOCK_MAX)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left) > 0);
+	bool CollCenter = (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left+1) < NOMAL_BLOCK_MAX)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Left+1) > 0);
+	bool CollRight =(m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) < NOMAL_BLOCK_MAX)&& (m_pMapChip->GetMapData(m_MapPosition.Y, m_MapPosition.Right) > 0);
 	if ((CollLeft || CollRight || CollCenter)|| (ReverseCollLeft || ReverseCollRight || ReverseCollCenter)){
 		return true;
 	}
@@ -615,9 +610,9 @@ bool GameChara::DownCollisionBlock(int block) {
 }
 
 bool GameChara::TopCollisionBlock(int block) {
-	if ((m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left) == block) ||
-		(m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left + 1) == block) ||
-		(m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Right) == block)) {
+	if ((m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left) == block) ||
+		(m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left + 1) == block) ||
+		(m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Right) == block)) {
 		return true;
 	}
 	return false;
@@ -690,10 +685,10 @@ bool GameChara::LookDownWater() {
 		if (!buf) {
 			// 下にブロックがあるかの確認
 			int MapdateBuf = m_pMapChip->GetMapData(m_MapPosition.Y + i, m_MapPosition.Left);
-			if (MapdateBuf > 0 && MapdateBuf < 100&& MapdateBuf!= SPEAR&& MapdateBuf!= STAGE_DROP_ZONE) {
+			if (MapdateBuf > 0 && MapdateBuf < NOMAL_BLOCK_MAX && MapdateBuf!= SPEAR&& MapdateBuf!= STAGE_DROP_ZONE) {
 				return false;
 			}
-			buf = (BT_WATER == (MapdateBuf / 100));
+			buf = (BT_WATER == (MapdateBuf / NOMAL_BLOCK_MAX));
 		}
 	}
 	return buf;
@@ -836,7 +831,7 @@ bool GameChara::SetGround() {
 	else if (!m_isJump && !m_isUsingArt) {
 		m_ChangeAnimation = JUMPING;
 		if (animeCount % 3) {
-			m_TurnAnimation = (animeCount % 2) ? 4.0f : 5.0f;
+			m_TurnAnimation = (animeCount % ANIMATION_INTERVAL) ? 4.0f : 5.0f;
 		}
 		++animeCount;
 		if (animeCount > 1000) {
@@ -855,20 +850,20 @@ bool GameChara::TopCollision() {
 	if (m_PrevPosition.Y > m_Central.y)
 	{
 		UpdateMapPos();
-		bool CollLeft = (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left) < 100)
-			&& (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left) > 0)
-			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left)
-			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left);
+		bool CollLeft = (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left) < NOMAL_BLOCK_MAX)
+			&& (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left) > 0)
+			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left)
+			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left);
 
-		bool CollCenter = (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left + 1) < 100)
-			&& (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left + 1) > 0)
-			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left + 1)
-			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Left + 1);
+		bool CollCenter = (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left + 1) < NOMAL_BLOCK_MAX)
+			&& (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left + 1) > 0)
+			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left + 1)
+			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Left + 1);
 
-		bool CollRight = (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Right) < 100)
-			&& (m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Right) > 0)
-			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Right)
-			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - 4, m_MapPosition.Right);
+		bool CollRight = (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Right) < NOMAL_BLOCK_MAX)
+			&& (m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Right) > 0)
+			&& START_ZONE != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Right)
+			&& DESCRIPTION_BOARD != m_pMapChip->GetMapData(m_MapPosition.Y - CHARA_HEIGHT, m_MapPosition.Right);
 
 		if ((CollLeft || CollRight || CollCenter)) {
 			m_CollisionHead = true;

@@ -124,12 +124,12 @@ bool Shuriken::Update()
 		DeActive();
 	}
 	int buf = m_pMapChip->GetMapData(m_MapPositionY, m_MapPositionX);
-	if (buf > 100 && buf<200)
+	if (buf > NOMAL_BLOCK_MAX && buf<200)
 	{
 		m_pMapChip->Activate(m_MapPositionX, m_MapPositionY);
 		DeActive();
 	}
-	else if (buf < 100 && buf > MapBlock::NONE && buf != MapBlock::START_ZONE&&buf != MapBlock::DESCRIPTION_BOARD)
+	else if (buf < NOMAL_BLOCK_MAX && buf > MapBlock::NONE && buf != MapBlock::START_ZONE&&buf != MapBlock::DESCRIPTION_BOARD)
 	{
 		m_pSoundOperater->Start("CLAWSHOT", false);
 		DeActive();

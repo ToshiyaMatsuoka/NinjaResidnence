@@ -174,7 +174,7 @@ private:
 	//! 慣性移動の許可
 	bool m_isInertiaMoving = false;
 
-	void MapReversePointSearch(int blockNumber, MapDataState mapState);
+	void MapReversePointSearch(int pairNumber, MapDataState mapState);
 	//! 当たり判定描画用
 	float m_CollisionTu = 80 / 512.f;
 	//! 当たり判定描画用
@@ -204,7 +204,8 @@ private:
 	//! キャラの向きに応じてTuの値を変える為の値
 	PlayerAnimation::DIRECTION_BIAS m_DirectionBias = PlayerAnimation::ZERO;
 	void TurnTheAnimation(int AnimationPage);
-
+	const int ANIMATION_INTERVAL = 2;
+	const int CHARA_HEIGHT = 4;
 	bool m_isScrollingDown = false;
 	bool m_isInTheAir = false;
 	bool m_isJump = false;

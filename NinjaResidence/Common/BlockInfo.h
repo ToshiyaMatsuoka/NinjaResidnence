@@ -8,7 +8,7 @@
 #define CELL_SIZE  40.f
 #define BLOCK_INTEGRATION_WIDTH 80.2f / 512.0f
 #define BLOCK_INTEGRATION_HEIGHT 81.0f / 1024.0f
-
+#define NOMAL_BLOCK_MAX 100
 class MapChip;
 
 /**
